@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (medical) {
+      <div>
+        <h2 data-cy="medicalDetailsHeading"><span>Medical</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ medical.id }}</span>
+          </dd>
+          <dt><span>Client Id</span></dt>
+          <dd>
+            <span>{{ medical.clientId }}</span>
+          </dd>
+          <dt><span>Injury Id</span></dt>
+          <dd>
+            <span>{{ medical.injuryId }}</span>
+          </dd>
+          <dt><span>Medication Id</span></dt>
+          <dd>
+            <span>{{ medical.medicationId }}</span>
+          </dd>
+          <dt><span>Condition Id</span></dt>
+          <dd>
+            <span>{{ medical.conditionId }}</span>
+          </dd>
+          <dt><span>Operation Id</span></dt>
+          <dd>
+            <span>{{ medical.operationId }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/medical', medical.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,62 @@
+{
+  "ermConsoleApp": {
+    "exerGroup": {
+      "home": {
+        "title": "Group Exercise",
+        "createLabel": "Add Group Exr.",
+        "createOrEditLabel": "Create or edit a Exer Group",
+        "notFound": "No Exer Groups found"
+      },
+      "created": "A new Exer Group is created with identifier {{ param }}",
+      "updated": "A Exer Group is updated with identifier {{ param }}",
+      "deleted": "A Exer Group is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Exer Group {{ id }}?"
+      },
+      "detail": {
+        "title": "Group Exercise"
+      },
+      "name": "Name",
+
+      "groupInfo": "Group Info",
+      "summary": "Summary",
+      "myExerGroup": "My Group Exercise",
+      "exercises": "Exercise(s)",
+      "inGroupExercise": "Exercise Listing",
+
+      "addNew": "Add Group Exercise",
+      "exerciseDetails": "Exercise Detail(s)",
+      "general": "Group Info",
+      "groupName": "Group Info",
+      "exerciseInfo": "Exercise Info",
+      "editExerGroup": "Edit Group Exercise ",
+      "editExercise": "Edit Exercise",
+      "description": "Description",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Modified",
+      "all": "All",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "edit": "Edit",
+      "manageGroupExer": "Manage Group Exercise",
+      "notFoundAdd": "No group found. Add new group",
+      "instruction": "Instruction",
+      "instructions": "Instructions",
+      "noExerciseSelected": "No exercise selected.",
+      "editGroupInstruction": "Manage Instruction(s)",
+      "addInstruction": "Add Inst.",
+      "addNewGroup": "Add New Group",
+      "instructions": "Instruction(s)",
+      "cancelAdd": "Cancel",
+      "saveInstruction": "Save Inst.",
+      "notFound": "Group Exercise not found.",
+      "group": "Group",
+      "exercise": "Exercise",
+      "exerciseShort": "Exer.",
+      "instruction": "Inst.",
+      "instructionLong": "Instruction",
+      "defaultInstruction": "Default Instruction(s)",
+      "exerciseNotFound": "Exercise not found."
+    }
+  }
+}

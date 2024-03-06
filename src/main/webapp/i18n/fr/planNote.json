@@ -1,0 +1,27 @@
+{
+  "ermConsoleApp": {
+    "planNote": {
+      "home": {
+        "title": "Plan Notes",
+        "createLabel": "Create a new Plan Note",
+        "createOrEditLabel": "Create or edit a Plan Note",
+        "notFound": "No Plan Notes found"
+      },
+      "created": "A new Plan Note is created with identifier {{ param }}",
+      "updated": "A Plan Note is updated with identifier {{ param }}",
+      "deleted": "A Plan Note is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Plan Note {{ id }}?"
+      },
+      "detail": {
+        "title": "Plan Note"
+      },
+      "planId": "Plan Id",
+      "note": "Note",
+      "createdDate": "Created Date",
+      "createdBy": "Created By",
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By"
+    }
+  }
+}

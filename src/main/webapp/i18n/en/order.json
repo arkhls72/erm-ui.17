@@ -1,0 +1,46 @@
+{
+  "ermConsoleApp": {
+    "order": {
+      "home": {
+        "title": "Orders",
+        "createLabel": "Add Order",
+        "createOrEditLabel": "Create or edit a Order",
+        "notFound": "No Orders found",
+        "edit": "Edit order:"
+      },
+      "created": "A new Order is created with identifier {{ param }}",
+      "updated": "A Order is updated with identifier {{ param }}",
+      "deleted": "A Order is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Order {{ id }}?"
+      },
+      "detail": {
+        "title": "Order",
+        "general": "General"
+      },
+      "productOrderId": "Product Order Id",
+      "myProductId": "My Product Id",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "orderDate": "Order Date",
+      "lastModifiedBy": "Modified By",
+      "lastModified": "Last Modified",
+      "lastModifiedDate": "Last Modified",
+      "orderDate": "Order Date",
+      "subTotal": "Subtotal",
+      "order": "Order",
+      "total": "Total",
+      "tax": "HST",
+      "status": "Status",
+      "viewDetail": "View Detail",
+      "viewOrder": "View Order ",
+      "description": "Description",
+      "orderNumber": "Order #",
+      "grandTotal": "Grand total",
+      "productSearch": "Search for",
+      "product": "Product",
+      "note": "Note",
+      "selectProduct": "Select Product"
+    }
+  }
+}

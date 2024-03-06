@@ -1,0 +1,36 @@
+{
+  "ermConsoleApp": {
+    "supplier": {
+      "home": {
+        "title": "Suppliers",
+        "createLabel": "Create a new Supplier",
+        "createOrEditLabel": "Create or edit a Supplier",
+        "notFound": "No Suppliers found"
+      },
+      "created": "A new Supplier is created with identifier {{ param }}",
+      "updated": "A Supplier is updated with identifier {{ param }}",
+      "deleted": "A Supplier is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Supplier {{ name }}?"
+      },
+      "detail": {
+        "title": "Supplier: "
+      },
+      "name": "Name",
+      "contactName": "Contact Name",
+      "phone": "Phone",
+      "addressId": "Address Id",
+      "createSupplier": "Create Supplier",
+      "email": "Email",
+      "general-tab": "General",
+      "address-tab": "Address",
+      "product-tab": "Products",
+      "specification-tab": "Specification",
+      "feePackage-tab": "Fees",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Modified By",
+      "lastModifiedDate": "Modified Date"
+    }
+  }
+}

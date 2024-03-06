@@ -1,0 +1,29 @@
+{
+  "ermConsoleApp": {
+    "progGroupInstruction": {
+      "home": {
+        "title": "Prog Instructions",
+        "createLabel": "Create a new Prog Instruction",
+        "createOrEditLabel": "Create or edit a Prog Instruction",
+        "notFound": "No Prog Instructions found"
+      },
+      "created": "A new Prog Instruction is created with identifier {{ param }}",
+      "updated": "A Prog Instruction is updated with identifier {{ param }}",
+      "deleted": "A Prog Instruction is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Prog Instruction {{ id }}?"
+      },
+      "detail": {
+        "title": "Prog Instruction"
+      },
+      "exerciseId": "Exercise Id",
+      "progId": "Prog Id",
+      "instructionId": "Instruction Id",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date",
+      "select": "Select"
+    }
+  }
+}

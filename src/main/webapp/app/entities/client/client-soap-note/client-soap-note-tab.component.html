@@ -1,0 +1,122 @@
+<table class="sum_invoice_top">
+  <tbody>
+    <tr>
+      <td class="td_label_center"></td>
+      <td class="td_label_right">
+        <div
+          class="btn-group flex-btn-group-container"
+          *ngIf="soapNoteEventType === 0 || soapNoteEventType === 1 || soapNoteEventType === 7"
+        >
+          <button
+            type="button"
+            *ngIf="soapNoteEventType === 1 || soapNoteEventType === 7"
+            class="btn btn-outline-primary"
+            (click)="backToTab()"
+          >
+            <span class="fa fa-window-close"></span>
+          </button>
+
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          &nbsp;
+          <button type="submit" (click)="addAssessment()" *ngIf="selectedSoapNote" class="btn btn-outline-primary">
+            <i class="fa fa-1x fa-plus"></i>
+            &nbsp;<span jhiTranslate="ermConsoleApp.assessment.add"></span>&nbsp;&nbsp;
+          </button>
+          &nbsp;
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" (click)="addSoapNote()" class="btn btn-outline-primary">
+            <i class="fa fa-1x fa-plus"></i>
+            <span jhiTranslate="ermConsoleApp.soapNote.addSoapNote"></span></button
+          >&nbsp;
+        </div>
+        <div class="btn-group flex-btn-group-container" *ngIf="soapNoteEventType === 3 || soapNoteEventType === 5">
+          <button type="button" class="btn btn-outline-primary" (click)="cancelAddTreatment()">
+            <span class="fa fa-window-close"></span>
+          </button>
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          &nbsp;
+          <button type="submit" (click)="addTreatment()" *ngIf="selectedSoapNote" class="btn btn-outline-primary">
+            <i class="fa fa-1x fa-plus"></i>
+            &nbsp;<span jhiTranslate="ermConsoleApp.soapNote.addTreatment"></span>&nbsp;&nbsp;
+          </button>
+          &nbsp;
+        </div>
+        <div class="btn-group flex-btn-group-container" *ngIf="soapNoteEventType === 4">
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="button" class="btn btn-outline-primary" (click)="cancelAddTreatment()">
+            <span class="fa fa-window-close"></span>
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="row">
+  <!-- left panel -->
+  <div class="col-sm-6">
+    <bc-soap-note-list [client]="client" (selectedSoapNoteEmitter)="initSoapNote($event)" (deleteSoapNoteEmitter)="deleteSoapNote($event)">
+    </bc-soap-note-list>
+  </div>
+  <!-- right panel -->
+  <div class="col-sm-6">
+    <div *ngIf="soapNoteEventType === 0">
+      <bc-soap-note-select
+        [selectedSoapNote]="selectedSoapNote"
+        (updateSoapNoteEmitter)="confirmAddDeleteUpdate()"
+        (assessmentEmitter)="ngOnAssessment($event)"
+        (deleteAssessmentEmitter)="ngOnDeleteAssessment()"
+      >
+      </bc-soap-note-select>
+    </div>
+    <div *ngIf="soapNoteEventType === 1">
+      <bc-soap-note-add [client]="client" (saveEmitter)="afterAddSopaNote($event)"> </bc-soap-note-add>
+    </div>
+
+    <div *ngIf="soapNoteEventType === 2">
+      <bc-soap-note-delete
+        [soapNote]="selectedSoapNote"
+        (confirmDeleteEmitter)="confirmedDeleteSoapNote($event)"
+        (cancelDeleteEmitter)="cancelDeleteSoapNote()"
+      >
+      </bc-soap-note-delete>
+    </div>
+    <div *ngIf="soapNoteEventType === 3">
+      <bc-assessment-select
+        [client]="client"
+        [selectedAssessment]="selectedAssessment"
+        (deleteSelectedEventEmitter)="ngOnDeleteAssessment()"
+        (goToTreatmentViewEmitter)="goToTreatmentView($event)"
+        (addTreatmentEmitter)="addTreatment()"
+        (backToParentEmitter)="backToMain($event)"
+        (updateSoapNoteAssessmentEmitter)="addUpdateAssessment($event)"
+        (confirmDeleteTreatmentEmitter)="afterTreatmentPlanDelete($event)"
+      >
+      </bc-assessment-select>
+    </div>
+    <div *ngIf="soapNoteEventType === 4">
+      <bc-assessment-treatment-view
+        [plan]="plan"
+        [assessment]="selectedAssessment"
+        (deleteTreatmentEmitter)="deleteTreatment($event)"
+        (backToAssessmentSelectEmitter)="backToAssessmentSelect($event)"
+      >
+      </bc-assessment-treatment-view>
+    </div>
+
+    <div *ngIf="soapNoteEventType === 5">
+      <bc-assessment-treatment-add
+        [assessment]="selectedAssessment"
+        [client]="client"
+        (cancelAddTreatmentEmitter)="cancelAddTreatment()"
+        (confirmedAddTreatmentFromSoapNoteEmitter)="confirmAddTreatment($event)"
+        (backToSelectAssessmentEmitter)="ngOnAssessment($event)"
+      >
+      </bc-assessment-treatment-add>
+    </div>
+
+    <div *ngIf="soapNoteEventType === 7">
+      <bc-assessment-add [client]="client" [soapNote]="selectedSoapNote" (addAssessmentFromSoapNoteEmitter)="backToTabAfterAssessmentAdd()">
+      </bc-assessment-add>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,119 @@
+<br />
+<br />
+<div class="row">
+  &nbsp;&nbsp;&nbsp;
+  <h5><span jhiTranslate="ermConsoleApp.client.addressInfo"></span></h5>
+</div>
+
+<form name="editForm" role="form" novalidate #editForm="ngForm">
+  <div class="mt-lg-4">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.address.streetNumber" for="field_streetNumber"
+        >Street Number</label
+      >
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="streetNumber" id="field_streetNumber" [(ngModel)]="address.streetNumber" required />
+        <small
+          class="form-control-feedback text-danger"
+          [hidden]="!editForm.controls.streetNumber?.errors?.required"
+          jhiTranslate="entity.validation.required"
+          >This field is required.
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.address.streetName" for="field_streetName"
+        >Street Name</label
+      >
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="streetName" id="field_streetName" [(ngModel)]="address.streetName" required />
+        <small
+          class="form-control-feedback text-danger"
+          [hidden]="!editForm.controls.streetName?.errors?.required"
+          jhiTranslate="entity.validation.required"
+          >This field is required.
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.address.unitNumber" for="field_unitNumber"
+        >Unit Number</label
+      >
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="unitNumber" id="field_unitNumber" [(ngModel)]="address.unitNumber" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.address.postalCode" for="field_postalCode"
+        >Postal Code</label
+      >
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="postalCode" id="field_postalCode" [(ngModel)]="address.postalCode" required />
+        <small
+          class="form-control-feedback text-danger"
+          [hidden]="!editForm.controls.postalCode?.errors?.required"
+          jhiTranslate="entity.validation.required"
+          >This field is required.
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.address.city" for="field_city">City</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="city" id="field_city" [(ngModel)]="address.city" required />
+        <small
+          class="form-control-feedback text-danger"
+          [hidden]="!editForm.controls.city?.errors?.required"
+          jhiTranslate="entity.validation.required"
+          >This field is required.
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.client.province" for="field_province">Province</label>
+      <div class="col-sm-6">
+        <select class="form-control" id="field_province" name="province" (change)="changeProvince($event)" required>
+          <option
+            *ngFor="let province of provinces"
+            [selected]="address != null && address.province != null && address.province.id == province.id"
+            [value]="province.id"
+          >
+            {{ province.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.client.country" for="field_countries">Countries</label>
+      <div class="col-sm-6">
+        <select class="form-control" id="field_countries" name="countries" (change)="changeCountries($event)" required>
+          <option
+            *ngFor="let country of countryList"
+            [selected]="address != null && address.countries != null && address.countries.id == country.id"
+            [value]="country.id"
+          >
+            {{ country.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.address.lastModifiedDate"></label>
+      <div class="col-sm-6">
+        <span class="form-control">{{ address.lastModifiedDate | formatMediumDatetime }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-8 text-right">
+      <div class="btn-group flex-btn-group-container">
+        <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+        <button type="submit" (click)="save()" [disabled]="editForm.invalid" class="btn btn-outline-primary">
+          <i class="fa fa-1x fa-save"></i>
+          <span jhiTranslate="ermConsoleApp.client.saveAddress"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

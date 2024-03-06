@@ -1,0 +1,25 @@
+{
+  "ermConsoleApp": {
+    "exerGroupDetaill": {
+      "home": {
+        "title": "Exer Group Detaills",
+        "createLabel": "Create a new Exer Group Detaill",
+        "createOrEditLabel": "Create or edit a Exer Group Detaill",
+        "notFound": "No Exercise found in this group."
+      },
+      "created": "A new Exer Group Detaill is created with identifier {{ param }}",
+      "updated": "A Exer Group Detaill is updated with identifier {{ param }}",
+      "deleted": "A Exer Group Detaill is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Exer Group Detaill {{ id }}?"
+      },
+      "detail": {
+        "title": "Exer Group Detaill"
+      },
+      "exerGroupId": "Exer Group Id",
+      "exerciseId": "Exercise Id",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

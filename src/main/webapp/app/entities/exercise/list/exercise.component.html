@@ -1,0 +1,72 @@
+<jhi-alert-error></jhi-alert-error>
+<jhi-alert></jhi-alert>
+<br />
+<table class="exercise_top">
+  <thead>
+    <tr>
+      <th class="th_label_center">
+        <h5><span jhiTranslate="ermConsoleApp.exercise.exercises"></span></h5>
+      </th>
+      <th class="th_label_center">
+        <h5><span jhiTranslate="ermConsoleApp.exerGroup.myExerGroup"></span></h5>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="td_label_left">
+        <button
+          [disabled]="exerciseEventType === 9"
+          id="jh-create-entity_exer"
+          class="btn btn-primary float-left jh-create-entity create-exercise"
+          (click)="addExercise()"
+        >
+          <fa-icon icon="plus"></fa-icon>
+          <span jhiTranslate="ermConsoleApp.exercise.home.createLabel"></span>
+        </button>
+      </td>
+      <td class="td_label_right">
+        <button
+          id="jh-create-entity_exerGroup"
+          class="btn btn-primary float-right jh-create-entity create-exer-group"
+          [routerLink]="['/exer-group/new']"
+        >
+          <fa-icon icon="plus"></fa-icon>
+          <span jhiTranslate="ermConsoleApp.exerGroup.home.createLabel"></span>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="mt-lg-4">
+  <div class="row">
+    <div class="col-sm-6" *ngIf="exerciseEventType === 0 || exerciseEventType === 3">
+      <bc-exercise-list (deleteExerEmitter)="deleteExercise($event)"></bc-exercise-list>
+    </div>
+    <div class="col-sm-6" *ngIf="exerciseEventType === 9">
+      <bc-exercise-add (cancelAddEmitter)="cancelAddExercise()"></bc-exercise-add>
+    </div>
+
+    <div class="col-sm-6" *ngIf="exerciseEventType === 1">
+      <bc-exercise-list-delete
+        [exercise]="exercise"
+        (cancelDeleteExercise)="cancelDeleteExercise()"
+        (confirmDeleteExercise)="confirmDeleteExercise()"
+      >
+      </bc-exercise-list-delete>
+    </div>
+    <div class="col-sm-6" *ngIf="exerciseEventType !== 3">
+      <bc-exer-group-list (deleteExerGroupEmitter)="deleteExerGroup($event)"></bc-exer-group-list>
+    </div>
+
+    <div class="col-sm-6" *ngIf="exerciseEventType === 3">
+      <bc-exer-group-list-delete
+        [exerGroup]="exerGroup"
+        (cancelDeleteExerGroup)="cancelDeleteExerGroup()"
+        (confirmDeleteExerGroup)="confirmDeleteExerGroup()"
+      >
+      </bc-exer-group-list-delete>
+    </div>
+  </div>
+</div>

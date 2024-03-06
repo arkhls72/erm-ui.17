@@ -1,0 +1,33 @@
+{
+  "ermConsoleApp": {
+    "address": {
+      "home": {
+        "title": "Addresses",
+        "createLabel": "Create a new Address",
+        "createOrEditLabel": "Create or edit a Address",
+        "notFound": "No Addresses found"
+      },
+      "created": "A new Address is created with identifier {{ param }}",
+      "updated": "A Address is updated with identifier {{ param }}",
+      "deleted": "A Address is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Address {{ id }}?"
+      },
+      "detail": {
+        "title": "Address"
+      },
+      "streetNumber": "Street Number",
+      "streetName": "Street Name",
+      "unitNumber": "Unit Number",
+      "postalCode": "Postal Code",
+      "city": "City",
+      "provinceId": "Province Id",
+      "countryId": "Country Id",
+      "province": "Province",
+      "country": "Country",
+      "poBox": "PO. Box",
+      "lastModifiedBy": "Modified by",
+      "lastModifiedDate": "Last Modified"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "ermConsoleApp": {
+    "ehcPrimary": {
+      "home": {
+        "title": "Ehc Primaries",
+        "createLabel": "Create a new Ehc Primary",
+        "createOrEditLabel": "Create or edit a Ehc Primary",
+        "notFound": "No Ehc Primaries found"
+      },
+      "created": "A new Ehc Primary is created with identifier {{ param }}",
+      "updated": "A Ehc Primary is updated with identifier {{ param }}",
+      "deleted": "A Ehc Primary is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Ehc Primary {{ id }}?"
+      },
+      "detail": {
+        "title": "Ehc Primary"
+      },
+      "ehcId": "Ehc Id",
+      "clientId": "Client Id",
+      "name": "Name",
+      "fullName": "Full Name",
+      "status": "Status",
+      "ehcType": "Ehc Type"
+    }
+  }
+}

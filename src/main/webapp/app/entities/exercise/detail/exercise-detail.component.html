@@ -1,0 +1,41 @@
+<!--<jhi-alert-error></jhi-alert-error>-->
+<!--<jhi-alert></jhi-alert>-->
+<br />
+<table class="exercise_top">
+  <thead>
+    <tr>
+      <th class="th_label_left">
+        <button type="submit" (click)="previousState()" class="btn btn-info">
+          <span class="fa fa-arrow-left"></span>&nbsp; <span jhiTranslate="entity.action.back"></span>
+        </button>
+      </th>
+      <th class="th_label_center">
+        <h5><span jhiTranslate="ermConsoleApp.exercise.editExercise"></span></h5>
+      </th>
+      <th class="th_label_center"></th>
+    </tr>
+    <tr>
+      <th class="th_label_right"></th>
+      <th class="th_label_center"></th>
+      <th class="th_label_left">
+        <!-- <button id="jh-create-entity_exerGroup"  (click)="goInstruction()"
+                    class="btn btn-primary float-right jh-create-entity create-exer-group" *ngIf="exerciseEvent !== 7">
+                <fa-icon icon="plus"></fa-icon>
+                <span  jhiTranslate="ermConsoleApp.exercise.instruction"></span>
+            </button>-->
+      </th>
+    </tr>
+  </thead>
+</table>
+
+<div class="mt-lg-12">
+  <div class="row">
+    <div class="col-lg-6">
+      <bc-exercise-info></bc-exercise-info>
+    </div>
+    <div class="col-lg-6" *ngIf="exerciseEvent === 6">
+      <bc-exer-media-right [exercise]="exercise"> </bc-exer-media-right>
+    </div>
+    <div class="col-lg-6" *ngIf="exerciseEvent === 7"></div>
+  </div>
+</div>

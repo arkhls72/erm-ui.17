@@ -1,0 +1,119 @@
+<br />
+<div class="row">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <h5><span jhiTranslate="ermConsoleApp.exerGroup.exercises"></span></h5>
+</div>
+<div>
+  <div class="row">
+    <div class="col-sm-12">
+      <form name="searchForm" class="form-inline">
+        <div class="input-group w-100 mt-3">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="currentSearch"
+            id="currentSearch"
+            name="currentSearch"
+            placeholder="{{ 'ermConsoleApp.exercise.search' | translate }}"
+          />
+          <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+            <span class="fa fa-search"></span>
+          </button>
+          <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+            <span class="fa fa-trash-o"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <br />
+  <div class="table-responsive" id="entities" *ngIf="exercises && exercises.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th></th>
+          <th scope="col" jhiSortBy="name"><span jhiTranslate="ermConsoleApp.exercise.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="bodyPart">
+            <span jhiTranslate="ermConsoleApp.exercise.bodyPart">Body Part</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="muscle">
+            <span jhiTranslate="ermConsoleApp.exercise.muscle">Muscle</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="firstMediaId">
+            <span jhiTranslate="ermConsoleApp.exercise.firstMedia">First Media Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="secondMediaId">
+            <span jhiTranslate="ermConsoleApp.exercise.secondMedia">Second Media Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ex of exercises; trackBy: trackId">
+          <td class="text-left">
+            <input
+              class="largerCheckbox_20"
+              [disabled]="!isEditMode"
+              type="checkbox"
+              id="selectedCondition"
+              [checked]="isSelected(ex)"
+              (change)="addOrRemovePrimary(ex, $event)"
+            />
+          </td>
+          <td>
+            <a [routerLink]="['/exercise', ex.id, 'view']">{{ ex.name }}</a>
+          </td>
+          <td>{{ getBodyPart(ex) }}</td>
+          <td>{{ getMuscle(ex) }}</td>
+          <td>
+            <a *ngIf="ex.firstMediaId">
+              <img [src]="addSrcMedia(ex.firstMediaId)" style="max-height: 50px" alt="media image" />
+            </a>
+          </td>
+          <td>
+            <a *ngIf="ex.secondMediaId">
+              <img [src]="addSrcMedia(ex.secondMediaId)" style="max-height: 50px" alt="media image" />
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<table class="exercise_top">
+  <thead>
+    <tr>
+      <th class="th_label_left">
+        <div class="btn-group flex-btn-group-container">
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+        </div>
+      </th>
+      <th class="th_label_center">
+        <div *ngIf="exercises && exercises.length > 0">
+          <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+          </div>
+
+          <div class="row justify-content-center">
+            <ngb-pagination
+              [collectionSize]="totalItems"
+              [(page)]="ngbPaginationPage"
+              [pageSize]="itemsPerPage"
+              [maxSize]="5"
+              (pageChange)="loadPage($event)"
+            >
+            </ngb-pagination>
+          </div>
+        </div>
+      </th>
+      <th class="th_label_right">
+        <div class="btn-group flex-btn-group-container">
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" id="save-entity" class="btn btn-outline-primary" [disabled]="!isSaveMode" (click)="saveToGroup()">
+            <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="ermConsoleApp.exercise.saveInGroup">Save</span>
+          </button>
+        </div>
+      </th>
+    </tr>
+  </thead>
+</table>

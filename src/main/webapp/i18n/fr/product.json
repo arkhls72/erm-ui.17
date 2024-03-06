@@ -1,0 +1,42 @@
+{
+  "ermConsoleApp": {
+    "product": {
+      "home": {
+        "title": "Products",
+        "createLabel": "Create a new Product",
+        "createOrEditLabel": "Create or edit a Product",
+        "notFound": "No Products found"
+      },
+      "created": "A new Product is created with identifier {{ param }}",
+      "updated": "A Product is updated with identifier {{ param }}",
+      "deleted": "A Product is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Product {{ id }}?"
+      },
+      "detail": {
+        "title": "Product",
+        "feePackage": "Fees"
+      },
+      "name": "Name",
+      "description": "Description",
+      "feeId": "Fee Id",
+      "supplierId": "Supplier",
+      "supplierName": "Supplier",
+      "quantity": "In stock",
+      "availableQty": "Available in Stock",
+      "note": "Note",
+      "orderDate": "Order Date",
+      "orderPrice": "orderPrice",
+      "lastOrderDate": "Last Order",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified",
+      "lastModifiedDate": "Last Modified",
+      "general-tab": "General",
+      "fee-package-tab": "Fees",
+      "specification-tab": "Specification",
+      "specification-go": "Go Specification",
+      "addNewProduct": "Add Product"
+    }
+  }
+}

@@ -1,0 +1,82 @@
+<table class="sum_invoice_top">
+  <tbody>
+    <tr>
+      <td class="td_label_center"></td>
+      <td class="td_label_right">
+        <div class="btn-group flex-btn-group-container" *ngIf="treatmentEventType === 0">
+          &nbsp;<button type="submit" (click)="goSelectAssessment()" class="btn btn-outline-primary">
+            <i class="fa fa-1x fa-plus"></i>
+            <span jhiTranslate="ermConsoleApp.assessment.addTreatment"></span></button
+          >&nbsp;
+        </div>
+
+        <div class="btn-group flex-btn-group-container" *ngIf="treatmentEventType !== 0">
+          <button
+            type="button"
+            *ngIf="treatmentEventType === 3 || treatmentEventType === 2"
+            (click)="closeAddTreatment()"
+            class="btn btn-outline-primary"
+          >
+            <i class="fa fa-1x fa-window-close-o"></i>
+          </button>
+          &nbsp;<button type="submit" (click)="goSelectAssessment()" class="btn btn-outline-primary">
+            <i class="fa fa-1x fa-plus"></i>
+            <span jhiTranslate="ermConsoleApp.assessment.addTreatment"></span></button
+          >&nbsp;
+          <button
+            type="submit"
+            *ngIf="treatmentEventType === 2"
+            (click)="afterSelectAssessment()"
+            [disabled]="!isAssessmentSelected"
+            class="btn btn-outline-primary"
+          >
+            <i class="fa fa-1x fa-long-arrow-right"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="row">
+  <!-- left panel -->
+  <div class="col-sm-6">
+    <bc-treatment-list
+      [client]="client"
+      (deletePlanEmitter)="deletePLan($event)"
+      (selectedPlanEmitter)="initTreatmentPlan($event)"
+      (selectedAssessmentEmitter)="initAssessmentClinical($event)"
+    >
+    </bc-treatment-list>
+  </div>
+  <!-- right panel -->
+  <div class="col-sm-6">
+    <!--        <div class="modal-header"></div>-->
+    <div *ngIf="treatmentEventType === 0">
+      <bc-treatment-select [plan]="selectedPlan" [assessment]="assessment"> </bc-treatment-select>
+    </div>
+    <div *ngIf="treatmentEventType === 2">
+      <bc-treatment-select-assessment
+        [plan]="selectedPlan"
+        [client]="client"
+        (isSelectedAssessEmitter)="isSelectedAssessment($event)"
+        (cancelAddTreatmentEmitter)="cancelAddTreatment()"
+        (saveTreatmentEmitter)="saveNewTreatment($event)"
+      >
+      </bc-treatment-select-assessment>
+    </div>
+    <div *ngIf="treatmentEventType === 3">
+      <bc-treatment-add
+        [client]="client"
+        [selectedAssessment]="selectedAssessment"
+        (cancelAddTreatmentEmitter)="cancelAddTreatment()"
+        (confirmedAddTreatmentEmitter)="confirmAddOrDelete()"
+      >
+      </bc-treatment-add>
+    </div>
+
+    <div *ngIf="treatmentEventType === 4">
+      <bc-treatment-delete [plan]="selectedPlan" (cancelDeleteEmitter)="cancelDelete()" (confirmDeleteEmitter)="confirmAddOrDelete()">
+      </bc-treatment-delete>
+    </div>
+  </div>
+</div>

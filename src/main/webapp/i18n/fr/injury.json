@@ -1,0 +1,25 @@
+{
+  "ermConsoleApp": {
+    "injury": {
+      "home": {
+        "title": "Injuries",
+        "createLabel": "Create a new Injury",
+        "createOrEditLabel": "Create or edit a Injury",
+        "notFound": "No Injuries found"
+      },
+      "created": "A new Injury is created with identifier {{ param }}",
+      "updated": "A Injury is updated with identifier {{ param }}",
+      "deleted": "A Injury is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Injury:  {{ nameType }}?"
+      },
+      "detail": {
+        "title": "Injury"
+      },
+      "nameType": "Name Type",
+      "happenDate": "Happen Date",
+      "note": "Note",
+      "modifyInjury": "Modify Injuries"
+    }
+  }
+}

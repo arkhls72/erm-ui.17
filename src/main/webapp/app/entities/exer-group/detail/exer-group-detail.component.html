@@ -1,0 +1,70 @@
+<jhi-alert-error></jhi-alert-error>
+<jhi-alert></jhi-alert>
+<br />
+<table class="exercise_top">
+  <thead>
+    <tr>
+      <th class="th_label_left">
+        <button type="submit" (click)="previousState()" class="btn btn-info">
+          <span class="fa fa-arrow-left"></span>&nbsp; <span jhiTranslate="entity.action.back"> Back</span>
+        </button>
+      </th>
+      <th class="th_label_center">
+        <h5>
+          <span *ngIf="exerciseEvent === 4 || exerciseEvent === 5" jhiTranslate="ermConsoleApp.exerGroup.editExerGroup"></span>
+          <span *ngIf="exerciseEvent === 8 || exerciseEvent === 9" jhiTranslate="ermConsoleApp.exerGroup.editGroupInstruction"></span>
+        </h5>
+      </th>
+      <th class="th_label_center"></th>
+    </tr>
+    <tr>
+      <th class="th_label_center"></th>
+      <th class="th_label_center"></th>
+      <th class="th_label_center"></th>
+    </tr>
+  </thead>
+</table>
+<div class="mt-lg-12">
+  <div class="row">
+    <div class="col-lg-6" *ngIf="exerciseEvent === 4">
+      <!-- left panel-->
+      <bc-group-info></bc-group-info>
+    </div>
+    <!-- Right panel-->
+    <div class="col-lg-6" *ngIf="exerciseEvent === 4">
+      <bc-detail-exercise-list
+        (deleteGroupExerciseDetail)="deleteGroupExerciseDetail($event)"
+        [selectedExerciseGroup]="exerGroup"
+        (editGroupInstruction)="editInstruction($event)"
+      >
+      </bc-detail-exercise-list>
+    </div>
+    <div class="col-lg-6" *ngIf="exerciseEvent === 5">
+      <bc-group-exercise-list-delete
+        [exerciseGroupDetail]="exerciseGroupDetail"
+        (cancelDeleteGroupExercise)="backToExerciseView()"
+        (confirmDeleteGroupExercise)="backToExerciseView()"
+      >
+      </bc-group-exercise-list-delete>
+    </div>
+    <!--left panel-->
+    <div class="col-lg-6" *ngIf="exerciseEvent === 8 || exerciseEvent === 10">
+      <bc-group-instruction-info [exercise]="selectedExercise"> </bc-group-instruction-info>
+    </div>
+    <!--right panel-->
+    <div class="col-lg-6" *ngIf="exerciseEvent === 8">
+      <bc-group-instruction-edit
+        [exerGroupWrapper]="exerGroupWrapper"
+        (addInstructionEmitter)="addNewInstruction()"
+        (cancelAddInstructionEmitter)="cancelAddInstruction()"
+        (deleteInstructionEmitter)="deleteInstruction($event)"
+        (cancelInstructionEmitter)="backToExerciseView()"
+      >
+      </bc-group-instruction-edit>
+    </div>
+    <div class="col-lg-6" *ngIf="exerciseEvent === 10">
+      <bc-instruction-delete-list [instruction]="selectedInstruction" (cancelDeleteInstructionEmitter)="cancelDeleteInstruction()">
+      </bc-instruction-delete-list>
+    </div>
+  </div>
+</div>

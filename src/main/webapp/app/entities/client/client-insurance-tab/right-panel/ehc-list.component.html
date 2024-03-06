@@ -1,0 +1,95 @@
+<br />
+<h5><span jhiTranslate="ermConsoleApp.ehc.ehcListing">EhcListing</span></h5>
+
+<br />
+<div id="entities" *ngIf="ehces && ehces.length > 0">
+  <table class="table table-striped" aria-describedby="page-heading">
+    <thead>
+      <!--            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">-->
+      <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
+        <th scope="col" jhiSortBy="policyHolder">
+          <span jhiTranslate="ermConsoleApp.ehc.policyHolder">policyHolder</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" jhiSortBy="ehc.name"><span jhiTranslate="ermConsoleApp.ehc.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+
+        <th scope="col" jhiSortBy="ehc.policyNumber">
+          <span jhiTranslate="ermConsoleApp.ehc.policyNum">Policy Number</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+
+        <th scope="col" jhiSortBy="ehc.status">
+          <span jhiTranslate="ermConsoleApp.ehc.prStatus">Status</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" jhiSortBy="ehc.lastModifiedDate">
+          <span jhiTranslate="ermConsoleApp.ehc.ehcType">Last Modified Date</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" jhiSortBy="ehc.ehcClient.status">
+          <span jhiTranslate="ermConsoleApp.ehc.myStatus">my Status</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ehc of ehces; let i = index; trackBy: trackId">
+        <td *ngIf="ifPrimary(ehc)">
+          <a class="my-alert-link" (click)="editPrimaryPolicyHolder(ehc)">{{ ehc.policyHolder }}</a>
+        </td>
+        <td *ngIf="!ifPrimary(ehc)">
+          <a class="my-alert-link" (click)="ngOnEhcEdit(ehc)">{{ ehc.policyHolder }}</a>
+        </td>
+
+        <td>{{ ehc.name }}</td>
+        <td>{{ ehc.policyNumber }}</td>
+        <td>{{ ehc.status }}</td>
+        <td>
+          <a class="my-alert-link" (click)="ngOnEhcEdit(ehc)">{{ getEhcType(ehc) }}</a>
+        </td>
+        <td>{{ getMyStatus(ehc) }}</td>
+        <td class="text-right">
+          <div class="btn-group flex-btn-group-container">
+            &nbsp;<span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+            <div class="not-selected">
+              <i class="fa fa-2x fa-trash-o" (click)="deleteRow(i)"></i>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="ehces && ehces.length > 0">
+  <div class="row justify-content-center">
+    <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"> </jhi-item-count>
+  </div>
+
+  <div class="row justify-content-center">
+    <ngb-pagination
+      [collectionSize]="totalItems"
+      [(page)]="ngbPaginationPage"
+      [pageSize]="itemsPerPage"
+      [maxSize]="5"
+      [rotate]="true"
+      [boundaryLinks]="true"
+      (
+      pageChange)="loadPage($event)"
+    >
+    </ngb-pagination>
+  </div>
+</div>
+<div *ngIf="!ehces || ehces.length === 0">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th><span jhiTranslate="ermConsoleApp.ehc.policyHolder"></span></th>
+        <th><span jhiTranslate="ermConsoleApp.ehc.ehcType"></span></th>
+        <th><span jhiTranslate="ermConsoleApp.ehc.name"></span></th>
+        <th><span jhiTranslate="ermConsoleApp.ehc.policyNumber"></span></th>
+        <th><span jhiTranslate="ermConsoleApp.ehc.status"></span></th>
+      </tr>
+    </thead>
+  </table>
+  <div class="alert alert-warning" id="no-result">
+    <span jhiTranslate="ermConsoleApp.ehc.notFoundAll"></span>
+  </div>
+</div>

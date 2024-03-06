@@ -1,0 +1,26 @@
+{
+  "ermConsoleApp": {
+    "insurance": {
+      "home": {
+        "title": "Insurances",
+        "createLabel": "Create a new Insurance",
+        "createOrEditLabel": "Create or edit a Insurance",
+        "notFound": "No Insurances found"
+      },
+      "created": "A new Insurance is created with identifier {{ param }}",
+      "updated": "A Insurance is updated with identifier {{ param }}",
+      "deleted": "A Insurance is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Insurance {{ id }}?"
+      },
+      "detail": {
+        "title": "Insurance"
+      },
+      "clientId": "Client Id",
+      "ehcId": "Ehc Id",
+      "coverageId": "Coverage Id",
+      "mvaId": "Mva Id",
+      "wsibId": "Wsib Id"
+    }
+  }
+}

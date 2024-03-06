@@ -1,0 +1,130 @@
+<br />
+<h5><span jhiTranslate="ermConsoleApp.prog.addNewProgram"></span></h5>
+<form name="editForm" role="form" novalidate #editForm="ngForm">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.soapNoteName"></label>
+    <div class="col-sm-8" *ngIf="selectedAssessment && selectedAssessment.soapNote">
+      <input type="text" class="form-control" name="lastModifiedDate" [value]="selectedAssessment!.soapNote!.name" readonly />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.assessment"></label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="lastModifiedDate" [value]="selectedAssessment!.name" readonly />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.name"></label>
+    <div class="col-sm-8">
+      <input
+        type="text"
+        class="form-control"
+        name="name"
+        id="field_name"
+        [(ngModel)]="prog.name"
+        required
+        [minLength]="1"
+        [maxlength]="50"
+      />
+      <small
+        class="form-control-feedback text-danger"
+        [hidden]="!editForm.controls.name.errors!.required"
+        jhiTranslate="entity.validation.required"
+        >This field is required.
+      </small>
+      <small
+        class="form-text text-danger"
+        [hidden]="!editForm.controls.name.errors!.minlength"
+        jhiTranslate="entity.validation.minlength"
+        translateValues="{ min: 1 }"
+      >
+        This field is required to be at least 3 characters.
+      </small>
+      <small
+        class="form-text text-danger"
+        [hidden]="!editForm.controls.name.errors!.maxlength"
+        jhiTranslate="entity.validation.maxlength"
+        translateValues="{ max: 50 }"
+      >
+        This field cannot be longer than 50 characters.
+      </small>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.note"></label>
+    <div class="col-sm-8">
+      <textarea
+        type="text"
+        class="form-control"
+        name="clinicalNote"
+        id="field_clinicalNote"
+        [(ngModel)]="prog.clinicalNote!.note"
+        (ngModelChange)="isNoteModified($event)"
+        [maxlength]="350"
+      ></textarea>
+      <small
+        class="form-text text-danger"
+        [hidden]="!editForm.controls.clinicalNote.errors!.maxlength"
+        jhiTranslate="entity.validation.maxlength"
+        translateValues="{ max: 350 }"
+      >
+        This field cannot be longer than 350 characters.
+      </small>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.startDate"></label>
+    <div class="col-sm-3">
+      <div class="input-group">
+        <input
+          id="field_startDate"
+          type="text"
+          class="form-control"
+          name="endDate"
+          ngbDatepicker
+          #startDateDp="ngbDatepicker"
+          [(ngModel)]="prog.startDate"
+        />
+        <span class="input-group-append">
+          <button type="button" class="btn btn-secondary" (click)="startDateDp.toggle()">
+            <fa-icon icon="calendar-alt"></fa-icon>
+          </button>
+        </span>
+      </div>
+    </div>
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.endDate"></label>
+    <div class="col-sm-3">
+      <div class="input-group">
+        <input
+          id="field_endDate"
+          type="text"
+          class="form-control"
+          name="endDate"
+          ngbDatepicker
+          #endDateDp="ngbDatepicker"
+          [(ngModel)]="prog.endDate"
+        />
+        <span class="input-group-append">
+          <button type="button" class="btn btn-secondary" (click)="endDateDp.toggle()">
+            <fa-icon icon="calendar-alt"></fa-icon>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10 text-right">
+      <div class="btn-group flex-btn-group-container">
+        <button type="button" (click)="closeAddProgWindow()" class="btn btn-outline-primary">
+          <i class="fa fa-1x fa-window-close-o"></i></button
+        >&nbsp;
+        <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+        <button type="submit" (click)="save()" [disabled]="editForm.invalid" class="btn btn-outline-primary">
+          <i class="fa fa-1x fa-save"></i>
+          <span jhiTranslate="ermConsoleApp.prog.saveProg"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

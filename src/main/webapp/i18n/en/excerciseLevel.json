@@ -1,0 +1,22 @@
+{
+  "ermConsoleApp": {
+    "exerciseLevel": {
+      "home": {
+        "title": "Exercise Levels",
+        "createLabel": "Create a new Exercise Level",
+        "createOrEditLabel": "Create or edit a Exercise Level",
+        "notFound": "No Exercise Levels found"
+      },
+      "created": "A new Exercise Level is created with identifier {{ param }}",
+      "updated": "A Exercise Level is updated with identifier {{ param }}",
+      "deleted": "A Exercise Level is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Exercise Level {{ id }}?"
+      },
+      "detail": {
+        "title": "Exercise Level"
+      },
+      "name": "Name"
+    }
+  }
+}

@@ -1,0 +1,66 @@
+<div>
+  <br />
+  <table class="invoice_right_frame">
+    <thead>
+      <tr>
+        <th><span jhiTranslate="ermConsoleApp.invoice.index"></span></th>
+        <th><span jhiTranslate="ermConsoleApp.invoice.item"></span></th>
+        <th><span jhiTranslate="ermConsoleApp.invoice.quantity"></span></th>
+        <th><span jhiTranslate="ermConsoleApp.invoice.type"></span></th>
+        <th><span jhiTranslate="ermConsoleApp.invoice.unitPrice"></span></th>
+        <th><span jhiTranslate="ermConsoleApp.invoice.amount"></span></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let it of invoiceItems; let i = index">
+        <td class="td_index">{{ i + 1 }}</td>
+        <td class="td_desc">
+          {{ it.name }} <span *ngIf="it.type === 'P'">- {{ it.type }}</span>
+        </td>
+        <td class="td_index">
+          <input
+            type="number"
+            onkeydown="if(event.key==='.'){event.preventDefault();}"
+            oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');"
+            (change)="changeQuantity()"
+            [(ngModel)]="it.quantity"
+            class="text_number_center"
+            name="quantity"
+            id="field_quantity"
+          />
+        </td>
+
+        <td class="td_desc_15_center">
+          <select class="form-control col-sm" id="field_feeType_{{ i }}" name="feeType_{{ i }}" (change)="changeFeeType(i, it)" required>
+            <option *ngFor="let ft of feeTypes" [selected]="it.psFeeTypeId === ft.id" [value]="ft.id">{{ ft.name }}</option>
+          </select>
+        </td>
+        <td class="td_grey_right">{{ getFee(it) | currency: 'CAD' : 'symbol-narrow' }} &nbsp;&nbsp;</td>
+        <td class="td_grey_right">{{ it.paymentAmount! | currency: 'CAD' : 'symbol-narrow' }} &nbsp;&nbsp;</td>
+        <td class="td_index">
+          <i class="fa fa-2x fa-trash-o" (click)="removeItemLine(it)"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br />
+
+  <div class="modal-footer">
+    <button type="submit" (click)="save()" [disabled]="!dirty" id="save-entity" class="btn btn-primary v-btm-m">
+      <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+    </button>
+    <button
+      type="submit"
+      (click)="changeInvoicePage()"
+      [disabled]="disablePayment"
+      id="paymentInvoice-entity"
+      class="btn btn-primary v-btm-m"
+    >
+      <fa-icon icon="save"></fa-icon>&nbsp;
+
+      <span *ngIf="invoice!.status !== 'Paid'" jhiTranslate="ermConsoleApp.invoice.makePayment">Make a payment</span>
+      <span *ngIf="invoice!.status === 'Paid'" jhiTranslate="ermConsoleApp.invoice.paymentHistory"></span>
+    </button>
+  </div>
+</div>

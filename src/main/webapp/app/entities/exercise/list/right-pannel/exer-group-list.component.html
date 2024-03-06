@@ -1,0 +1,82 @@
+<div class="col-sm-12">
+  <form name="searchForm" class="form-inline">
+    <div class="input-group w-100 mt-3">
+      <!--            <input type="text" class="form-control" [(ngModel)]="currentSearch"-->
+      <!--                   id="currentSearch" name="currentSearch" placeholder="{{ 'ermConsoleApp.exercise.search' | translate }}">-->
+
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="currentSearch"
+        id="currentSearch"
+        name="currentSearch"
+        placeholder="{{ 'ermConsoleApp.exercise.search' }}"
+      />
+      <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+        <span class="fa fa-search"></span>
+      </button>
+      <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+        <span class="fa fa-trash-o"></span>
+      </button>
+    </div>
+  </form>
+</div>
+<br />
+<div>
+  <div class="table-responsive" id="entities">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <!--                <tr jhiSort [(predicate)]="predicate" -->
+        <!--                    [(ascending)]="ascending" -->
+        <!--                    -->
+        <!--                    [callback]="loadPage.bind(this)">-->
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
+          <th scope="col" jhiSortBy="name">
+            <span jhiTranslate="ermConsoleApp.exerGroup.name">Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedDate">
+            <span jhiTranslate="ermConsoleApp.exerGroup.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let exerGroup of exerGroups; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/exer-group', exerGroup.id, 'view']">{{ exerGroup.name }}</a>
+          </td>
+          <td>{{ exerGroup.lastModifiedDate?.format('YYYY-MM-DD HH:mm') }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" (click)="delete(exerGroup)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tbody></tbody>
+    </table>
+    <div class="alert alert-warning" id="no-result" *ngIf="!exerGroups || exerGroups.length === 0">
+      <span jhiTranslate="ermConsoleApp.exerGroup.notFound">No instructions found</span>
+    </div>
+  </div>
+
+  @if (exerGroups && exerGroups.length) {
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"> </jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  }
+</div>

@@ -1,0 +1,257 @@
+<div class="modal-header"></div>
+&nbsp;
+<h5><span jhiTranslate="ermConsoleApp.wsib.newWsib">WSIB INfo</span></h5>
+<br />
+<form name="editForm" role="form" novalidate [formGroup]="editForm">
+  <div class="mt-lg-4">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.wsib.employer"></label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="employer" id="field_employer" formControlName="employer" />
+        <div *ngIf="editForm.get('employer')!.invalid && (editForm.get('employer')!.dirty || editForm.get('employer')!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="(editForm.get('employer')?.errors)!.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+          <!--                        <small class="form-text text-danger"-->
+          <!--                               *ngIf="editForm.get('employer')?.errors!.maxlength" -->
+          <!--                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">-->
+          <!--                            This field cannot be longer than 50 characters.-->
+          <!--                        </small>-->
+
+          <small
+            class="form-text text-danger"
+            *ngIf="(editForm.get('employer')?.errors)!.maxlength"
+            jhiTranslate="entity.validation.maxlength"
+          >
+            This field cannot be longer than 50 characters.
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.wsib.claimNumber"></label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="claimNumber" id="field_claimNumber" formControlName="claimNumber" />
+        <div *ngIf="editForm.get('claimNumber')!.invalid && (editForm.get('claimNumber')!.dirty || editForm.get('claimNumber')!.touched)">
+          <!--                    <small class="form-text text-danger"-->
+          <!--                           *ngIf="editForm.get('claimNumber')?.errors!.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">-->
+          <!--                        This field cannot be longer than 50 characters.-->
+          <!--                    </small>-->
+
+          <small
+            class="form-text text-danger"
+            *ngIf="(editForm.get('claimNumber')?.errors)!.maxlength"
+            jhiTranslate="entity.validation.maxlength"
+          >
+            This field cannot be longer than 50 characters.
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.wsib.accidentDate"></label>
+      <div class="col-sm-3">
+        <div class="input-group">
+          <input
+            id="field_accidentDate"
+            type="text"
+            class="form-control"
+            name="accidentDate"
+            ngbDatepicker
+            #accidentDateDp="ngbDatepicker"
+            formControlName="accidentDate"
+          />
+          <span class="input-group-append">
+            <button type="button" class="btn btn-secondary" (click)="accidentDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </span>
+        </div>
+        <div
+          *ngIf="editForm.get('accidentDate')!.invalid && (editForm.get('accidentDate')!.dirty || editForm.get('accidentDate')!.touched)"
+        >
+          <small
+            class="form-text text-danger"
+            *ngIf="(editForm.get('accidentDate')?.errors)!.required"
+            jhiTranslate="entity.validation.required"
+          >
+            This field is required.
+          </small>
+        </div>
+      </div>
+      <label class="col-sm-1 col-form-label text-right" jhiTranslate="ermConsoleApp.wsib.status"></label>
+      <div class="col-sm-2">
+        <div class="btn-group">
+          <select class="form-control" name="status">
+            <option *ngFor="let st of statuses" [selected]="wsib.status != null && wsib.status == st" [value]="st">{{ st }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.wsib.adjudicator"></label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="adjudicator" id="field_adjudicator" formControlName="adjudicator" />
+        <div *ngIf="editForm.get('adjudicator')!.invalid && (editForm.get('adjudicator')!.dirty || editForm.get('adjudicator')!.touched)">
+          <!--                    <small class="form-text text-danger"-->
+          <!--                           *ngIf="editForm.get('adjudicator')?.errors!.maxlength" -->
+          <!--                           jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">-->
+          <!--                        This field cannot be longer than 50 characters.-->
+          <!--                    </small>-->
+
+          <small
+            class="form-text text-danger"
+            *ngIf="(editForm.get('adjudicator')?.errors)!.maxlength"
+            jhiTranslate="entity.validation.maxlength"
+          >
+            This field cannot be longer than 50 characters.
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.wsib.supervisor"></label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="supervisor" id="field_supervisor" formControlName="supervisor" />
+        <div *ngIf="editForm.get('supervisor')!.invalid && (editForm.get('supervisor')!.dirty || editForm.get('supervisor')!.touched)">
+          <!--                    <small class="form-text text-danger"-->
+          <!--                           *ngIf="editForm.get('supervisor')?.errors!.maxlength" -->
+          <!--                           jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">-->
+          <!--                        This field cannot be longer than 50 characters.-->
+          <!--                    </small>-->
+
+          <small
+            class="form-text text-danger"
+            *ngIf="(editForm.get('supervisor')?.errors)!.maxlength"
+            jhiTranslate="entity.validation.maxlength"
+          >
+            This field cannot be longer than 50 characters.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.wsib.caseManager"></label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="caseManager" id="field_caseManager" formControlName="caseManager" />
+        <div *ngIf="editForm.get('caseManager')!.invalid && (editForm.get('caseManager')!.dirty || editForm.get('caseManager')!.touched)">
+          <!--                    <small class="form-text text-danger"-->
+          <!--                           *ngIf="editForm.get('caseManager')?.errors!.maxlength" -->
+          <!--                           jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">-->
+          <!--                        This field cannot be longer than 50 characters.-->
+          <!--                    </small>-->
+          <small
+            class="form-text text-danger"
+            *ngIf="(editForm.get('caseManager')?.errors)!.maxlength"
+            jhiTranslate="entity.validation.maxlength"
+          >
+            This field cannot be longer than 50 characters.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.wsib.phone"></label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="phone" id="field_phone" formControlName="phone" />
+        <div *ngIf="editForm.get('phone')!.invalid && (editForm.get('phone')!.dirty || editForm.get('phone')!.touched)">
+          <!--                    <small class="form-text text-danger"-->
+          <!--                           *ngIf="editForm.get('phone')?.errors!.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 12 }">-->
+          <!--                        This field cannot be longer than 12 characters.-->
+          <!--                    </small>-->
+          <small
+            class="form-text text-danger"
+            *ngIf="(editForm.get('phone')?.errors)!.maxlength"
+            jhiTranslate="entity.validation.maxlength"
+          >
+            This field cannot be longer than 12 characters.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.wsib.fax"></label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="fax" id="field_fax" formControlName="fax" />
+        <div *ngIf="editForm.get('fax')!.invalid && (editForm.get('fax')!.dirty || editForm.get('fax')!.touched)">
+          <!--                    <small class="form-text text-danger"-->
+          <!--                           *ngIf="editForm.get('fax')?.errors!.maxlength" jhiTranslate="entity.validation.maxlength" -->
+          <!--                           [translateValues]="{ max: 12 }">-->
+          <!--                        This field cannot be longer than 12 characters.-->
+          <!--                    </small>-->
+
+          <small class="form-text text-danger" *ngIf="(editForm.get('fax')?.errors)!.maxlength" jhiTranslate="entity.validation.maxlength">
+            This field cannot be longer than 12 characters.
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.wsib.email"></label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="fax" id="field_email" formControlName="email" />
+        <div *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)">
+          <!--                    <small class="form-text text-danger"-->
+          <!--                           *ngIf="editForm.get('email')?.errors!.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">-->
+          <!--                        This field cannot be longer than 50 characters.-->
+          <!--                    </small>-->
+          <small
+            class="form-text text-danger"
+            *ngIf="(editForm.get('email')?.errors)!.maxlength"
+            jhiTranslate="entity.validation.maxlength"
+          >
+            This field cannot be longer than 50 characters.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.wsib.note"></label>
+      <div class="col-sm-6">
+        <textarea type="text" class="form-control" name="note" id="field_note" formControlName="note"></textarea>
+        <div *ngIf="editForm.get('note')!.invalid && (editForm.get('note')!.dirty || editForm.get('note')!.touched)">
+          <!--                    <small class="form-text text-danger"-->
+          <!--                           *ngIf="editForm.get('note')?.errors!.maxlength"-->
+          <!--                           jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 350 }">-->
+          <!--                        This field cannot be longer than 350 characters.-->
+          <!--                    </small>-->
+
+          <small class="form-text text-danger" *ngIf="(editForm.get('note')?.errors)!.maxlength" jhiTranslate="entity.validation.maxlength">
+            This field cannot be longer than 350 characters.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.wsib.closingDate"></label>
+      <div class="col-sm-3">
+        <div class="input-group">
+          <input
+            id="field_closeDate"
+            type="text"
+            class="form-control"
+            name="closeDate"
+            ngbDatepicker
+            #closeDateDp="ngbDatepicker"
+            formControlName="closeDate"
+          />
+          <span class="input-group-append">
+            <button type="button" class="btn btn-secondary" (click)="closeDateDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+</form>

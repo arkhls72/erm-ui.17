@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
 import { combineLatest, filter, Observable, switchMap, tap } from 'rxjs';
@@ -12,10 +12,10 @@ import { FormsModule } from '@angular/forms';
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
 import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
 import { FilterComponent, FilterOptions, IFilterOptions, IFilterOption } from 'app/shared/filter';
-import { IClient } from '../client.model';
-
+import { Client } from '../client.model';
 import { EntityArrayResponseType, ClientService } from '../service/client.service';
 import { ClientDeleteDialogComponent } from '../delete/client-delete-dialog.component';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
   standalone: true,
@@ -32,10 +32,11 @@ import { ClientDeleteDialogComponent } from '../delete/client-delete-dialog.comp
     FormatMediumDatePipe,
     FilterComponent,
     ItemCountComponent,
+    FaIconComponent,
   ],
 })
 export class ClientComponent implements OnInit {
-  clients?: IClient[];
+  clients?: Client[];
   isLoading = false;
 
   predicate = 'id';
@@ -51,9 +52,10 @@ export class ClientComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     public router: Router,
     protected modalService: NgbModal,
+    protected zone: NgZone,
   ) {}
 
-  trackId = (_index: number, item: IClient): number => this.clientService.getClientIdentifier(item);
+  trackId = (_index: number, item: Client): number => this.clientService.getClientIdentifier(item);
 
   ngOnInit(): void {
     this.load();
@@ -61,7 +63,7 @@ export class ClientComponent implements OnInit {
     this.filters.filterChanges.subscribe(filterOptions => this.handleNavigation(1, this.predicate, this.ascending, filterOptions));
   }
 
-  delete(client: IClient): void {
+  delete(client: Client): void {
     const modalRef = this.modalService.open(ClientDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
     modalRef.componentInstance.client = client;
     // unsubscribe not needed because closed completes on modal close
@@ -90,7 +92,7 @@ export class ClientComponent implements OnInit {
   }
 
   navigateToPage(page = this.page): void {
-    this.handleNavigation(page, this.predicate, this.ascending, this.filters.filterOptions);
+    this.handleNavigation(page, this.predicate, this.ascending);
   }
 
   protected loadFromBackendWithRouteInformations(): Observable<EntityArrayResponseType> {
@@ -115,7 +117,7 @@ export class ClientComponent implements OnInit {
     this.clients = dataFromBody;
   }
 
-  protected fillComponentAttributesFromResponseBody(data: IClient[] | null): IClient[] {
+  protected fillComponentAttributesFromResponseBody(data: Client[] | null): Client[] {
     return data ?? [];
   }
 
@@ -149,13 +151,12 @@ export class ClientComponent implements OnInit {
       sort: this.getSortQueryParam(predicate, ascending),
     };
 
-    filterOptions?.forEach(filterOption => {
-      queryParamsObj[filterOption.nameAsQueryParam()] = filterOption.values;
-    });
-
-    this.router.navigate(['./'], {
-      relativeTo: this.activatedRoute,
-      queryParams: queryParamsObj,
+    // arash: added: this.zone.run() this.zone run to get rid of error in unit testing
+    this.zone.run(() => {
+      this.router.navigate(['./'], {
+        relativeTo: this.activatedRoute,
+        queryParams: queryParamsObj,
+      });
     });
   }
 

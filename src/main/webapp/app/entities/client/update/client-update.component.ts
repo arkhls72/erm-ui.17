@@ -7,7 +7,7 @@ import { finalize } from 'rxjs/operators';
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IClient } from '../client.model';
+import { Client } from '../client.model';
 import { ClientService } from '../service/client.service';
 import { ClientFormService, ClientFormGroup } from './client-form.service';
 
@@ -19,7 +19,7 @@ import { ClientFormService, ClientFormGroup } from './client-form.service';
 })
 export class ClientUpdateComponent implements OnInit {
   isSaving = false;
-  client: IClient | null = null;
+  client: Client | null = null;
 
   editForm: ClientFormGroup = this.clientFormService.createClientFormGroup();
 
@@ -52,7 +52,7 @@ export class ClientUpdateComponent implements OnInit {
     }
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IClient>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<Client>>): void {
     result.pipe(finalize(() => this.onSaveFinalize())).subscribe({
       next: () => this.onSaveSuccess(),
       error: () => this.onSaveError(),
@@ -71,7 +71,7 @@ export class ClientUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  protected updateForm(client: IClient): void {
+  protected updateForm(client: Client): void {
     this.client = client;
     this.clientFormService.resetForm(this.editForm, client);
   }

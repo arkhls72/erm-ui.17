@@ -1,0 +1,35 @@
+{
+  "ermConsoleApp": {
+    "clientInvoice": {
+      "home": {
+        "title": "Client Invoices",
+        "createLabel": "Create a new Client Invoice",
+        "createOrEditLabel": "Create or edit a Client Invoice",
+        "notFound": "No Client Invoices found"
+      },
+      "created": "A new Client Invoice is created with identifier {{ param }}",
+      "updated": "A Client Invoice is updated with identifier {{ param }}",
+      "deleted": "A Client Invoice is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Client Invoice {{ id }}?"
+      },
+      "detail": {
+        "title": "Client Invoice"
+      },
+      "invoiceId": "Invocie Id",
+      "clientId": "Client Id",
+      "name": "Name",
+      "invoicePrice": "Invoice Price",
+      "productId": "Product Id",
+      "myServiceId": "My Service Id",
+      "quantity": "Quantity",
+      "status": "Status",
+      "addService": "Add therapy & service",
+      "addProduct": "Add product",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

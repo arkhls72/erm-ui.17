@@ -1,0 +1,42 @@
+<table class="table table-striped">
+  <thead></thead>
+  <tbody>
+    <tr>
+      <td>
+        <div class="resp-table-body">
+          <div class="divTable">
+            <div class="divTableBody">
+              <div class="divTableRow" *ngFor="let sf of myServiceFees; let i = index">
+                <div class="divTableCell_100">{{ getFeeTypeName(sf) }}</div>
+                <!--                        This is an example of having link the currencymask to list of elements -->
+                <div class="divTableCell_180">
+                  <input currencyMask type="tel" [(ngModel)]="sf.fee" id="fee_{{ i }}" class="form-control col-lg-15" />
+                </div>
+
+                <div class="divTableCell">
+                  <textarea
+                    type="text"
+                    class="form-control col-lg-15"
+                    name="note"
+                    placeholder="{{ 'ermConsoleApp.myServiceFee.note' | translate }}"
+                    [(ngModel)]="sf.note"
+                  >
+                  </textarea>
+                </div>
+              </div>
+              <div class="divTableRow">
+                <div class="divTableCell_100"></div>
+                <div class="divTableCell_180">&nbsp;</div>
+                <div class="divTableCell">
+                  <button class="btn btn-primary btn-md" (click)="save()">
+                    <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,150 @@
+<table class="sum_invoice_top">
+  <tbody>
+    <tr>
+      <td class="td_label_center"></td>
+      <td class="td_label_right">
+        <div class="btn-group flex-btn-group-container" *ngIf="programEventType === 0">
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" (click)="addProgramSelectAssessment()" class="btn btn-outline-primary">
+            <i class="fa fa-1x fa-plus"></i>
+            &nbsp;<span jhiTranslate="ermConsoleApp.prog.addProgram"></span>&nbsp;&nbsp;
+          </button>
+          &nbsp;
+        </div>
+        <div class="btn-group flex-btn-group-container" *ngIf="programEventType === 2">
+          <button type="submit" (click)="backToProgramTab()" class="btn btn-outline-primary">
+            <span class="fa fa-window-close"></span></button
+          >&nbsp;
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" (click)="afterSelectAssessment()" [disabled]="!isAssessmentSelected" class="btn btn-outline-primary">
+            <span jhiTranslate="ermConsoleApp.prog.next"></span>&nbsp;&nbsp;
+            <i class="fa fa-1x fa-long-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="btn-group flex-btn-group-container" *ngIf="programEventType === 4">
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" (click)="backToProgramTab()" class="btn btn-outline-primary">
+            <span class="fa fa-window-close"></span></button
+          >&nbsp;
+        </div>
+        <div class="btn-group flex-btn-group-container" *ngIf="programEventType === 5">
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" (click)="backToGroupList()" class="btn btn-outline-primary">
+            <span class="fa fa-window-close"></span></button
+          >&nbsp;
+        </div>
+        <div class="btn-group flex-btn-group-container" *ngIf="programEventType === 6">
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" (click)="backToExerciseList()" class="btn btn-outline-primary">
+            <span class="fa fa-window-close"></span></button
+          >&nbsp;
+        </div>
+        <div class="btn-group flex-btn-group-container" *ngIf="programEventType === 7">
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" (click)="backToProgramTab()" class="btn btn-outline-primary">
+            <span class="fa fa-window-close"></span></button
+          >&nbsp;
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="col-sm-6">
+    <bc-program-list
+      [client]="client"
+      (selectProgEventEmitter)="ngOnSelectProgram($event)"
+      (deleteProgEventEmitter)="ngOnDeleteProg($event)"
+    >
+    </bc-program-list>
+  </div>
+
+  <div class="col-sm-6">
+    <div *ngIf="programEventType === 0">
+      <bc-program-select
+        [selectedProg]="selectedProg"
+        [selectedAssessment]="selectedAssessment"
+        (instructionEmitter)="goToInstruction($event)"
+        (groupButtonEmitter)="goToSelectGroupExercise()"
+        (exerciseButtonEmitter)="goToSelectExercise()"
+      >
+      </bc-program-select>
+    </div>
+    <div *ngIf="programEventType === 1">
+      <bc-program-add
+        [client]="client"
+        [selectedAssessment]="selectedAssessment"
+        (confirmedAddProgEmitter)="confirmAddProg($event)"
+        (cancelAddProgramEmitter)="backToAddProgramSelectAssessment()"
+      >
+      </bc-program-add>
+    </div>
+    <div *ngIf="programEventType === 2">
+      <bc-program-select-assessment
+        (cancelAddProgEmitter)="mainFirstPageWindow()"
+        [client]="client"
+        (selectedAssessEmitter)="selectAssessment($event)"
+      >
+      </bc-program-select-assessment>
+    </div>
+    <div *ngIf="programEventType === 3">
+      <bc-program-delete
+        [selectedProg]="selectedProg"
+        (confirmDeleteEmitter)="confirmDeleteProg()"
+        (cancelDeleteEmitter)="cancelDeleteProg()"
+      >
+      </bc-program-delete>
+    </div>
+
+    <div *ngIf="programEventType === 4">
+      <bc-group-add
+        [client]="client"
+        [selectedProg]="selectedProg"
+        (selectedGroupEmitter)="exerciseInGroup($event)"
+        (updateTreeEmitter)="updateTreeCache()"
+      >
+      </bc-group-add>
+    </div>
+    <div *ngIf="programEventType === 5">
+      <bc-group-exercise-detail
+        [selectedExerciseGroup]="selectedExerGroup"
+        [selectedProg]="selectedProg"
+        (editGroupInstruction)="groupInstruction($event)"
+      >
+      </bc-group-exercise-detail>
+    </div>
+
+    <div *ngIf="programEventType === 6">
+      <bc-group-instruction-add
+        [selectedExerciseGroup]="selectedExerGroup"
+        [selectedProg]="selectedProg"
+        (updateTreeEmitter)="updateTreeCache()"
+        [exerGroupWrapper]="exerGroupWrapper"
+        (cancelInstructionEmitter)="cancelInstruction()"
+      >
+      </bc-group-instruction-add>
+    </div>
+    <div *ngIf="programEventType === 7">
+      <bc-program-instruction-edit
+        [selectedProg]="selectedProg"
+        [selectedExerGroup]="selectedExerGroup"
+        [selectedExercise]="selectedExercise"
+        [selectedProgGroupInstruction]="selectedProgGroupInstruction"
+      >
+      </bc-program-instruction-edit>
+    </div>
+    <div *ngIf="programEventType === 8">
+      <bc-exercise-select
+        [selectedProg]="selectedProg"
+        (initCacheEmitter)="initExerciseList()"
+        (instructionEmitter)="goToExerciseInstruction($event)"
+      >
+      </bc-exercise-select>
+    </div>
+    <div *ngIf="programEventType === 9">
+      <bc-exercise-instruction-add [selectedProg]="selectedProg" [selectedExercise]="selectedExercise"> </bc-exercise-instruction-add>
+    </div>
+  </div>
+</div>

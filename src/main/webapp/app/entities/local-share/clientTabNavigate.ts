@@ -1,0 +1,17 @@
+export enum ClientTabNavigateType {
+  GENERAL,
+  MEDICALS,
+  INSURANCES,
+  CLAIMS,
+  SOAPNOTES,
+  ASSESSMENTS,
+  TREATMENTS,
+  INVOICES,
+  PROGRAMS,
+  PROGRAMS_SELECT_GROUP,
+  PROGRAMS_SELECT_ASSESMENT = 10,
+  PROGRAMS_EDIT_INSTRUCTION,
+}
+export class ClientTabNavigate {
+  constructor() {}
+}

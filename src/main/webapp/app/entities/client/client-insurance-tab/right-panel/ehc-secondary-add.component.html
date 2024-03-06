@@ -1,0 +1,106 @@
+<div class="modal-header"></div>
+<br />
+<h5><span jhiTranslate="ermConsoleApp.ehc.addSecondaryInsurance">Add Seconday</span></h5>
+<br />
+<div class="col-sm-12" *ngIf="primaries && primaries.length > 0">
+  <form name="searchForm" class="form-inline">
+    <div class="input-group w-100 mt-3">
+      <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" />
+      <!--                   placeholder="{{ 'ermConsoleApp.ehc.search' | translate }}">-->
+
+      <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+        <span class="fa fa-search"></span>
+      </button>
+      <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+        <span class="fa fa-trash-o"></span>
+      </button>
+    </div>
+  </form>
+</div>
+
+<br />
+
+<table class="table table-striped" *ngIf="primaries && primaries.length > 0">
+  <thead>
+    <tr>
+      <th></th>
+      <th><span jhiTranslate="ermConsoleApp.ehc.policyHolder"></span></th>
+      <th><span jhiTranslate="ermConsoleApp.ehc.ehcType"></span></th>
+      <th><span jhiTranslate="ermConsoleApp.ehc.name"></span></th>
+      <th><span jhiTranslate="ermConsoleApp.ehc.policyNumber"></span></th>
+      <th><span jhiTranslate="ermConsoleApp.ehc.status"></span></th>
+      <th><span jhiTranslate="ermConsoleApp.ehc.action"></span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let primary of primaries; trackBy: trackId">
+      <td class="text-left">
+        <input
+          class="largerCheckbox_20"
+          type="checkbox"
+          id="selectedCondition"
+          [checked]="isSelected(primary)"
+          (change)="addOrRemoveFromPrimary(primary, $event)"
+        />
+      </td>
+      <td>{{ primary.policyHolder }}</td>
+      <td>{{ primary.ehcType }}</td>
+      <td>{{ primary.name }}</td>
+      <td>{{ primary.policyNumber }}</td>
+      <td>{{ primary.status }}</td>
+      <td>
+        <div class="btn-group flex-btn-group-container" *ngIf="isSelected(primary)">
+          <div class="not-selected">
+            <i class="fa fa-2x fa-edit" (click)="goToSecondaryEdit(primary)"></i>
+          </div>
+        </div>
+        <div class="btn-group flex-btn-group-container" *ngIf="!isSelected(primary)"></div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-striped" *ngIf="!primaries || primaries.length === 0">
+  <thead>
+    <tr>
+      <th></th>
+      <th><span jhiTranslate="ermConsoleApp.ehc.policyHolder"></span></th>
+      <th><span jhiTranslate="ermConsoleApp.ehc.ehcType"></span></th>
+      <th><span jhiTranslate="ermConsoleApp.ehc.name"></span></th>
+      <th><span jhiTranslate="ermConsoleApp.ehc.policyNumber"></span></th>
+      <th><span jhiTranslate="ermConsoleApp.ehc.status"></span></th>
+    </tr>
+  </thead>
+</table>
+<div class="alert alert-warning" id="no-result" *ngIf="!primaries || primaries.length === 0">
+  <span jhiTranslate="ermConsoleApp.ehc.notFound"></span>
+</div>
+
+<table class="exercise_top" *ngIf="primaries && primaries.length > 0">
+  <thead>
+    <tr>
+      <th class="th_label_left">
+        <div class="btn-group flex-btn-group-container"><span jhiTranslate="ermConsoleApp.ehc.empty"></span></div>
+      </th>
+      <th class="th_label_center">
+        <div *ngIf="primaries && primaries.length">
+          <div class="row justify-content-center">
+            <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"> </jhi-item-count>
+          </div>
+          <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+          </div>
+        </div>
+      </th>
+      <th class="th_label_right">
+        <div class="btn-group flex-btn-group-container">
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" id="save-entity" class="btn btn-outline-primary" (click)="save()" [disabled]="disable">
+            <i class="fa fa-1x fa-save"></i>
+            <span jhiTranslate="ermConsoleApp.ehc.saveSecondary"></span>
+          </button>
+        </div>
+      </th>
+    </tr>
+  </thead>
+</table>

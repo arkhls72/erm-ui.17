@@ -1,0 +1,399 @@
+<div class="form-group row">
+  <label class="switch">
+    <input
+      class="largerCheckbox"
+      [disabled]="!selectedProg || !selectedProg.id"
+      type="checkbox"
+      id="viewProgramId"
+      (change)="checkViewProgram($event)"
+    />
+    <span class="slider round"></span>
+  </label>
+  <div class="col-sm-5">
+    <label class="col-form-label text-left"><h5>View Program</h5></label>
+  </div>
+</div>
+<!-- display Program tab -->
+<div *ngIf="isViewProgram">
+  <div *ngIf="!selectedProg || !selectedProg.id">
+    <br />
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="ermConsoleApp.prog.notFound"></span>
+    </div>
+  </div>
+
+  <div *ngIf="selectedProg && selectedProg.id">
+    <form name="editForm" role="form" novalidate #editForm="ngForm">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.prog.edit"></label>
+        <div class="col-sm-4">
+          <label class="switch">
+            <input class="largerCheckbox" [disabled]="!selectedProg || !selectedProg.id" type="checkbox" (change)="checkEditMode($event)" />
+            <span class="slider round"></span> </label
+          >&nbsp;
+        </div>
+      </div>
+      <div *ngIf="selectedProg">
+        <form name="editForm" role="form" novalidate #editForm="ngForm">
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.prog.name"></label>
+            <div class="col-sm-3" *ngIf="selectedProg && selectedProg.name">
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                id="field_name"
+                [readOnly]="!editMode"
+                [(ngModel)]="selectedProg!.name"
+                required
+                [minLength]="1"
+                [maxlength]="50"
+              />
+              <small
+                class="form-control-feedback text-danger"
+                [hidden]="!editForm.controls.name.errors!.required"
+                jhiTranslate="entity.validation.required"
+                >This field is required.
+              </small>
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.controls.name.errors!.minlength"
+                jhiTranslate="entity.validation.minlength"
+                translateValues="{ min: 1 }"
+              >
+                This field is required to be at least 3 characters.
+              </small>
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.controls.name.errors!.maxlength"
+                jhiTranslate="entity.validation.maxlength"
+                translateValues="{ max: 50 }"
+              >
+                This field cannot be longer than 50 characters.
+              </small>
+            </div>
+            <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.status"></label>
+            <div class="col-sm-3" *ngIf="editMode && selectedProg && selectedProg.status">
+              <select class="form-control col-md-15" name="status" (change)="changeStatus(selectedProg, $event)">
+                <option
+                  *ngFor="let st of statuses"
+                  [selected]="selectedProg && selectedProg.status && st == selectedProg.status"
+                  [value]="st"
+                >
+                  {{ st }}
+                </option>
+              </select>
+            </div>
+            <div class="col-sm-3" *ngIf="!editMode && selectedProg && selectedProg.status">
+              <input type="text" class="form-control" name="status" readonly [(ngModel)]="selectedProg!.status" />
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="editMode">
+            <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.startDate"></label>
+            <div class="col-sm-3">
+              <div class="input-group">
+                <input
+                  id="field_startDate"
+                  type="text"
+                  class="form-control"
+                  name="startDate"
+                  ngbDatepicker
+                  #startDateDp="ngbDatepicker"
+                  [(ngModel)]="selectedProg!.startDate"
+                />
+                <span class="input-group-append">
+                  <button type="button" class="btn btn-secondary" (click)="startDateDp.toggle()">
+                    <fa-icon icon="calendar-alt"></fa-icon>
+                  </button>
+                </span>
+              </div>
+            </div>
+            <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.plan.endDate"></label>
+            <div class="col-sm-3">
+              <div class="input-group">
+                <input
+                  id="field_endDate"
+                  type="text"
+                  class="form-control"
+                  name="endDate"
+                  ngbDatepicker
+                  #endDateDp="ngbDatepicker"
+                  [(ngModel)]="selectedProg!.endDate"
+                />
+                <span class="input-group-append">
+                  <button type="button" class="btn btn-secondary" (click)="endDateDp.toggle()">
+                    <fa-icon icon="calendar-alt"></fa-icon>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row" *ngIf="!editMode">
+            <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.startDate"></label>
+            <div class="col-sm-3">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  *ngIf="selectedProg && selectedProg.startDate"
+                  name="endDate"
+                  ngbDatepicker
+                  #startDateDp="ngbDatepicker"
+                  [(ngModel)]="selectedProg!.startDate"
+                  readonly
+                />
+              </div>
+            </div>
+            <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.plan.endDate"></label>
+            <div class="col-sm-3">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  *ngIf="selectedProg && selectedProg.endDate"
+                  name="endDate"
+                  ngbDatepicker
+                  #endDateDp="ngbDatepicker"
+                  [(ngModel)]="selectedProg!.endDate"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label
+              class="col-sm-2 col-form-label text-right"
+              jhiTranslate="ermConsoleApp.plan.progressNote"
+              *ngIf="!isClinicalNoteChanged"
+            ></label>
+            <label
+              class="col-sm-2 col-form-label text-right"
+              jhiTranslate="ermConsoleApp.assessment.newNote"
+              *ngIf="isClinicalNoteChanged"
+            ></label>
+            <div class="col-sm-8" *ngIf="selectedProg">
+              <textarea
+                type="text"
+                class="form-control"
+                name="clinicalNote"
+                id="field_clinicalNote"
+                *ngIf="selectedProg!.clinicalNote"
+                [(ngModel)]="selectedProg!.clinicalNote!.note"
+                [maxlength]="350"
+                [readOnly]="!editMode"
+                (ngModelChange)="isNoteModified($event)"
+              ></textarea>
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.controls.clinicalNote.errors!.maxlength"
+                jhiTranslate="entity.validation.maxlength"
+                translateValues="{ max: 350 }"
+              >
+                This field cannot be longer than 350 characters.
+              </small>
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="editMode">
+            <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.empty"></label>
+            <div class="col-sm-8 text-right">
+              <div class="btn-group flex-btn-group-container">
+                <div *ngIf="isClinicalNoteChanged" class="not-selected">
+                  <label class="col-sm-1 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.empty"></label>
+                  <i class="fa fa-save fa-2x" (click)="saveNotes()"></i>
+                </div>
+
+                <label class="col-sm-1 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.empty"></label>
+                <div class="not-selected text-right">
+                  <i class="fa fa-plus fa-2x" (click)="addRow()"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row" *ngIf="!deleteSelectedNote">
+            <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.plan.progressNotes"></label>
+            <div class="col-sm-8">
+              <table class="table table-borderless" *ngIf="progNotes">
+                <thead>
+                  <tr>
+                    <th><span jhiTranslate="ermConsoleApp.assessment.num"></span></th>
+                    <th><span jhiTranslate="ermConsoleApp.assessment.modifiedOn"></span></th>
+                    <th class="text-right"><span jhiTranslate="ermConsoleApp.plan.action"></span></th>
+                  </tr>
+                </thead>
+                <tr *ngFor="let note of progNotes; let i = index">
+                  <td>
+                    <a class="my-alert-link" (click)="onSelectNote(note)">{{ i + 1 }}</a>
+                  </td>
+                  <td>
+                    <a class="my-alert-link" (click)="onSelectNote(note)">{{ note.lastModifiedDate!.format('YYYY-MM-DD HH:mm') }}</a>
+                  </td>
+
+                  <td class="text-right">
+                    <div class="not-selected" *ngIf="editMode">
+                      <i class="fa fa-2x fa-trash-o" (click)="deleteNote(note)"></i>
+                    </div>
+                    <div class="selected" *ngIf="!editMode">
+                      <i class="fa fa-2x fa-trash-o"></i>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="deleteSelectedNote">
+            <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.empty"></label>
+            <div class="col-sm-8">
+              <bc-program-note-delete
+                [progNote]="selectedProgNote"
+                (cancelDeleteEmitter)="cancelNoteDelete()"
+                (confirmDeleteEmitter)="confirmDeleteNote($event)"
+              >
+              </bc-program-note-delete>
+
+              <br />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.modified"></label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" name="lastModifiedDate" [value]="getFormatDate(selectedProg)" readonly />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.soapNoteName"></label>
+            <div class="col-sm-3" *ngIf="selectedAssessment && selectedAssessment.soapNote">
+              <input type="text" class="form-control" name="name" value="{{ selectedAssessment.soapNote.name }}" readonly />
+            </div>
+            <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.assessmentName"></label>
+            <div class="col-sm-3" *ngIf="selectedAssessment">
+              <input type="text" class="form-control" name="assessment" readonly [value]="selectedAssessment!.name" />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-10 text-right">
+              <div class="btn-group flex-btn-group-container">
+                <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+                <button
+                  type="submit"
+                  (click)="save()"
+                  [disabled]="isClinicalNoteChanged || editForm.invalid || !editMode"
+                  class="btn btn-outline-primary"
+                >
+                  <i class="fa fa-1x fa-save"></i>
+                  <span jhiTranslate="ermConsoleApp.prog.saveProgram"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal-header"></div>
+<br />
+<!-- exergroup radio -->
+<table class="button_header_top">
+  <tbody>
+    <tr>
+      <td class="td_label_left_medium">
+        <div class="form-group row">
+          <label class="switch">
+            <input
+              class="largerCheckbox"
+              [disabled]="!selectedProg || !selectedProg.id"
+              type="checkbox"
+              id="viewGroupExerId"
+              (change)="checkViewGroupExercise($event)"
+            />
+            <span class="slider round"></span>
+          </label>
+          <div class="col-sm-5">
+            <h5><label class="col-form-label text-left" jhiTranslate="ermConsoleApp.prog.groupExer"></label></h5>
+          </div>
+        </div>
+      </td>
+      <td class="td_label_right_medium">
+        <div class="form-group row" *ngIf="isViewGroupTree">
+          <div class="btn-group flex-btn-group-container">
+            <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+            <button type="submit" (click)="goToSelectGroupExercise()" class="btn btn-outline-primary">
+              <i class="fa fa-1x fa-plus"></i>
+              &nbsp;<span jhiTranslate="ermConsoleApp.prog.addGroupExer"></span>&nbsp;&nbsp;
+            </button>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!--  ExerGroup table and Group Tree -->
+<div *ngIf="isViewGroupTree">
+  <div class="alert alert-warning" id="no-result2" *ngIf="!groupList || groupList.length === 0">
+    <span jhiTranslate="ermConsoleApp.exerGroup.notFound">No instructions found</span>
+  </div>
+  <bc-tree-group-node
+    [treeData]="treeData"
+    [selectedProg]="selectedProg"
+    [progGroupInstructions]="progGroupInstructions"
+    [groupList]="groupList"
+    (instructionEmitter)="gotToInstruction($event)"
+    *ngIf="treeData && treeData.length > 0"
+  >
+  </bc-tree-group-node>
+</div>
+
+<div class="modal-header"></div>
+<br />
+<table class="button_header_top">
+  <tbody>
+    <tr>
+      <td class="td_label_left_medium">
+        <div class="form-group row">
+          <label class="switch">
+            <input
+              class="largerCheckbox"
+              [disabled]="!selectedProg || !selectedProg.id"
+              type="checkbox"
+              id="viewExerId"
+              (change)="checkViewExercise($event)"
+            />
+            <span class="slider round"></span>
+          </label>
+          <div class="col-sm-5">
+            <h5><label class="col-form-label text-left" jhiTranslate="ermConsoleApp.prog.exercises"></label></h5>
+          </div>
+        </div>
+      </td>
+      <td class="td_label_right_medium">
+        <div class="form-group row" *ngIf="isViewExerciseTree">
+          <div class="btn-group flex-btn-group-container">
+            <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+            <button type="submit" (click)="goToSelectExerciseList()" class="btn btn-outline-primary">
+              <i class="fa fa-1x fa-plus"></i>
+              &nbsp;<span jhiTranslate="ermConsoleApp.prog.addExer"></span>&nbsp;&nbsp;
+            </button>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div *ngIf="isViewExerciseTree">
+  <div class="alert alert-warning" id="no-result3" *ngIf="!groupList || groupList.length === 0">
+    <span jhiTranslate="ermConsoleApp.exerGroup.exerciseNotFound">No Exercise found</span>
+  </div>
+  <bc-tree-exercise-node
+    [selectedProg]="selectedProg"
+    [treeDataExercise]="treeDataExercise"
+    [exerciseMedia]="exerciseMedia"
+    [progExerciseInstructions]="progExerciseInstructions"
+  >
+  </bc-tree-exercise-node>
+</div>

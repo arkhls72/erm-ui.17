@@ -1,0 +1,22 @@
+{
+  "ermConsoleApp": {
+    "feeType": {
+      "home": {
+        "title": "Fee Typs",
+        "createLabel": "Create a new Fee Typ",
+        "createOrEditLabel": "Create or edit a Fee Typ",
+        "notFound": "No Fee Typs found"
+      },
+      "created": "A new Fee Typ is created with identifier {{ param }}",
+      "updated": "A Fee Typ is updated with identifier {{ param }}",
+      "deleted": "A Fee Typ is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Fee Typ {{ id }}?"
+      },
+      "detail": {
+        "title": "Fee Typ"
+      },
+      "name": "Name"
+    }
+  }
+}

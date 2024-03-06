@@ -4,16 +4,16 @@ import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { of, EMPTY, Observable } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { IClient } from '../client.model';
+import { Client } from '../client.model';
 import { ClientService } from '../service/client.service';
 
-export const clientResolve = (route: ActivatedRouteSnapshot): Observable<null | IClient> => {
+export const clientResolve = (route: ActivatedRouteSnapshot): Observable<null | Client> => {
   const id = route.params['id'];
   if (id) {
     return inject(ClientService)
       .find(id)
       .pipe(
-        mergeMap((client: HttpResponse<IClient>) => {
+        mergeMap((client: HttpResponse<Client>) => {
           if (client.body) {
             return of(client.body);
           } else {

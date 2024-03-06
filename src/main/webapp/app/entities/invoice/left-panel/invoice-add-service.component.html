@@ -1,0 +1,103 @@
+<div>
+  <h5 id="page-heading">
+    <span jhiTranslate="ermConsoleApp.invoice.addService">Add service</span>
+  </h5>
+  <br />
+  <div class="row">
+    <div class="col-sm-12">
+      <form name="searchForm" class="form-inline">
+        <div class="input-group w-100 mt-3">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="currentSearch"
+            id="currentSearch"
+            name="currentSearch"
+            placeholder="{{ 'ermConsoleApp.commonServiceCode.search' | translate }}"
+          />
+          <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+            <span class="fa fa-search"></span>
+          </button>
+          <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+            <span class="fa fa-trash-o"></span>
+          </button>
+          <button (click)="resetRefresh()" class="input-group-text">
+            <span class="fa fa-refresh"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="table-responsive-lg" id="entities" *ngIf="myServices && myServices.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading" id="my-service-table">
+      <thead>
+        <!--            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="getMyServices.bind(this)">-->
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
+          <th>
+            <input class="largerCheckbox_20" type="checkbox" id="checkUncheck" (change)="checkUnCheck($event)" />
+          </th>
+          <th scope="col" jhiSortBy="name"><span jhiTranslate="ermConsoleApp.myService.name"></span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="description">
+            <span jhiTranslate="ermConsoleApp.myService.description"></span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th>&nbsp;&nbsp;</th>
+          <th class="myth">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="!checkedButton" id="myService-body">
+        <tr *ngFor="let myService of myServices; let i = index; trackBy: trackId">
+          <td class="td_5">
+            <input
+              class="largerCheckbox_20"
+              type="checkbox"
+              id="line-checkbox-{{ i }}"
+              [checked]="isSelected(myService)"
+              (change)="addRemoveService(myService, $event, i)"
+            />
+          </td>
+          <td class="td_30">
+            <a [routerLink]="['/my-service', myService.id, 'edit']">{{ myService.name }}</a>
+          </td>
+          <td class="td_30">{{ myService.description }}</td>
+          <td><span *ngIf="myService.emptyPrice" jhiTranslate="ermConsoleApp.invoice.noPrice"></span></td>
+          <td></td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="checkedButton">
+        <tr *ngFor="let lc of lineCheckedMyServices; let i = index; trackBy: trackId">
+          <td class="td_5">
+            <input
+              class="largerCheckbox_20"
+              type="checkbox"
+              id="selectedCondition-{{ i }}"
+              [checked]="isSelected(lc)"
+              (change)="addRemoveService(lc, $event, i)"
+            />
+          </td>
+          <td class="td_30">
+            <a [routerLink]="['/my-service', lc.id, 'edit']">{{ lc.name }}</a>
+          </td>
+          <td class="td_30">{{ lc.description }}</td>
+          <td><span *ngIf="lc.emptyPrice" jhiTranslate="ermConsoleApp.invoice.noPrice"></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="!checkedButton && myServices && myServices.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"> </jhi-item-count>
+
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="getMyServices($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+  <div></div>
+</div>

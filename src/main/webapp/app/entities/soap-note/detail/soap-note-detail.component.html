@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (soapNote) {
+      <div>
+        <h2 data-cy="soapNoteDetailsHeading"><span>Soap Note</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ soapNote.id }}</span>
+          </dd>
+          <dt><span>Name</span></dt>
+          <dd>
+            <span>{{ soapNote.name }}</span>
+          </dd>
+          <dt><span>Subjective</span></dt>
+          <dd>
+            <span>{{ soapNote.subjective }}</span>
+          </dd>
+          <dt><span>Objective</span></dt>
+          <dd>
+            <span>{{ soapNote.objective }}</span>
+          </dd>
+          <dt><span>Analysis</span></dt>
+          <dd>
+            <span>{{ soapNote.analysis }}</span>
+          </dd>
+          <dt><span>Evaluation</span></dt>
+          <dd>
+            <span>{{ soapNote.evaluation }}</span>
+          </dd>
+          <dt><span>intervention</span></dt>
+          <dd>
+            <span>{{ soapNote.intervention }}</span>
+          </dd>
+          <dt><span>Client Id</span></dt>
+          <dd>
+            <span>{{ soapNote.clientId }}</span>
+          </dd>
+          <dt><span>Assessments</span></dt>
+          <dd>
+            <span>{{ soapNote.assessments }}</span>
+          </dd>
+          <dt><span>Created By</span></dt>
+          <dd>
+            <span>{{ soapNote.createdBy }}</span>
+          </dd>
+          <dt><span>Created Date</span></dt>
+          <dd>
+            <span>{{ soapNote.createdDate?.format('YYYY-MM-DD HH:mm') }}</span>
+          </dd>
+          <dt><span>Last Modified By</span></dt>
+          <dd>
+            <span>{{ soapNote.lastModifiedBy }}</span>
+          </dd>
+          <dt><span>Last Modified Date</span></dt>
+          <dd>
+            <span>{{ soapNote.lastModifiedDate?.format('YYYY-MM-DD HH:mm') }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/soap-note', soapNote.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

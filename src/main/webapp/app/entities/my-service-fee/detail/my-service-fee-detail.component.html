@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (myServiceFee) {
+      <div>
+        <h2 data-cy="myServiceFeeDetailsHeading"><span>My Service Fee</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ myServiceFee.id }}</span>
+          </dd>
+          <dt><span>Fee</span></dt>
+          <dd>
+            <span>{{ myServiceFee.fee }}</span>
+          </dd>
+          <dt><span>Fee Type Id</span></dt>
+          <dd>
+            <span>{{ myServiceFee.feeTypeId }}</span>
+          </dd>
+          <dt><span>My Service Id</span></dt>
+          <dd>
+            <span>{{ myServiceFee.myServiceId }}</span>
+          </dd>
+          <dt><span>Note</span></dt>
+          <dd>
+            <span>{{ myServiceFee.note }}</span>
+          </dd>
+          <dt><span>Created By</span></dt>
+          <dd>
+            <span>{{ myServiceFee.createdBy }}</span>
+          </dd>
+          <dt><span>Created Date</span></dt>
+          <dd>
+            <span>{{ myServiceFee.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Last Modified By</span></dt>
+          <dd>
+            <span>{{ myServiceFee.lastModifiedBy }}</span>
+          </dd>
+          <dt><span>Last Modified Date</span></dt>
+          <dd>
+            <span>{{ myServiceFee.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/my-service-fee', myServiceFee.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

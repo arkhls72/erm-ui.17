@@ -1,0 +1,28 @@
+{
+  "ermConsoleApp": {
+    "myProductFee": {
+      "home": {
+        "title": "My Product Fees",
+        "createLabel": "Create a new My Product Fee",
+        "createOrEditLabel": "Create or edit a My Product Fee",
+        "notFound": "No My Product Fees found"
+      },
+      "created": "A new My Product Fee is created with identifier {{ param }}",
+      "updated": "A My Product Fee is updated with identifier {{ param }}",
+      "deleted": "A My Product Fee is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  My Product Fee {{ id }}?"
+      },
+      "detail": {
+        "title": "My Product Fee"
+      },
+      "fee": "Fee",
+      "feeTypeId": "Fee Type Id",
+      "myProductId": "My Product Id",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date",
+      "createdBy": "Created By",
+      "createdDate": "Created Date"
+    }
+  }
+}

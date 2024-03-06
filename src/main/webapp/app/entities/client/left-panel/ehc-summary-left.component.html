@@ -1,0 +1,78 @@
+<ul>
+  &nbsp;&nbsp;
+  <h5><span jhiTranslate="ermConsoleApp.client.ehcPrimary"></span></h5>
+  <br />
+  <ul>
+    <div *ngFor="let ehc of primaries">
+      <div class="table-body-cell">
+        <div class="summary">{{ ehc.name }}</div>
+      </div>
+      <div *ngIf="ehc.coverages">
+        <ul>
+          <div *ngFor="let cov of ehc.coverages; let i = index">
+            <table class="summary_table">
+              <thead></thead>
+              <tbody>
+                <tr>
+                  <td class="td_label">{{ getTherapyName(cov?.therapyId) }}</td>
+                  <td class="td_label">&nbsp;&nbsp;</td>
+                  <td class="td_label_left">${{ cov?.limit }}</td>
+                  <td class="td_label">&nbsp;&nbsp;</td>
+                </tr>
+              </tbody>
+            </table>
+            <div *ngIf="ifHasDependent(ehc, i)">
+              <div class="table-body-cell">
+                <div class="summary"><span jhiTranslate="ermConsoleApp.ehc.dependent"></span></div>
+              </div>
+
+              <ul>
+                <div *ngFor="let dep of ehc.dependents">
+                  <table class="summary_table">
+                    <thead></thead>
+                    <tbody>
+                      <tr>
+                        <td class="td_label">{{ dep.dependentName }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </ul>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </ul>
+</ul>
+
+<ul>
+  &nbsp;&nbsp;&nbsp;
+  <h5><span jhiTranslate="ermConsoleApp.client.ehcSecondary"></span></h5>
+  <ul>
+    <div *ngFor="let ehc of secondaries">
+      <div class="table-body-cell">
+        <div class="summary">
+          {{ ehc.name }}
+        </div>
+        <div *ngIf="ehc.coverages">
+          <ul>
+            <div *ngFor="let cov of ehc.coverages">
+              <table class="summary_table">
+                <thead></thead>
+                <tbody>
+                  <tr>
+                    <td class="td_label">{{ getTherapyName(cov?.therapyId) }}</td>
+                    <td class="td_label">&nbsp;&nbsp;</td>
+                    <td class="td_label_left">${{ cov?.limit }}</td>
+                    <td class="td_label">&nbsp;&nbsp;</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </ul>
+</ul>

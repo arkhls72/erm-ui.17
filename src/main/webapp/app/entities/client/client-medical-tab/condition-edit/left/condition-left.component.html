@@ -1,0 +1,22 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><span class="text-left"></span></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cond of leftConditions; let i = index">
+      <td class="text-left">
+        <input
+          class="largerCheckbox_20"
+          type="checkbox"
+          id="selectedCondition_{{ i }}"
+          (change)="addOrRemoveCondition(cond, $event)"
+          [checked]="isSelected(cond.id)"
+        />
+      </td>
+      <td class="text-left">{{ cond.name }}</td>
+    </tr>
+  </tbody>
+</table>

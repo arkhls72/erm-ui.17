@@ -1,0 +1,74 @@
+<h5><span jhiTranslate="ermConsoleApp.assessment.listingAssessment"></span></h5>
+<form name="searchForm" class="form-inline">
+  <div class="input-group w-100 mt-3">
+    <!--        <input type="text" class="form-control"-->
+    <!--               [(ngModel)]="currentSearch" id="currentSearch"-->
+    <!--               name="currentSearch" placeholder="{{ 'ermConsoleApp.assessment.home.search' | translate }}">&nbsp;-->
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="currentSearch"
+      id="currentSearch"
+      name="currentSearch"
+      placeholder="{{ 'ermConsoleApp.assessment.home.search'}"
+    />&nbsp;
+    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+      <span class="fa fa-search"></span>
+    </button>
+    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+      <span class="fa fa-trash-o"></span></button
+    >&nbsp;
+  </div>
+</form>
+<div class="table-responsive" id="entities" *ngIf="assessments && assessments.length > 0">
+  <table class="table table-striped" aria-describedby="page-heading">
+    <thead>
+      <!--            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">-->
+      <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
+        <th scope="col" jhiSortBy="name"><span jhiTranslate="ermConsoleApp.assessment.name">Name</span></th>
+        <th scope="col" jhiSortBy="sourcePain"><span jhiTranslate="ermConsoleApp.assessment.sourcePain">Source Pain</span></th>
+        <th scope="col" jhiSortBy="lastModifiedDate"><span jhiTranslate="ermConsoleApp.assessment.lastModifiedDate"></span></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let assessment of assessments; trackBy: trackId">
+        <td>
+          <a class="my-alert-link" (click)="ngOnSelect(assessment)">{{ assessment.name }}</a>
+        </td>
+        <td>{{ assessment.sourcePain }}</td>
+        <td>{{ assessment.lastModifiedDate?.format('YYYY-MM-DD HH:mm') }}</td>
+        <td>
+          <div class="btn-group flex-btn-group-container">
+            <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+            <div class="not-selected">
+              <i class="fa fa-2x fa-trash-o" (click)="deleteAssessment(assessment)"></i>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="assessments && assessments.length">
+  <div class="row justify-content-center">
+    <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"> </jhi-item-count>
+  </div>
+  <div class="row justify-content-center">
+    <ngb-pagination [collectionSize]="totalItems" [pageSize]="itemsPerPage" [(page)]="page" (pageChange)="loadPage($event)">
+    </ngb-pagination>
+  </div>
+</div>
+<div class="table-responsive" *ngIf="!assessments || assessments.length === 0">
+  <table class="table table-striped" aria-describedby="page-heading">
+    <thead>
+      <!--        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">-->
+      <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
+        <th scope="col" jhiSortBy="name"><span jhiTranslate="ermConsoleApp.assessment.name">Name</span></th>
+        <th scope="col" jhiSortBy="sourcePain"><span jhiTranslate="ermConsoleApp.assessment.sourcePain">Source Pain</span></th>
+        <th scope="col" jhiSortBy="lastModifiedDate"><span jhiTranslate="ermConsoleApp.assessment.lastModifiedDate"></span></th>
+        <th></th>
+      </tr>
+    </thead>
+  </table>
+</div>

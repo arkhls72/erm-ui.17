@@ -1,0 +1,71 @@
+<h5><span jhiTranslate="ermConsoleApp.soapNote.listingSoapNote">Plan Listing</span></h5>
+<form name="searchForm" class="form-inline">
+  <div class="input-group w-100 mt-3">
+    <!--        <input type="text" (keydown.enter)="$event.preventDefault()" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch"-->
+    <!--               placeholder="{{ 'ermConsoleApp.soapNote.home.search' | translate }}">-->
+
+    <input
+      type="text"
+      (keydown.enter)="$event.preventDefault()"
+      class="form-control"
+      [(ngModel)]="currentSearch"
+      id="currentSearch"
+      name="currentSearch"
+    />
+    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+      <span class="fa fa-search"></span>
+    </button>
+    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+      <span class="fa fa-trash-o"></span>
+    </button>
+    &nbsp;
+  </div>
+</form>
+
+<table class="table table-striped">
+  <thead>
+    <!--    <tr jhiSort [(predicate)]="paginationParams.predicate"-->
+    <!--        [(ascending)]="paginationParams.reverse"  [callback]="reorder.bind(this)">-->
+
+    <tr jhiSort [(predicate)]="paginationParams.predicate" [(ascending)]="paginationParams.reverse">
+      <th jhiSortBy="name"><span jhiTranslate="ermConsoleApp.soapNote.name">Name</span> <span class="fa fa-sort"></span></th>
+      <th jhiSortBy="lastModifiedDate">
+        <span jhiTranslate="ermConsoleApp.soapNote.lastModifiedDate"></span> <span class="fa fa-sort"></span>
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let soap of soapNotes; let i = index; trackBy: trackId">
+      <!--        <td style="width: 1em"><a class="nav-link" (click)="ngOnClickSoapNote(soap)">{{i + 1 }}</a></td>-->
+      <td>
+        <a class="nav-link" (click)="ngOnClickSoapNote(soap)">{{ soap.name }}</a>
+      </td>
+      <td>{{ soap.lastModifiedDate?.format('') }}</td>
+      <td>
+        <div class="btn-group flex-btn-group-container">
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <div class="not-selected">
+            <i class="fa fa-2x fa-trash-o" (click)="deleteSoapNote(soap)"></i>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="soapNotes && soapNotes.length">
+  <div class="row justify-content-center">
+    <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"> </jhi-item-count>
+  </div>
+  <div class="row justify-content-center">
+    <ngb-pagination
+      [collectionSize]="totalItems"
+      [(page)]="page"
+      [pageSize]="itemsPerPage"
+      [maxSize]="5"
+      [rotate]="true"
+      (pageChange)="loadPage(page)"
+    ></ngb-pagination>
+  </div>
+</div>

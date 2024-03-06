@@ -1,0 +1,176 @@
+<form name="editForm" role="form" novalidate #editForm="ngForm">
+  <br />
+  &nbsp;
+  <h5><span jhiTranslate="ermConsoleApp.exercise.exerciseInfo">exerciseInfo</span></h5>
+  <br />
+  <div class="form-group row">
+    &nbsp;&nbsp;&nbsp;<label class="switch">
+      <input class="largerCheckbox" type="checkbox" (change)="checkEditMode($event)" />
+      <span class="slider round"></span> </label
+    >&nbsp;
+    <span jhiTranslate="ermConsoleApp.exercise.edit"></span>
+  </div>
+  <br />
+
+  <div class="mt-lg-4">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.exercise.name" for="field_name">Name</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="name" id="field_name" [(ngModel)]="exercise.name" required [readOnly]="!editMode" />
+        <small
+          class="form-control-feedback text-danger"
+          [hidden]="!editForm.controls.name.errors!.required"
+          jhiTranslate="entity.validation.required"
+          >This field is required.
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.exercise.description" for="field_description"
+        >Description</label
+      >
+      <div class="col-sm-6">
+        <textarea
+          type="text"
+          class="form-control"
+          name="description"
+          id="field_description"
+          [(ngModel)]="exercise.description"
+          [readOnly]="!editMode"
+        ></textarea>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label
+        class="col-sm-2 col-form-label col-form-label-lg text-right"
+        jhiTranslate="ermConsoleApp.exercise.bodyPart"
+        for="field_bodyPart"
+        >bodyPart</label
+      >
+      <div class="col-sm-2" *ngIf="editMode">
+        <select class="form-control" id="field_bodyPart" name="bodyPart" (change)="changeBodyPart($event)">
+          <option
+            *ngFor="let bodyPart of bodyParts"
+            [selected]="exercise.bodyPart != null && exercise.bodyPart.id == bodyPart.id"
+            [value]="bodyPart.id"
+          >
+            {{ bodyPart.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-2" *ngIf="!editMode">
+        <input id="field_duration_txt" type="text" class="form-control" name="bodyPart" [(ngModel)]="exercise!.bodyPart!.name" readonly />
+      </div>
+
+      <label class="col-sm-2 col-form-label col-form-label-lg text-right" jhiTranslate="ermConsoleApp.exercise.muscle" for="field_muscle"
+        >muscle</label
+      >
+      <div class="col-sm-2" *ngIf="editMode">
+        <select class="form-control" id="field_muscle" name="muscle" (change)="changeMuscle($event)">
+          <option
+            *ngFor="let muscle of muscles"
+            [selected]="exercise.muscle != null && exercise.muscle.id == muscle.id"
+            [value]="muscle.id"
+          >
+            {{ muscle.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-2" *ngIf="!editMode">
+        <input id="field_muscle_txt" type="text" class="form-control" name="muscle" [(ngModel)]="exercise!.muscle!.name" readonly />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label col-form-label-lg text-right" jhiTranslate="ermConsoleApp.exercise.type" for="field_type"
+        >type</label
+      >
+      <div class="col-sm-2" *ngIf="editMode">
+        <select class="form-control" id="field_type" name="type" (change)="changeType($event)">
+          <option *ngFor="let type of types" [selected]="exercise.type != null && exercise.type.id == type.id" [value]="type.id">
+            {{ type.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-2" *ngIf="!editMode">
+        <input id="field_type_txt" type="text" class="form-control" name="type" [(ngModel)]="exercise!.type!.name" readonly />
+      </div>
+      <label
+        class="col-sm-2 col-form-label col-form-label-lg text-right"
+        jhiTranslate="ermConsoleApp.exercise.position"
+        for="field_position"
+        >position</label
+      >
+      <div class="col-sm-2" *ngIf="editMode">
+        <select class="form-control" id="field_position" name="position" (change)="changePosition($event)">
+          <option
+            *ngFor="let position of positions"
+            [selected]="exercise.position != null && exercise.position.id == position.id"
+            [value]="position.id"
+          >
+            {{ position.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-2" *ngIf="!editMode">
+        <input id="field_position_txt" type="text" class="form-control" name="position" [(ngModel)]="exercise!.position!.name" readonly />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label
+        class="col-sm-2 col-form-label col-form-label-lg text-right"
+        jhiTranslate="ermConsoleApp.exercise.movement"
+        for="field_movement"
+        >movement</label
+      >
+      <div class="col-sm-2" *ngIf="editMode">
+        <select class="form-control" id="field_movement" name="movement" (change)="changeMovement($event)">
+          <option
+            *ngFor="let movement of movements"
+            [selected]="exercise.movement != null && exercise.movement.id == movement.id"
+            [value]="movement.id"
+          >
+            {{ movement.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-2" *ngIf="!editMode">
+        <input id="field_movement_txt" type="text" class="form-control" name="movement" [(ngModel)]="exercise!.movement!.name" readonly />
+      </div>
+      <label class="col-sm-2 col-form-label col-form-label-lg text-right" jhiTranslate="ermConsoleApp.exercise.tools" for="field_movement"
+        >tools</label
+      >
+      <div class="col-sm-2" *ngIf="editMode">
+        <select class="form-control" id="field_tools" name="tools" (change)="changeTools($event)">
+          <option *ngFor="let tools of tools" [selected]="exercise.tool != null && exercise.tool.id == tools.id" [value]="tools.id">
+            {{ tools.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-2" *ngIf="!editMode">
+        <input id="field_tool_txt" type="text" class="form-control" name="tool" [(ngModel)]="exercise!.tool!.name" readonly />
+      </div>
+    </div>
+    <br />
+    <table class="exercise_top">
+      <thead>
+        <tr>
+          <th class="th_label_left">
+            <div class="btn-group flex-btn-group-container">
+              <button type="submit" (click)="save()" class="btn btn-outline-primary" [disabled]="editForm.invalid || !editMode">
+                <i class="fa fa-1x fa-save"></i>
+                <span jhiTranslate="ermConsoleApp.exercise.saveExercise"></span>
+              </button>
+              <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+            </div>
+          </th>
+          <th class="th_label_center"></th>
+          <th class="th_label_right"></th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</form>
+<br />
+<div *ngIf="exercise">
+  <bc-exercise-info-instruction [exercise]="exercise"> </bc-exercise-info-instruction>
+</div>

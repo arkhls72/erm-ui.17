@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (invoice) {
+      <div>
+        <h2 data-cy="invoiceDetailsHeading"><span>Invoice</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ invoice.id }}</span>
+          </dd>
+          <dt><span>Client Id</span></dt>
+          <dd>
+            <span>{{ invoice.clientId }}</span>
+          </dd>
+          <dt><span>Invoice Number</span></dt>
+          <dd>
+            <span>{{ invoice.invoiceNumber }}</span>
+          </dd>
+          <dt><span>Clinic Id</span></dt>
+          <dd>
+            <span>{{ invoice.clinicId }}</span>
+          </dd>
+          <dt><span>Status</span></dt>
+          <dd>
+            <span>{{ invoice.status }}</span>
+          </dd>
+          <dt><span>Tax Total</span></dt>
+          <dd>
+            <span>{{ invoice.taxTotal }}</span>
+          </dd>
+          <dt><span>Sub Total</span></dt>
+          <dd>
+            <span>{{ invoice.subTotal }}</span>
+          </dd>
+          <dt><span>Note</span></dt>
+          <dd>
+            <span>{{ invoice.note }}</span>
+          </dd>
+          <dt><span>Full Name</span></dt>
+          <dd>
+            <span>{{ invoice.fullName }}</span>
+          </dd>
+          <dt><span>Grand Total</span></dt>
+          <dd>
+            <span>{{ invoice.grandTotal }}</span>
+          </dd>
+          <dt><span>Created By</span></dt>
+          <dd>
+            <span>{{ invoice.createdBy }}</span>
+          </dd>
+          <dt><span>Created Date</span></dt>
+          <dd>
+            <span>{{ invoice.createdDate?.format('YYYY-MM-DD HH:mm') }}</span>
+          </dd>
+          <dt><span>Last Modified By</span></dt>
+          <dd>
+            <span>{{ invoice.lastModifiedBy }}</span>
+          </dd>
+          <dt><span>Last Modified Date</span></dt>
+          <dd>
+            <span>{{ invoice.lastModifiedDate?.format('YYYY-MM-DD HH:mm') }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/invoice', invoice.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

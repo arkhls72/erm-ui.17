@@ -1,0 +1,28 @@
+{
+  "ermConsoleApp": {
+    "progNote": {
+      "home": {
+        "title": "Prog Notes",
+        "createLabel": "Create a new Prog Note",
+        "createOrEditLabel": "Create or edit a Prog Note",
+        "notFound": "No Prog Notes found"
+      },
+      "created": "A new Prog Note is created with identifier {{ param }}",
+      "updated": "A Prog Note is updated with identifier {{ param }}",
+      "deleted": "A Prog Note is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Prog Note {{ id }}?",
+        "questionNote": "Are you sure you  are deleting  Program modified on: {{ lastModifiedDate }}?"
+      },
+      "detail": {
+        "title": "Prog Note"
+      },
+      "progId": "Prog Id",
+      "note": "Note",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

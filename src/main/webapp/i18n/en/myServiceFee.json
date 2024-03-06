@@ -1,0 +1,29 @@
+{
+  "ermConsoleApp": {
+    "myServiceFee": {
+      "home": {
+        "title": "My Service Fees",
+        "createLabel": "Create a new My Service Fee",
+        "createOrEditLabel": "Create or edit a My Service Fee",
+        "notFound": "No My Service Fees found"
+      },
+      "created": "A new My Service Fee is created with identifier {{ param }}",
+      "updated": "A My Service Fee is updated with identifier {{ param }}",
+      "deleted": "A My Service Fee is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  My Service Fee {{ id }}?"
+      },
+      "detail": {
+        "title": "My Service Fee"
+      },
+      "fee": "Fee",
+      "feeTypeId": "Fee Type Id",
+      "myServiceId": "My Service Id",
+      "note": "Note",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

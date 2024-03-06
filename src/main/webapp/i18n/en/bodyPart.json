@@ -1,0 +1,22 @@
+{
+  "ermConsoleApp": {
+    "bodyPart": {
+      "home": {
+        "title": "Body Parts",
+        "createLabel": "Create a new Body Part",
+        "createOrEditLabel": "Create or edit a Body Part",
+        "notFound": "No Body Parts found"
+      },
+      "created": "A new Body Part is created with identifier {{ param }}",
+      "updated": "A Body Part is updated with identifier {{ param }}",
+      "deleted": "A Body Part is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Body Part {{ id }}?"
+      },
+      "detail": {
+        "title": "Body Part"
+      },
+      "name": "Name"
+    }
+  }
+}

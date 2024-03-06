@@ -1,0 +1,75 @@
+<table class="table table-striped" *ngIf="medicalEventType === 4">
+  <thead>
+    <tr>
+      <th><span jhiTranslate="ermConsoleApp.operation.name">Name</span></th>
+      <th><span jhiTranslate="ermConsoleApp.operation.reasonFor">reason For</span></th>
+      <th><span jhiTranslate="ermConsoleApp.operation.operationDate">operation date</span></th>
+      <th><span jhiTranslate="ermConsoleApp.operation.note">note</span></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let opr of operations; let i = index">
+      <td class="text-center">
+        <input [(ngModel)]="opr.name" class="form-control col-lg-10" type="text" required />
+      </td>
+
+      <td class="text-center">
+        <input [(ngModel)]="opr.reasonFor" class="form-control col-lg-10" type="text" required />
+      </td>
+
+      <td class="text-center">
+        <div class="input-group">
+          <input
+            type="text"
+            name="operation_field{{ i }}"
+            id="operation_field{{ i }}"
+            class="form-control col-md-7"
+            ngbDatepicker
+            #operationDateDp="ngbDatepicker"
+            [(ngModel)]="opr.operationDate"
+          />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" (click)="operationDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+          </span>
+        </div>
+      </td>
+      <td class="text-center">
+        <textarea type="text" class="form-control" name="note" id="field_note" [(ngModel)]="opr.note" *ngIf="opr"></textarea>
+      </td>
+      <!--<td ">-->
+      <td class="text-center" (click)="deleteRow(i)">
+        <div class="btn-group flex-btn-group-container">
+          <button type="submit" id="save-entity-2" class="btn btn-outline-primary" (click)="save(i)">
+            <i class="fa fa-1x fa-save"></i>
+            &nbsp;&nbsp;<span jhiTranslate="entity.action.save"></span>
+          </button>
+          &nbsp;
+          <button type="submit" class="btn btn-outline-danger">
+            <i class="fa fa-2x fa-trash-o" (click)="deleteRow(i)"></i>
+          </button>
+        </div>
+      </td>
+      <td class="text-center"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td class="text-right">
+        <i class="fa fa-plus fa-2x" (click)="addRow()"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="resp-table-row" *ngIf="medicalEventType === 10">
+  <div class="divTableRow">
+    <div>
+      <bc-operation-delete [operation]="operation" [medicalClient]="medicalClient"> </bc-operation-delete>
+    </div>
+  </div>
+</div>

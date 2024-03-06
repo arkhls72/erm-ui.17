@@ -1,0 +1,48 @@
+{
+  "ermConsoleApp": {
+    "exercise": {
+      "home": {
+        "title": "Exercises",
+        "createLabel": "Add Exercise",
+        "createOrEditLabel": "Create or edit a Exercise",
+        "notFound": "No Exercises found"
+      },
+      "created": "A new Exercise is created with identifier {{ param }}",
+      "updated": "A Exercise is updated with identifier {{ param }}",
+      "deleted": "A Exercise is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Exercise {{ id }}?"
+      },
+      "detail": {
+        "title": "Exercise"
+      },
+      "name": "Name",
+      "exercises": "Exercise(s)",
+      "inGroupExercises": "In Group Exercise(s)",
+      "exerciseInfo": "Exercise Info",
+      "edit": "Edit",
+      "bodyPart": "Body Part",
+      "muscle": "Muscle",
+      "image": "Image(s)",
+      "type": "Type",
+      "position": "Position",
+      "movement": "Movement",
+      "tools": "Tools",
+      "mediaId": "Media",
+      "search": "Search exercise ",
+      "description": "Description",
+      "firstMedia": "First Media",
+      "secondMedia": "Second Media",
+      "empty": " ",
+      "saveInGroup": "Save Exer.",
+      "search": "Search exercise by word",
+      "editExercise": "Edit Exercise",
+      "instruction": "Instruction",
+      "saveInstruction": "Save Inst.",
+      "saveExercise": "Save Exer.",
+      "image": "Image(s)",
+      "instructionDefault": "Default Instruction",
+      "addNewExercise": "Add Exercise"
+    }
+  }
+}

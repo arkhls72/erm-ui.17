@@ -1,0 +1,66 @@
+<div class="row">
+  <br />
+</div>
+<table class="textBoxTable">
+  <thead>
+    <tr>
+      <th></th>
+      <th><span jhiTranslate="ermConsoleApp.product.name">product name</span></th>
+      <th><span jhiTranslate="ermConsoleApp.productOrder.supplier">supplier</span></th>
+      <th><span jhiTranslate="ermConsoleApp.productOrder.status">status</span></th>
+      <th><span jhiTranslate="ermConsoleApp.productOrder.unitPrice">unitPrice</span></th>
+      <th><span jhiTranslate="ermConsoleApp.productOrder.quantity">quantity</span></th>
+      <th><span jhiTranslate="ermConsoleApp.productOrder.orderPrice">order price</span></th>
+      <th>&nbsp;&nbsp;</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>
+        <button
+          type="submit"
+          (click)="saveForUpdateList()"
+          id="save-entity"
+          [disabled]="isProductOrderDisable()"
+          class="btn btn-primary v-btm-m"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <tr *ngFor="let pro of productOrders; let i = index">
+      <td></td>
+      <td>{{ initProductName(pro.myProductId) }}</td>
+      <td>{{ initSupplierNameByProduct(pro.myProductId) }}</td>
+      <td>{{ pro.status }}</td>
+      <td>{{ initItemPrice(pro.myProductId) }}</td>
+      <td><input [(ngModel)]="pro.quantity" class="form-control col-lg-10" type="text" required /></td>
+      <td>{{ pro.orderPrice | currency: 'CAD' : 'symbol-narrow' }}</td>
+      <td>
+        <div class="btn-group flex-btn-group-container">
+          <button class="btn btn-danger btn-md" (click)="deleteRow(i)">
+            <span class="fa fa-remove"></span>
+            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+          </button>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">&nbsp;</td>
+      <td class="text-center">&nbsp;</td>
+      <td class="text-center">&nbsp;</td>
+      <td class="text-center">&nbsp;</td>
+      <td class="text-right"></td>
+      <td class="text-right"></td>
+      <td class="text-right"></td>
+    </tr>
+  </tbody>
+</table>

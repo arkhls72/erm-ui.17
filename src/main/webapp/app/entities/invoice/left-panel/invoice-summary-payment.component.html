@@ -1,0 +1,38 @@
+<br />
+<div class="row">
+  &nbsp;&nbsp;&nbsp;
+  <h5><span jhiTranslate="ermConsoleApp.invoice.summaryInvoice"></span></h5>
+</div>
+<br />
+<table class="invoice_right_frame">
+  <thead>
+    <tr>
+      <th><span jhiTranslate="ermConsoleApp.invoice.index"></span></th>
+      <th><span jhiTranslate="ermConsoleApp.invoice.item"></span></th>
+      <th><span jhiTranslate="ermConsoleApp.invoice.quantity"></span></th>
+      <th><span jhiTranslate="ermConsoleApp.invoice.type"></span></th>
+      <th><span jhiTranslate="ermConsoleApp.invoice.unitPrice"></span></th>
+      <th><span jhiTranslate="ermConsoleApp.invoice.amount"></span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let it of invoiceItems; let i = index">
+      <td class="td_index">{{ i + 1 }}</td>
+      <td class="td_desc">
+        {{ it.name }} <span *ngIf="it.type === 'P'">- {{ it.type }}</span>
+      </td>
+      <td class="td_index">{{ it.quantity }}</td>
+      <td class="td_desc_15_center">{{ getFtName(it.psFeeTypeId!) }}</td>
+      <td class="td_grey_right">{{ getFee(it) | currency: 'CAD' : 'symbol-narrow' }} &nbsp;&nbsp;</td>
+      <td class="td_grey_right">{{ it.paymentAmount! | currency: 'CAD' : 'symbol-narrow' }} &nbsp;&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<br />
+<div class="row">
+  &nbsp;&nbsp;&nbsp;
+  <h5><span jhiTranslate="ermConsoleApp.invoice.paymentHistory"></span></h5>
+</div>
+
+<bc-payment-right-history [invoice]="invoice"> </bc-payment-right-history>

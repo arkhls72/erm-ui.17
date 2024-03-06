@@ -1,0 +1,92 @@
+<h5><span jhiTranslate="ermConsoleApp.prog.listingProg"></span></h5>
+<form name="searchForm" class="form-inline">
+  <div class="input-group w-100 mt-3">
+    <!--        <input type="text" class="form-control"-->
+    <!--               [(ngModel)]="currentSearch" id="currentSearch"-->
+    <!--               name="currentSearch" placeholder="{{ 'ermConsoleApp.prog.search' | translate }}">&nbsp;-->
+
+    <input
+      type="text"
+      class="form-control"
+      [(ngModel)]="currentSearch"
+      id="currentSearch"
+      name="currentSearch"
+      placeholder="{{ 'ermConsoleApp.prog.search' }}"
+    />&nbsp;
+    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+      <span class="fa fa-search"></span>
+    </button>
+    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+      <span class="fa fa-trash-o"></span></button
+    >&nbsp;
+  </div>
+</form>
+<div class="table-responsive" id="entities" *ngIf="programs && programs.length > 0">
+  <table class="table table-striped">
+    <thead>
+      <!--            <tr jhiSort [(predicate)]="paginationParams.predicate"-->
+      <!--                [(ascending)]="paginationParams.reverse"  [callback]="loadAll.bind(this)">-->
+      <tr jhiSort [(predicate)]="paginationParams.predicate" [(ascending)]="paginationParams.reverse">
+        <th jhiSortBy="name"><span jhiTranslate="ermConsoleApp.prog.name"></span> <span class="fa fa-sort"></span></th>
+        <th jhiSortBy="status"><span jhiTranslate="ermConsoleApp.prog.status"></span> <span class="fa fa-sort"></span></th>
+        <th jhiSortBy="assessment.name"><span jhiTranslate="ermConsoleApp.prog.assessment"> </span><span class="fa fa-sort"></span></th>
+        <th jhiSortBy="lastModifiedDate">
+          <span jhiTranslate="ermConsoleApp.prog.lastModifiedDate"></span> <span class="fa fa-sort"></span>
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pr of programs; trackBy: trackId; let i = index">
+        <td>
+          <a class="my-alert-link" (click)="ngOnSelect(pr)">{{ pr.name }}</a>
+        </td>
+        <td>{{ pr.status }}</td>
+        <td>{{ getAssessment(pr) }}</td>
+        <td>{{ pr.lastModifiedDate?.format('YYYY-MM-DD HH:mm') }}</td>
+        <td>
+          <div class="btn-group flex-btn-group-container">
+            <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+            <div class="not-selected">
+              <i class="fa fa-2x fa-trash-o" (click)="deleteProg(pr)"></i>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="programs && programs.length">
+  <div class="row justify-content-center">
+    <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"> </jhi-item-count>
+  </div>
+  <div class="row justify-content-center">
+    <ngb-pagination
+      [collectionSize]="totalItems"
+      [page]="page"
+      [pageSize]="itemsPerPage"
+      [maxSize]="5"
+      [rotate]="true"
+      [boundaryLinks]="true"
+      (pageChange)="loadPage(page)"
+    >
+    </ngb-pagination>
+  </div>
+</div>
+<div class="table-responsive" *ngIf="!programs || programs.length === 0">
+  <table class="table table-striped" aria-describedby="page-heading">
+    <thead>
+      <!--        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadAll.bind(this)">-->
+      <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
+        <th jhiSortBy="name"><span jhiTranslate="ermConsoleApp.assessment.name">Name</span><span class="fa fa-sort"></span></th>
+        <th jhiSortBy="sourcePain">
+          <span jhiTranslate="ermConsoleApp.assessment.sourcePain">Source Pain</span><span class="fa fa-sort"></span>
+        </th>
+        <th jhiSortBy="lastModifiedDate">
+          <span jhiTranslate="ermConsoleApp.assessment.lastModifiedDate"></span><span class="fa fa-sort"></span>
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+  </table>
+</div>

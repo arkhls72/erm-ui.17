@@ -1,0 +1,47 @@
+{
+  "ermConsoleApp": {
+    "soapNote": {
+      "home": {
+        "search": "Search Soap notes",
+        "title": "Soapnotes",
+        "createLabel": "Create a new Soapnote",
+        "createOrEditLabel": "Create or edit a Soapnote",
+        "notFound": "No Soapnotes found"
+      },
+      "created": "A new Soapnote is created with identifier {{ param }}",
+      "updated": "A Soapnote is updated with identifier {{ param }}",
+      "deleted": "A Soapnote is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Soapnote {{ id }}?"
+      },
+      "detail": {
+        "title": "Soap Note"
+      },
+      "name": "Name",
+      "subjective": "Subjective",
+      "objective": "Objective",
+      "analysis": "Analysis",
+      "evaluation": "Evaluation",
+      "intervention": "Intervention",
+      "clientId": "Client Id",
+      "soapNotes": "Soap Note(s)",
+      "soapNote": "Soap Note",
+      "empty": "",
+      "addSoapNote": "Add SoapNote",
+      "listingSoapNote": "Soap Note Listing",
+      "viewSoapNote": "View SoapNote",
+      "addSoapNote": "Add Soap Note",
+      "notFound": "No Soap Note found.",
+      "assessments": "Assessment(s)",
+      "assessName": "Name",
+      "assessModified": "Modified",
+      "assessSource": "Pain",
+      "addTreatment": "Treatment",
+      "createdBy": "Created By",
+      "assessmentListing": "Assessment Listing",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

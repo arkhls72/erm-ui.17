@@ -1,42 +1,131 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
-    @if (client) {
-      <div>
-        <h2 data-cy="clientDetailsHeading"><span jhiTranslate="ermConsoleApp.client.detail.title">Client</span></h2>
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+</head>
+<div *ngIf="client">
+  <h5><span jhiTranslate="ermConsoleApp.client.detail.title">Client</span>: &nbsp;{{ client.firstName }}&nbsp;{{ client.lastName }}</h5>
+  <hr />
+  <jhi-alert-error></jhi-alert-error>
+  <jhi-alert></jhi-alert>
+</div>
 
-        <hr />
+<button type="submit" (click)="previousState()" class="btn btn-info">
+  <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+</button>
 
-        <jhi-alert-error></jhi-alert-error>
+<div class="mt-lg-4">
+  <ul ngbNav #nav="ngbNav" class="nav-tabs">
+    <li [ngbNavItem]="1">
+      <button ngbNavLink>Test</button>
+      <ng-template ngbNavContent>
+        <p>
+          <bc-client-general-tab [client]="client"> </bc-client-general-tab>
+        </p>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+      <button ngbNavLink>Two</button>
+      <ng-template ngbNavContent>
+        <p>
+          <!-- Content tab goes here-->
+        </p>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="3">
+      <button ngbNavLink>Three</button>
+      <ng-template ngbNavContent>
+        <p>
+          <!-- Content tab goes here-->
+        </p>
+      </ng-template>
+    </li>
+  </ul>
 
-        <jhi-alert></jhi-alert>
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
 
-        <dl class="row-md jh-entity-details">
-          <dt><span jhiTranslate="global.field.id">ID</span></dt>
-          <dd>
-            <span>{{ client.id }}</span>
-          </dd>
-          <dt><span jhiTranslate="ermConsoleApp.client.firstName">First Name</span></dt>
-          <dd>
-            <span>{{ client.firstName }}</span>
-          </dd>
-          <dt><span jhiTranslate="ermConsoleApp.client.lastName">Last Name</span></dt>
-          <dd>
-            <span>{{ client.lastName }}</span>
-          </dd>
-          <dt><span jhiTranslate="ermConsoleApp.client.lastModifiedDate">Last Modified Date</span></dt>
-          <dd>
-            <span>{{ client.lastModifiedDate | formatMediumDatetime }}</span>
-          </dd>
-        </dl>
+  <!--    <ngb-tabset>-->
+  <!--        <ngb-tab>-->
+  <!--            <ng-template ngbTabTitle>
+<span jhiTranslate="ermConsoleApp.client.detail.general"></span></ng-template>-->
+  <!--            <ng-template ngbTabContent>-->
+  <!--                <div>-->
+  <!--                    <bc-client-general-tab [client] = 'client' >-->
+  <!--                    </bc-client-general-tab>-->
+  <!--                </div>-->
+  <!--            </ng-template>-->
+  <!--        </ngb-tab>-->
+  <!--        <ngb-tab>-->
+  <!--            <ng-template ngbTabTitle><span jhiTranslate="ermConsoleApp.client.medical-tab"></span></ng-template>-->
+  <!--            <ng-template ngbTabContent>-->
+  <!--                <div>-->
+  <!--                   <bc-client-medical-tab [client] = 'client' >-->
+  <!--                   </bc-client-medical-tab>-->
+  <!--                </div>-->
+  <!--            </ng-template>-->
+  <!--        </ngb-tab>-->
+  <!--        <ngb-tab>-->
+  <!--            <ng-template ngbTabTitle><span jhiTranslate="ermConsoleApp.client.insurance-tab"></span></ng-template>-->
+  <!--            <ng-template ngbTabContent>-->
+  <!--                <div>-->
+  <!--                    <bc-client-insurance-tab [client] = 'client' >-->
+  <!--                    </bc-client-insurance-tab>-->
+  <!--                </div>-->
+  <!--            </ng-template>-->
+  <!--        </ngb-tab>-->
+  <!--        <ngb-tab>-->
+  <!--            <ng-template ngbTabTitle><span jhiTranslate="ermConsoleApp.client.claim-tab"></span></ng-template>-->
+  <!--            <ng-template ngbTabContent>-->
+  <!--                <div>-->
+  <!--                   <bc-client-claim-tab [client] = 'client'>-->
+  <!--                    </bc-client-claim-tab>-->
+  <!--                </div>-->
+  <!--            </ng-template>-->
+  <!--        </ngb-tab>-->
+  <!--            <ngb-tab>-->
+  <!--                <ng-template ngbTabTitle><span jhiTranslate="ermConsoleApp.client.soap-note-tab"></span></ng-template>-->
+  <!--                <ng-template ngbTabContent>-->
+  <!--                    <div>-->
+  <!--                        <bc-client-soap-note-tab [client] = 'client'>-->
+  <!--                        </bc-client-soap-note-tab>-->
+  <!--                    </div>-->
+  <!--                </ng-template>-->
+  <!--            </ngb-tab>-->
+  <!--              <ngb-tab>-->
+  <!--                    <ng-template ngbTabTitle><span jhiTranslate="ermConsoleApp.client.assessment-tab"></span></ng-template>-->
+  <!--                    <ng-template ngbTabContent>-->
+  <!--                        <div>-->
+  <!--                            <bc-client-assessment-tab [client] = 'client' >-->
+  <!--                            </bc-client-assessment-tab>-->
+  <!--                        </div>-->
+  <!--                    </ng-template>-->
+  <!--                </ngb-tab>-->
+  <!--                <ngb-tab>-->
+  <!--                    <ng-template ngbTabTitle><span jhiTranslate="ermConsoleApp.client.treatment-tab"></span></ng-template>-->
+  <!--                    <ng-template ngbTabContent>-->
+  <!--                        <div>-->
+  <!--                            <bc-client-treatment-tab [client] = 'client'>-->
+  <!--                            </bc-client-treatment-tab>-->
+  <!--                        </div>-->
+  <!--                    </ng-template>-->
+  <!--                </ngb-tab>-->
+  <!--                <ngb-tab>-->
+  <!--                    <ng-template ngbTabTitle><span jhiTranslate="ermConsoleApp.client.program-tab"></span></ng-template>-->
+  <!--                    <ng-template ngbTabContent>-->
+  <!--                        <div>-->
+  <!--                            <bc-client-program-tab [client]='client'>-->
 
-        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-        </button>
+  <!--                            </bc-client-program-tab>-->
+  <!--                        </div>-->
+  <!--                    </ng-template>-->
+  <!--                </ngb-tab>-->
+  <!--                <ngb-tab>-->
+  <!--                    <ng-template ngbTabTitle><span jhiTranslate="ermConsoleApp.client.invoice-tab"></span></ng-template>-->
+  <!--                    <ng-template ngbTabContent>-->
+  <!--                        <div>-->
+  <!--                            <bc-client-invoice-tab [client] = 'client'>-->
+  <!--                            </bc-client-invoice-tab>-->
+  <!--                        </div>-->
+  <!--                    </ng-template>-->
+  <!--                </ngb-tab>-->
 
-        <button type="button" [routerLink]="['/client', client.id, 'edit']" class="btn btn-primary">
-          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-        </button>
-      </div>
-    }
-  </div>
+  <!--        </ngb-tabset>-->
 </div>

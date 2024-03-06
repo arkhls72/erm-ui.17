@@ -1,0 +1,106 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (mva) {
+      <div>
+        <h2 data-cy="mvaDetailsHeading"><span>Mva</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ mva.id }}</span>
+          </dd>
+          <dt><span>Insurance</span></dt>
+          <dd>
+            <span>{{ mva.insurance }}</span>
+          </dd>
+          <dt><span>Client Id</span></dt>
+          <dd>
+            <span>{{ mva.clientId }}</span>
+          </dd>
+          <dt><span>Claim Number</span></dt>
+          <dd>
+            <span>{{ mva.claimNumber }}</span>
+          </dd>
+          <dt><span>Accident Date</span></dt>
+          <dd>
+            <span>{{ mva.accidentDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Adjuster</span></dt>
+          <dd>
+            <span>{{ mva.adjuster }}</span>
+          </dd>
+          <dt><span>Status</span></dt>
+          <dd>
+            <span>{{ mva.status }}</span>
+          </dd>
+          <dt><span>Close Date</span></dt>
+          <dd>
+            <span>{{ mva.closeDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Phone Extension</span></dt>
+          <dd>
+            <span>{{ mva.phoneExtension }}</span>
+          </dd>
+          <dt><span>Cell Phone</span></dt>
+          <dd>
+            <span>{{ mva.cellPhone }}</span>
+          </dd>
+          <dt><span>Fax</span></dt>
+          <dd>
+            <span>{{ mva.fax }}</span>
+          </dd>
+          <dt><span>Email</span></dt>
+          <dd>
+            <span>{{ mva.email }}</span>
+          </dd>
+          <dt><span>Note</span></dt>
+          <dd>
+            <span>{{ mva.note }}</span>
+          </dd>
+          <dt><span>Address Id</span></dt>
+          <dd>
+            <span>{{ mva.address }}</span>
+          </dd>
+          <dt><span>Coverages</span></dt>
+          <dd>
+            <span>{{ mva.coverages }}</span>
+          </dd>
+          <dt><span>Created Date</span></dt>
+          <dd>
+            <span>{{ mva.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Created By</span></dt>
+          <dd>
+            <span>{{ mva.createdBy }}</span>
+          </dd>
+          <dt><span>Last Modified By</span></dt>
+          <dd>
+            <span>{{ mva.lastModifiedBy }}</span>
+          </dd>
+          <dt><span>Last Modified Date</span></dt>
+          <dd>
+            <span>{{ mva.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Phone</span></dt>
+          <dd>
+            <span>{{ mva.phone }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/mva', mva.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

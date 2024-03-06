@@ -7,7 +7,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of, Subject, from } from 'rxjs';
 
 import { ClientService } from '../service/client.service';
-import { IClient } from '../client.model';
+import { Client } from '../client.model';
 import { ClientFormService } from './client-form.service';
 
 import { ClientUpdateComponent } from './client-update.component';
@@ -45,7 +45,7 @@ describe('Client Management Update Component', () => {
 
   describe('ngOnInit', () => {
     it('Should update editForm', () => {
-      const client: IClient = { id: 456 };
+      const client: Client = { id: 456 };
 
       activatedRoute.data = of({ client });
       comp.ngOnInit();
@@ -57,7 +57,7 @@ describe('Client Management Update Component', () => {
   describe('save', () => {
     it('Should call update service on save for existing entity', () => {
       // GIVEN
-      const saveSubject = new Subject<HttpResponse<IClient>>();
+      const saveSubject = new Subject<HttpResponse<Client>>();
       const client = { id: 123 };
       jest.spyOn(clientFormService, 'getClient').mockReturnValue(client);
       jest.spyOn(clientService, 'update').mockReturnValue(saveSubject);
@@ -80,7 +80,7 @@ describe('Client Management Update Component', () => {
 
     it('Should call create service on save for new entity', () => {
       // GIVEN
-      const saveSubject = new Subject<HttpResponse<IClient>>();
+      const saveSubject = new Subject<HttpResponse<Client>>();
       const client = { id: 123 };
       jest.spyOn(clientFormService, 'getClient').mockReturnValue({ id: null });
       jest.spyOn(clientService, 'create').mockReturnValue(saveSubject);
@@ -103,7 +103,7 @@ describe('Client Management Update Component', () => {
 
     it('Should set isSaving to false on error', () => {
       // GIVEN
-      const saveSubject = new Subject<HttpResponse<IClient>>();
+      const saveSubject = new Subject<HttpResponse<Client>>();
       const client = { id: 123 };
       jest.spyOn(clientService, 'update').mockReturnValue(saveSubject);
       jest.spyOn(comp, 'previousState');

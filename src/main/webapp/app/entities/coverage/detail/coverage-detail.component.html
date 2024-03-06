@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (coverage) {
+      <div>
+        <h2 data-cy="coverageDetailsHeading"><span>Coverage</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ coverage.id }}</span>
+          </dd>
+          <dt><span>Therapy Id</span></dt>
+          <dd>
+            <span>{{ coverage.therapyId }}</span>
+          </dd>
+          <dt><span>Ehc Id</span></dt>
+          <dd>
+            <span>{{ coverage.ehcId }}</span>
+          </dd>
+          <dt><span>Wsib Id</span></dt>
+          <dd>
+            <span>{{ coverage.wsibId }}</span>
+          </dd>
+          <dt><span>Mva Id</span></dt>
+          <dd>
+            <span>{{ coverage.mvaId }}</span>
+          </dd>
+          <dt><span>Limit</span></dt>
+          <dd>
+            <span>{{ coverage.limit }}</span>
+          </dd>
+          <dt><span>Note</span></dt>
+          <dd>
+            <span>{{ coverage.note }}</span>
+          </dd>
+          <dt><span>Last Modified Name</span></dt>
+          <dd>
+            <span>{{ coverage.lastModifiedDate }}</span>
+          </dd>
+          <dt><span>Last Modified By</span></dt>
+          <dd>
+            <span>{{ coverage.lastModifiedBy }}</span>
+          </dd>
+          <dt><span>Created Date</span></dt>
+          <dd>
+            <span>{{ coverage.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Created By</span></dt>
+          <dd>
+            <span>{{ coverage.createdBy }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/coverage', coverage.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

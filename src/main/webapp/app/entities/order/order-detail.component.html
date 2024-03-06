@@ -1,0 +1,182 @@
+<jhi-alert-error></jhi-alert-error>
+<jhi-alert></jhi-alert>
+<table class="sum_invoice_top">
+  <thead></thead>
+  <tbody>
+    <tr>
+      <td class="td_label_left">
+        <button type="submit" (click)="previousState()" class="btn btn-info">
+          <span class="fa fa-arrow-left"></span>&nbsp; <span jhiTranslate="entity.action.back"> Back</span>
+        </button>
+      </td>
+      <td></td>
+      <td class="td_title"><span jhiTranslate="ermConsoleApp.order.order">&nbsp;</span>: &nbsp;{{ order!.id }}</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td class="td_label"><span jhiTranslate="ermConsoleApp.order.status"> </span>&nbsp;&nbsp;</td>
+      <td class="td_grey_left">
+        {{ order!.status }}
+      </td>
+      <td class="td_empty"></td>
+      <td class="td_label"><span jhiTranslate="ermConsoleApp.order.total"> </span> &nbsp;</td>
+      <td class="td_grey_center">{{ getGrandTotal() | currency: 'CAD' : 'symbol-narrow' }} &nbsp;&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="td_label"><span jhiTranslate="ermConsoleApp.order.orderDate"></span>&nbsp;&nbsp;</td>
+      <td class="td_grey_left">{{ order!.createdDate | date: 'medium' }}</td>
+      <td class="td_empty"></td>
+      <td class="td_label"><span jhiTranslate="ermConsoleApp.order.subTotal"> </span> &nbsp;</td>
+      <td class="td_grey">{{ order!.subTotal | currency: 'CAD' : 'symbol-narrow' }} &nbsp;&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="td_label"><span jhiTranslate="ermConsoleApp.order.lastModifiedBy"></span>&nbsp;&nbsp;</td>
+      <td class="td_grey_left">{{ order!.lastModifiedBy }}</td>
+      <td></td>
+      <td class="td_label"><span jhiTranslate="ermConsoleApp.order.tax"> </span> &nbsp;</td>
+      <td class="td_grey">{{ order!.taxTotal | currency: 'CAD' : 'symbol-narrow' }} &nbsp;&nbsp;</td>
+    </tr>
+    <tr>
+      <td class="td_label"><span jhiTranslate="ermConsoleApp.order.lastModified"></span>&nbsp;&nbsp;</td>
+      <td class="td_grey_left">{{ order!.lastModifiedDate | date: 'medium' }}</td>
+      <td></td>
+      <td class="td_label"></td>
+      <td class="td_grey"></td>
+    </tr>
+    <tr>
+      <td class="td_label"><span jhiTranslate="ermConsoleApp.order.note"></span>&nbsp;&nbsp;</td>
+      <td class="td_grey_left">
+        <div>
+          <textarea type="text" name="note" class="sum_invoice_top" [(ngModel)]="order.note"></textarea>
+        </div>
+      </td>
+      <td class="td_arrow">
+        <div *ngIf="order.status === 'Draft'">
+          <span><i class="fa fa-angle-double-right fa-w-14 fa-3x" (click)="onProductAddArrow()"></i></span>
+          &nbsp;&nbsp;
+          <span><i class="fa fa-angle-double-right fa-w-14 fa-3x" (click)="onOrderProductArrow()"></i></span>
+          &nbsp;&nbsp;
+          <span><i class="fa fa-angle-double-right fa-w-14 fa-3x" (click)="onPaymentArrow()"></i></span>
+
+          <span><i class="fa fa-angle-double-right fa-w-14 fa-3x" (click)="onOrderPlaceArrow()"></i></span>
+        </div>
+      </td>
+
+      <td class="td_label"></td>
+      <td class="td_grey_button"></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- **************************************************   Table product ***********************************************************  -->
+
+<!-- orderPageFlow = 1  PRODUCT_ADD-->
+<div class="table-responsive" id="entities" *ngIf="orderPageFlow === 1 && order.status === 'Draft' && products && products.length >= 0">
+  <div class="input-group w-100 mt-3">
+    <form name="searchForm" class="form-inline">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="currentSearch"
+        id="currentSearch"
+        name="currentSearch"
+        placeholder="{{ 'ermConsoleApp.order.product' | translate }}"
+      />
+      <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+        <span class="fa fa-search"></span>
+      </button>
+      <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+        <span class="fa fa-trash-o"></span>
+      </button>
+    </form>
+  </div>
+  <table class="table table-striped" aria-describedby="page-heading">
+    <thead>
+      <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="searchProduct.bind(this)">
+        <th>
+          <input class="largerCheckbox_20" type="checkbox" id="checkUncheck" (change)="checkUnCheck($event)" />
+        </th>
+        <th scope="col" jhiSortBy="name"><span jhiTranslate="ermConsoleApp.product.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+        <th scope="col" jhiSortBy="supplierId">
+          <span jhiTranslate="ermConsoleApp.product.supplierId">Supplier Product Id</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" jhiSortBy="lastOrderDate">
+          <span jhiTranslate="ermConsoleApp.product.lastOrderDate">lastOrderDate</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" jhiSortBy="quantity">
+          <span jhiTranslate="ermConsoleApp.product.quantity">Quantity</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" jhiSortBy="orderPrice">
+          <span jhiTranslate="ermConsoleApp.productOrder.unitPrice">itePrice</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products; trackBy: trackId">
+        <td class="text-left">
+          <input
+            class="largerCheckbox_20"
+            type="checkbox"
+            id="selectedCondition"
+            [checked]="isSelected(product)"
+            (change)="addOrRemoveProduct(product, $event)"
+          />
+        </td>
+        <td>
+          <a [routerLink]="['/product', product.id, 'edit']">{{ product.name }}</a>
+        </td>
+        <td>{{ initSupplierName(product.supplierId) }}</td>
+        <td>{{ product.lastOrderDate | date: 'dd/MM/yy HH:mm a' }}</td>
+        <td>{{ product.quantity }}</td>
+        <td>{{ product.itemPrice | currency: 'CAD' : 'symbol-narrow' }}</td>
+        <td class="text-right"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- **************************************************   End Table product *******************************************  -->
+<!-- orderPageFlow = 1  PRODUCT_ADD page-->
+<div *ngIf="orderPageFlow === 1 && order.status === 'Draft' && products && products.length > 0">
+  <div class="row justify-content-center">
+    <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+  </div>
+
+  <div class="row justify-content-center">
+    <ngb-pagination
+      [collectionSize]="totalItems"
+      [(page)]="ngbPaginationPage"
+      [pageSize]="itemsPerPage"
+      [maxSize]="5"
+      [rotate]="true"
+      [boundaryLinks]="true"
+      (pageChange)="searchProduct($event)"
+    ></ngb-pagination>
+  </div>
+</div>
+
+<!-- orderPageFlow = 2 PRORDUCT_ORDER page-->
+<div *ngIf="orderPageFlow === 2 && order.status === 'Draft'">
+  <bc-product-order-table
+    [order]="order"
+    [suppliers]="suppliers"
+    [products]="products"
+    (orderEmitter)="refreshOrderByChild($event)"
+    (eventEmitter)="refreshByBackButton($event)"
+    (orderProductEmitter)="refreshProductOrderByChild($event)"
+  >
+  </bc-product-order-table>
+</div>
+
+<!-- orderPageFlow = 3  ORDER_PAYMENT page-->
+<div *ngIf="orderPageFlow === 3 && order.status === 'Dra' + 'ft'">
+  <bc-order-payment-table [order]="order" (eventEmitter)="refreshByBackButton($event)"> </bc-order-payment-table>
+</div>
+
+<!-- orderPageFlow = 4  ORDER_PAYMENT page-->
+<div *ngIf="orderPageFlow === 4 && order.status !== 'Draft'">
+  <bc-order-placement [order]="order" [productOrders]="productOrders" [products]="products"> </bc-order-placement>
+</div>

@@ -1,0 +1,29 @@
+{
+  "ermConsoleApp": {
+    "condition": {
+      "home": {
+        "title": "Conditions",
+        "createLabel": "Create a new Condition",
+        "createOrEditLabel": "Create or edit a Condition",
+        "notFound": "No Conditions found"
+      },
+      "created": "A new Condition is created with identifier {{ param }}",
+      "updated": "A Condition is updated with identifier {{ param }}",
+      "deleted": "A Condition is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Condition {{ id }}?"
+      },
+      "detail": {
+        "title": "Condition"
+      },
+      "name": "Name",
+      "note": "Add notes",
+      "modifyConditoion": "Modify Conditions",
+      "modifyMedication": "Modify Medications",
+      "addRemoveInjuries": "Modify Injuries",
+      "addRemoveOperation": "Modify Operations",
+      "saveCondition": "Save Cond.",
+      "saveMedication": "Save Medi."
+    }
+  }
+}

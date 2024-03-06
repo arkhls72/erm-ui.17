@@ -1,0 +1,78 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (instruction) {
+      <div>
+        <h2 data-cy="instructionDetailsHeading"><span>Instruction</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ instruction.id }}</span>
+          </dd>
+          <dt><span>Repeat</span></dt>
+          <dd>
+            <span>{{ instruction.repeat }}</span>
+          </dd>
+          <dt><span>Hold</span></dt>
+          <dd>
+            <span>{{ instruction.hold }}</span>
+          </dd>
+          <dt><span>Complete</span></dt>
+          <dd>
+            <span>{{ instruction.complete }}</span>
+          </dd>
+          <dt><span>Perform</span></dt>
+          <dd>
+            <span>{{ instruction.perform }}</span>
+          </dd>
+          <dt><span>Note</span></dt>
+          <dd>
+            <span>{{ instruction.note }}</span>
+          </dd>
+          <dt><span>Duration Number</span></dt>
+          <dd>
+            <span>{{ instruction.durationNumber }}</span>
+          </dd>
+          <dt><span>Name</span></dt>
+          <dd>
+            <span>{{ instruction.name }}</span>
+          </dd>
+          <dt><span>Exercise Id</span></dt>
+          <dd>
+            <span>{{ instruction.exerciseId }}</span>
+          </dd>
+          <dt><span>Created Date</span></dt>
+          <dd>
+            <span>{{ instruction.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Created By</span></dt>
+          <dd>
+            <span>{{ instruction.createdBy }}</span>
+          </dd>
+          <dt><span>Last Modified Date</span></dt>
+          <dd>
+            <span>{{ instruction.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Last Modified By</span></dt>
+          <dd>
+            <span>{{ instruction.lastModifiedBy }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/instruction', instruction.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

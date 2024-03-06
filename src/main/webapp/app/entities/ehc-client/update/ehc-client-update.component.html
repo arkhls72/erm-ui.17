@@ -1,0 +1,241 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-ehc-client-heading" data-cy="EhcClientCreateUpdateHeading">Create or edit a Ehc Client</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_ehcType">Ehc Type</label>
+          <input type="text" class="form-control" name="ehcType" id="field_ehcType" data-cy="ehcType" formControlName="ehcType" />
+          @if (editForm.get('ehcType')!.invalid && (editForm.get('ehcType')!.dirty || editForm.get('ehcType')!.touched)) {
+            <div>
+              @if ((editForm.get('ehcType')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              @if ((editForm.get('ehcType')?.errors)!.minlength) {
+                <small class="form-text text-danger">This field is required to be at least 1 characters.</small>
+              }
+              @if ((editForm.get('ehcType')?.errors)!.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 50 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_policyHolder">Policy Holder</label>
+          <input
+            type="text"
+            class="form-control"
+            name="policyHolder"
+            id="field_policyHolder"
+            data-cy="policyHolder"
+            formControlName="policyHolder"
+          />
+          @if (editForm.get('policyHolder')!.invalid && (editForm.get('policyHolder')!.dirty || editForm.get('policyHolder')!.touched)) {
+            <div>
+              @if ((editForm.get('policyHolder')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              @if ((editForm.get('policyHolder')?.errors)!.minlength) {
+                <small class="form-text text-danger">This field is required to be at least 1 characters.</small>
+              }
+              @if ((editForm.get('policyHolder')?.errors)!.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 50 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_clientId">Client Id</label>
+          <input type="number" class="form-control" name="clientId" id="field_clientId" data-cy="clientId" formControlName="clientId" />
+          @if (editForm.get('clientId')!.invalid && (editForm.get('clientId')!.dirty || editForm.get('clientId')!.touched)) {
+            <div>
+              @if ((editForm.get('clientId')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!(editForm.get('clientId')?.errors)!.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_ehcId">Ehc Id</label>
+          <input type="number" class="form-control" name="ehcId" id="field_ehcId" data-cy="ehcId" formControlName="ehcId" />
+          @if (editForm.get('ehcId')!.invalid && (editForm.get('ehcId')!.dirty || editForm.get('ehcId')!.touched)) {
+            <div>
+              @if ((editForm.get('ehcId')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!(editForm.get('ehcId')?.errors)!.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_endDate">End Date</label>
+          <div class="d-flex">
+            <input
+              id="field_endDate"
+              data-cy="endDate"
+              type="datetime-local"
+              class="form-control"
+              name="endDate"
+              formControlName="endDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_ehcPrimaryId">Ehc Primary Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="ehcPrimaryId"
+            id="field_ehcPrimaryId"
+            data-cy="ehcPrimaryId"
+            formControlName="ehcPrimaryId"
+          />
+          @if (editForm.get('ehcPrimaryId')!.invalid && (editForm.get('ehcPrimaryId')!.dirty || editForm.get('ehcPrimaryId')!.touched)) {
+            <div>
+              @if ((editForm.get('ehcPrimaryId')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!(editForm.get('ehcPrimaryId')?.errors)!.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_note">Note</label>
+          <input type="text" class="form-control" name="note" id="field_note" data-cy="note" formControlName="note" />
+          @if (editForm.get('note')!.invalid && (editForm.get('note')!.dirty || editForm.get('note')!.touched)) {
+            <div>
+              @if ((editForm.get('note')?.errors)!.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 350 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_relation">Relation</label>
+          <input type="text" class="form-control" name="relation" id="field_relation" data-cy="relation" formControlName="relation" />
+          @if (editForm.get('relation')!.invalid && (editForm.get('relation')!.dirty || editForm.get('relation')!.touched)) {
+            <div>
+              @if ((editForm.get('relation')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              @if ((editForm.get('relation')?.errors)!.minlength) {
+                <small class="form-text text-danger">This field is required to be at least 1 characters.</small>
+              }
+              @if ((editForm.get('relation')?.errors)!.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 50 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_removedDate">Removed Date</label>
+          <div class="d-flex">
+            <input
+              id="field_removedDate"
+              data-cy="removedDate"
+              type="datetime-local"
+              class="form-control"
+              name="removedDate"
+              formControlName="removedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModfiedDate">Last Modfied Date</label>
+          <div class="d-flex">
+            <input
+              id="field_lastModfiedDate"
+              data-cy="lastModfiedDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastModfiedDate"
+              formControlName="lastModfiedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedBy">Last Modified By</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifiedBy"
+            id="field_lastModifiedBy"
+            data-cy="lastModifiedBy"
+            formControlName="lastModifiedBy"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate">Created Date</label>
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

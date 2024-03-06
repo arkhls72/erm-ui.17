@@ -1,0 +1,28 @@
+{
+  "ermConsoleApp": {
+    "commonServiceCode": {
+      "home": {
+        "title": "Ontario Service Codes",
+        "createLabel": "Create a new Common Service Code",
+        "createOrEditLabel": "Create or edit a Common Service Code",
+        "notFound": "No Ontario Service Codes found"
+      },
+      "created": "A new Common Service Code is created with identifier {{ param }}",
+      "updated": "A Common Service Code is updated with identifier {{ param }}",
+      "deleted": "A Common Service Code is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Common Service Code {{ id }}?"
+      },
+      "detail": {
+        "title": "Common Service Code"
+      },
+      "serviceCode": "Service Code",
+      "description": "Description",
+      "serviceType": "Service Type",
+      "category": "Category",
+      "note": "Note",
+      "importServiceCode": "Select to import to My Services",
+      "search": "Search for service code"
+    }
+  }
+}

@@ -1,0 +1,208 @@
+<div *ngIf="invoicePage === 2">
+  <div class="table-responsive" id="entities">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <!--            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">-->
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="invoiceNumber">
+            <span jhiTranslate="ermConsoleApp.invoice.invoiceNumber">Invoice Number</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="subTotal">
+            <span jhiTranslate="ermConsoleApp.invoice.grandTotal">Grand total</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="client.firstName">
+            <span jhiTranslate="ermConsoleApp.invoice.fullName">Full name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <span jhiTranslate="ermConsoleApp.invoice.status">Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedDate">
+            <span jhiTranslate="ermConsoleApp.invoice.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col">
+            <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-invoice" (click)="createInvoice()">
+              <fa-icon icon="plus"></fa-icon>
+              <span jhiTranslate="ermConsoleApp.invoice.home.createLabel"> Create a new Invoice </span>
+            </button>
+          </th>
+        </tr>
+      </thead>
+      <tbody *ngIf="invoices && invoices.length > 0">
+        <tr *ngFor="let invoice of invoices; trackBy: trackId">
+          <td>
+            <a class="my-alert-link" (click)="invoiceDetail(invoice)">{{ invoice.id }}</a>
+          </td>
+          <td>{{ invoice.invoiceNumber }}</td>
+          <td>{{ invoice.grandTotal }}</td>
+          <td>{{ invoice.fullName }}</td>
+          <td>{{ invoice.status }}</td>
+          <td>{{ invoice.lastModifiedDate?.format('YYYY-MM-DD') }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" (click)="delete(invoice)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="invoices && invoices.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"> </jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="invoicePage === 0 || invoicePage === 1">
+  <!-- ************************************************************** Tope header page  -------------- -->
+  <table class="sum_invoice_top">
+    <thead></thead>
+    <tbody>
+      <tr>
+        <td (click)="previousState()">
+          <div class="divTableCell">
+            <i class="fa fa-long-arrow-left"></i>
+          </div>
+        </td>
+        <td></td>
+        <td class="td_title"><span jhiTranslate="ermConsoleApp.invoice.invoiceNumber">&nbsp;</span>&nbsp;{{ selectedInvoice!.id }}</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="td_label"><span jhiTranslate="ermConsoleApp.order.lastModifiedBy"></span>&nbsp;&nbsp;</td>
+        <td class="td_grey_left">{{ selectedInvoice!.lastModifiedBy }}</td>
+        <td class="td_empty"></td>
+        <td class="td_label"><span jhiTranslate="ermConsoleApp.invoice.total"> </span> &nbsp;</td>
+        <td class="td_grey_center">
+          {{ grandTotal() | currency: 'CAD' : 'symbol-narrow' }}
+        </td>
+      </tr>
+      <tr>
+        <td class="td_label"><span jhiTranslate="ermConsoleApp.invoice.lastModifiedDate"></span>&nbsp;&nbsp;</td>
+        <td class="td_grey_left">{{ selectedInvoice!.lastModifiedDate?.format('YYYY-MM-DD HH:mm') }}</td>
+        <td></td>
+        <td class="td_label"><span jhiTranslate="ermConsoleApp.invoice.subTotal"> </span> &nbsp;</td>
+        <td class="td_grey">{{ selectedInvoice!.subTotal | currency: 'CAD' : 'symbol-narrow' }}</td>
+      </tr>
+      <tr>
+        <td class="td_label"><span jhiTranslate="ermConsoleApp.invoice.status"> </span> &nbsp;</td>
+        <td class="td_grey_left">{{ selectedInvoice!.status }}</td>
+        <td></td>
+        <td class="td_label"><span jhiTranslate="ermConsoleApp.invoice.hstRate"></span> &nbsp;</td>
+        <td class="td_grey"><span jhiTranslate="ermConsoleApp.invoice.taxRate"></span></td>
+      </tr>
+
+      <tr>
+        <td class="td_label"></td>
+        <td class="td_grey_left"></td>
+        <td></td>
+        <td class="td_label"><span jhiTranslate="ermConsoleApp.invoice.taxTotal"> </span> &nbsp;</td>
+        <td class="td_grey">{{ selectedInvoice!.taxTotal | currency: 'CAD' : 'symbol-narrow' }}</td>
+      </tr>
+
+      <tr>
+        <td class="td_label"></td>
+        <td class="td_grey_left"></td>
+        <td class="td_empty"></td>
+        <td class="td_label"><span jhiTranslate="ermConsoleApp.invoice.balance"> </span> &nbsp;</td>
+        <td class="td_grey_center_bal">
+          {{ getDueNow() | currency: 'CAD' : 'symbol-narrow' }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="container-fluid">
+    <br />
+    <div class="row" *ngIf="invoicePage === 0">
+      <div class="col-sm-6">
+        <label class="switch">
+          <input class="largerCheckbox_20" type="checkbox" [checked]="isTherapy" (change)="changeTherapyOrProduct()" />
+
+          <span class="slider_dual round"></span>
+        </label>
+      </div>
+    </div>
+    <div class="row" *ngIf="invoicePage === 0">
+      <div class="col-sm-6">
+        <bc-invoice-add-service
+          *ngIf="isTherapy"
+          [invoice]="selectedInvoice"
+          [displayServiceInvoices]="displayServiceInvoices"
+          (modifyEventEmitter)="modifyServiceInvoiceByChild($event)"
+          (reloadEventEmitter)="reload()"
+        >
+        </bc-invoice-add-service>
+        <div *ngIf="!isTherapy"></div>
+        <bc-invoice-add-product
+          *ngIf="!isTherapy"
+          [invoice]="selectedInvoice"
+          [displayProductInvoices]="productInvoices"
+          (modifyEventEmitter)="modifyProductInvoiceByChild($event)"
+          (reloadEventEmitter)="reload()"
+        >
+        </bc-invoice-add-product>
+      </div>
+      <div class="col-sm-6">
+        <br /><br />
+        <bc-invoice-right-frame
+          [client]="client"
+          [invoice]="selectedInvoice"
+          [fromInvoice]="fromInvoice"
+          (paymentEventEmitter)="changeInvoiceOrPaymentPage($event)"
+          (removeEventEmitter)="removeFromInvoiceByChild($event)"
+          (itemEventEmitter)="updateInvoiceItems($event)"
+          (myServiceFeesEventEmitter)="updateMyServiceFees($event)"
+          (myProductFeesEventEmitter)="updateMyProductFees($event)"
+          (feeTypesEventEmitter)="updateFeeTypes($event)"
+        >
+        </bc-invoice-right-frame>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="invoicePage === 1">
+      <div class="col-sm-6">
+        <bc-invoice-summary-payment
+          [invoice]="selectedInvoice"
+          [client]="client"
+          [fromInvoice]="fromInvoice"
+          [invoiceItems]="invoiceItems"
+          [myProductFees]="myProductFees"
+          [myServiceFees]="myServiceFees"
+          [feeTypes]="feeTypes"
+          (removeEventEmitter)="removeFromInvoiceByChild($event)"
+        >
+        </bc-invoice-summary-payment>
+      </div>
+      <div class="col-sm-6" *ngIf="selectedInvoice!.status !== 'Paid'">
+        <bc-invoice-right-payment
+          [invoice]="selectedInvoice"
+          [paymentInvoice]="paymentInvoice"
+          (loadPaymentDetailEventEmitter)="loadPaymentDetails($event)"
+        >
+        </bc-invoice-right-payment>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="invoicePage === 3">
+  <bc-client-invoice-delete [invoice]="invoice" (deleteInvoiceEventEmitter)="confirmDeleteInvoice()"> </bc-client-invoice-delete>
+</div>

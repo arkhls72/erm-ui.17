@@ -1,0 +1,26 @@
+<div>
+  <br />
+  <table class="invoice_right_frame">
+    <thead>
+      <tr>
+        <th><span jhiTranslate="ermConsoleApp.invoice.paymentDate"></span></th>
+        <th><span jhiTranslate="ermConsoleApp.invoice.paymentMethod"></span></th>
+        <th><span jhiTranslate="ermConsoleApp.invoice.cardNum"></span></th>
+        <th><span jhiTranslate="ermConsoleApp.invoice.amount"></span></th>
+        <th><span jhiTranslate="ermConsoleApp.invoice.note"></span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let it of payments">
+        <td class="td_index_10">{{ it.createdDate?.format('yyyy-MM-dd') }}</td>
+        <td class="td_index">{{ it.paymentMethod }}</td>
+        <td class="td_index">{{ it.cardNumber }}</td>
+        <td class="td_index_right">{{ it.paymentAmount! | currency: 'CAD' : 'symbol-narrow' }} &nbsp;&nbsp;</td>
+
+        <td class="td_index">
+          {{ it.note }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,63 @@
+{
+  "ermConsoleApp": {
+    "invoice": {
+      "home": {
+        "title": "Invoices",
+        "createLabel": "Create invoice",
+        "createOrEditLabel": "Create or edit a Invoice",
+        "notFound": "No invoice found"
+      },
+      "created": "A new Invoice is created with identifier {{ param }}",
+      "updated": "A Invoice is updated with identifier {{ param }}",
+      "deleted": "A Invoice is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Invoice {{ id }}?"
+      },
+      "detail": {
+        "title": "Invoice"
+      },
+      "invoiceNumber": "Invoice #",
+      "status": "Status",
+      "for": "For",
+      "payment": "Payment",
+      "taxTotal": "HST total",
+      "subTotal": "Sub Total",
+      "total": "Total",
+      "unitPrice": "Unit price",
+      "note": "Note",
+      "amount": "Amount",
+      "payment": "Payment",
+      "index": "#",
+      "hstRate": "HST rate ",
+      "hstTotal": "HST total",
+      "item": "Item",
+      "fee": "Fee",
+      "type": "Type",
+      "noPrice": "Price not found.",
+      "feeType": "Fee",
+      "makePayment": "Make payment",
+      "save": "Save invoice",
+      "addService": "Treatment Services",
+      "addProduct": "Products",
+      "taxRate": "13%",
+      "cardNum": "Card #",
+      "paymentMethod": "Method",
+      "paymentHistory": "Payment history",
+      "summaryInvoice": "Summary invoice",
+      "balance": "Balance",
+      "note": "Note",
+      "amount": "Amount",
+      "fullName": "Full name",
+      "grandTotal": "Grand total",
+      "submitPayment": "Submit payment",
+      "quantity": "quantity",
+      "paymentDate": "Date",
+      "createInvoice": "Create invoice",
+      "action": "Action",
+      "createdBy": "Created",
+      "createdDate": "Created",
+      "lastModifiedBy": "Modified",
+      "lastModifiedDate": "Modified"
+    }
+  }
+}

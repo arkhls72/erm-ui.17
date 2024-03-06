@@ -1,0 +1,249 @@
+<div>
+  <h2 id="page-heading" data-cy="WsibHeading">
+    <span>Wsibs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-wsib"
+        [routerLink]="['/wsib/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span>Create a new Wsib</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (wsibs?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span>No Wsibs found</span>
+    </div>
+  }
+
+  @if (wsibs && wsibs.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span>ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="employer">
+              <div class="d-flex">
+                <span>Employer</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="claimNumber">
+              <div class="d-flex">
+                <span>Claim Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="clientId">
+              <div class="d-flex">
+                <span>Client Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="supervisor">
+              <div class="d-flex">
+                <span>Supervisor</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="accidentDate">
+              <div class="d-flex">
+                <span>Accident Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="adjudicator">
+              <div class="d-flex">
+                <span>Adjudicator</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="caseManager">
+              <div class="d-flex">
+                <span>Case Manager</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span>Status</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="phone">
+              <div class="d-flex">
+                <span>Phone</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="phoneExtension">
+              <div class="d-flex">
+                <span>Phone Extension</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="cellPhone">
+              <div class="d-flex">
+                <span>Cell Phone</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="closeDate">
+              <div class="d-flex">
+                <span>Close Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="note">
+              <div class="d-flex">
+                <span>Note</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fax">
+              <div class="d-flex">
+                <span>Fax</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="coverages">
+              <div class="d-flex">
+                <span>Coverages</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="email">
+              <div class="d-flex">
+                <span>Email</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="addressId">
+              <div class="d-flex">
+                <span>Address Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastModifiedBy">
+              <div class="d-flex">
+                <span>Last Modified By</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="lastModifiedDate">
+              <div class="d-flex">
+                <span>Last Modified Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (wsib of wsibs; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/wsib', wsib.id, 'view']">{{ wsib.id }}</a>
+              </td>
+              <td>{{ wsib.employer }}</td>
+              <td>{{ wsib.claimNumber }}</td>
+              <td>{{ wsib.clientId }}</td>
+              <td>{{ wsib.supervisor }}</td>
+              <td>{{ wsib.accidentDate?.format('YYYY-MM-DD') }}</td>
+              <td>{{ wsib.adjudicator }}</td>
+              <td>{{ wsib.caseManager }}</td>
+              <td>{{ wsib.status }}</td>
+              <td>{{ wsib.phone }}</td>
+              <td>{{ wsib.phoneExtension }}</td>
+              <td>{{ wsib.cellPhone }}</td>
+              <td>{{ wsib.closeDate?.format('YYYY-MM-DD') }}</td>
+              <td>{{ wsib.note }}</td>
+              <td>{{ wsib.fax }}</td>
+              <td>{{ wsib.coverages }}</td>
+              <td>{{ wsib.email }}</td>
+              <td>{{ wsib.addressId }}</td>
+              <td>{{ wsib.lastModifiedBy }}</td>
+              <td>{{ wsib.lastModifiedDate?.format('YYYY-MM-DD') }}</td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/wsib', wsib.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline">View</span>
+                  </a>
+
+                  <a [routerLink]="['/wsib', wsib.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(wsib)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (wsibs && wsibs.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"> </jhi-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

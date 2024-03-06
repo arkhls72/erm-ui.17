@@ -15,12 +15,46 @@
         "question": "Are you sure you want to delete Client {{ id }}?"
       },
       "detail": {
-        "title": "Client"
+        "title": "Client",
+        "general": "General"
       },
-      "id": "ID",
       "firstName": "First Name",
       "lastName": "Last Name",
-      "lastModifiedDate": "Last Modified Date"
+      "birthDate": "Birth Date",
+      "homePhone": "Home Phone",
+      "cellPhone": "Cell Phone",
+      "email": "Email",
+      "address": "Address",
+      "addressInfo": "Address Info",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified",
+      "gender": "Gender",
+      "howHear": "How Hear",
+      "emergencyName": "Emergency Name",
+      "emergencyPhone": "Emergency Phone",
+      "province": "Province",
+      "country": "Country",
+      "address-tab": "Address",
+      "medical-tab": "Medicals",
+      "insurance-tab": "Insurances",
+      "claim-tab": "Claims",
+      "soap-note-tab": "Soap Notes",
+      "assessment-tab": "Assessments",
+      "treatment-tab": "Treatments",
+      "invoice-tab": "Invoices",
+      "program-tab": "Programs",
+      "savePersonal": "Save Pers.",
+      "personal": "Personal",
+      "ehcSummary": "Summary",
+      "ehcPrimary": "Primary",
+      "coverage": "Coverage",
+      "ehcSecondary": "Secondary",
+      "saveAddress": "Save Addr.",
+      "editCondition": "Edit conditions",
+      "editMedication": "Edit medications",
+      "editInjury": "Edit injuries",
+      "editOperation": "Edit operation",
+      "personalInfo": "Personal Info"
     }
   }
 }

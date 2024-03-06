@@ -1,0 +1,32 @@
+{
+  "ermConsoleApp": {
+    "paymentInvoice": {
+      "home": {
+        "title": "Payment Invoices",
+        "createLabel": "Create a new Payment Invoice",
+        "createOrEditLabel": "Create or edit a Payment Invoice",
+        "notFound": "No Payment Invoices found"
+      },
+      "created": "A new Payment Invoice is created with identifier {{ param }}",
+      "updated": "A Payment Invoice is updated with identifier {{ param }}",
+      "deleted": "A Payment Invoice is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Payment Invoice {{ id }}?"
+      },
+      "detail": {
+        "title": "Payment Invoice"
+      },
+      "invoiceId": "Invoice Id",
+      "payment": "Payment",
+      "dueNow": "Due Now",
+      "paymentMethod": "Payment Method",
+      "status": "Status",
+      "note": "Note",
+      "balance": "Balance",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

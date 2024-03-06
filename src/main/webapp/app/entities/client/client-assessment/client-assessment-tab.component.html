@@ -1,0 +1,108 @@
+<table class="sum_invoice_top">
+  <tbody>
+    <tr>
+      <td class="td_label_center"></td>
+      <td class="td_label_right">
+        <div class="btn-group flex-btn-group-container" *ngIf="disableBackButton()">
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" (click)="addTreatment()" [disabled]="!selectedAssessment" class="btn btn-outline-primary">
+            <i class="fa fa-1x fa-plus"></i>
+            &nbsp;<span jhiTranslate="ermConsoleApp.assessment.addTreatment"></span>&nbsp;&nbsp;
+          </button>
+          &nbsp;
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" (click)="addAssessment()" [disabled]="!selectedSoapNote" class="btn btn-outline-primary">
+            <i class="fa fa-1x fa-plus"></i>
+            &nbsp;<span jhiTranslate="ermConsoleApp.assessment.add"></span>&nbsp;&nbsp;
+          </button>
+          &nbsp;
+        </div>
+        <div class="btn-group flex-btn-group-container" *ngIf="!disableBackButton()">
+          <button type="submit" (click)="backToAssessmentTab()" class="btn btn-outline-primary">
+            <span class="fa fa-window-close"></span></button
+          >&nbsp;
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" (click)="addTreatment()" [disabled]="!selectedAssessment" class="btn btn-outline-primary">
+            <i class="fa fa-1x fa-plus"></i>
+            &nbsp;<span jhiTranslate="ermConsoleApp.assessment.addTreatment"></span>&nbsp;&nbsp;
+          </button>
+          &nbsp;
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" (click)="addAssessment()" [disabled]="!selectedSoapNote" class="btn btn-outline-primary">
+            <i class="fa fa-1x fa-plus"></i>
+            &nbsp;<span jhiTranslate="ermConsoleApp.assessment.add"></span>&nbsp;&nbsp;
+          </button>
+          &nbsp;
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="col-sm-6">
+    <bc-assessment-list
+      [client]="client"
+      (selectAssessmentEventEmitter)="ngOnSelectAssessment($event)"
+      (deleteAssessmentEventEmitter)="ngOnDeleteAssessment($event)"
+    >
+    </bc-assessment-list>
+  </div>
+
+  <div class="col-sm-6">
+    <div *ngIf="assessmentEventType === 0">
+      <bc-assessment-select
+        [client]="client"
+        (updateAssessmentEmitter)="loadChildFromTab()"
+        [selectedAssessment]="selectedAssessment"
+        (deleteSelectedEventEmitter)="ngOnDeleteAssessment($event)"
+        (goToTreatmentViewEmitter)="goToTreatmentView($event)"
+        (addTreatmentEmitter)="addTreatment()"
+      >
+      </bc-assessment-select>
+    </div>
+
+    <div *ngIf="assessmentEventType === 1">
+      <bc-assessment-add [client]="client" [soapNote]="selectedSoapNote!" (addAssessmentEmitter)="backToTabAfterAdd($event)">
+      </bc-assessment-add>
+    </div>
+
+    <div *ngIf="assessmentEventType === 4">
+      <br />
+      <bc-assessment-delete
+        [assessment]="selectedAssessment"
+        (cancelDeleteEmitter)="backToTab()"
+        (confirmDeleteEmitter)="backToTabAfterDelete()"
+      >
+      </bc-assessment-delete>
+    </div>
+    <div *ngIf="assessmentEventType === 3">
+      <bc-assessment-treatment-view
+        [plan]="plan"
+        [assessment]="selectedAssessment"
+        (deleteTreatmentEmitter)="deleteTreatment($event)"
+        (backToAssessmentSelectEmitter)="backToAssessmentSelect($event)"
+      >
+      </bc-assessment-treatment-view>
+    </div>
+    <div *ngIf="assessmentEventType === 5">
+      <bc-assessment-treatment-delete
+        [plan]="plan"
+        (cancelTreatmentDeleteEmitter)="cancelTreatmentDelete($event)"
+        (confirmDelAssessmentTabTreatmentEmitter)="confirmTreatmentDelete($event)"
+        (confirmDelSoapNoteTabTreatmentEmitter)="confirmTreatmentDelete($event)"
+      >
+      </bc-assessment-treatment-delete>
+    </div>
+    <div *ngIf="assessmentEventType === 2">
+      <bc-assessment-treatment-add
+        [assessment]="selectedAssessment"
+        [client]="client"
+        (cancelAddTreatmentEmitter)="cancelAddTreatment()"
+        (confirmedAddTreatmentEmitter)="confirmAddTreatment($event)"
+        (backToSelectAssessmentEmitter)="gotoSelectAssessment($event)"
+      >
+      </bc-assessment-treatment-add>
+    </div>
+  </div>
+</div>

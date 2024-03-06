@@ -1,0 +1,200 @@
+<div class="modal-header"></div>
+<br />
+<h5><span jhiTranslate="ermConsoleApp.ehc.secondaryInfo"></span></h5>
+<br />
+<div class="form-group row">
+  &nbsp;&nbsp;&nbsp;<label class="switch">
+    <input class="largerCheckbox" type="checkbox" (change)="checkEditMode($event)" />
+    <span class="slider round"></span> </label
+  >&nbsp;
+  <span jhiTranslate="ermConsoleApp.exercise.edit"></span>
+</div>
+<div class="mt-lg-6">
+  <form name="editForm" role="form" novalidate [formGroup]="secondaryEditForm">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.ehc.relation"></label>
+      <div class="col-sm-3">
+        <input type="text" class="form-control" name="name" id="field_relation" formControlName="relation" [readOnly]="!editMode" />
+
+        <div
+          *ngIf="
+            secondaryEditForm.get('relation')!.invalid &&
+            (secondaryEditForm.get('relation')!.dirty || secondaryEditForm.get('relation')!.touched)
+          "
+        >
+          <!--                    <small class="form-text text-danger"-->
+          <!--                           *ngIf="secondaryEditForm.get('relation')?.errors!.maxlength" jhiTranslate="entity.validation.maxlength"-->
+          <!--                           [translateValues]="{ max: 15 }">-->
+          <!--                        This field cannot be longer than 15 characters.-->
+          <!--                    </small>-->
+
+          <small
+            class="form-text text-danger"
+            *ngIf="(secondaryEditForm.get('relation')?.errors)!.maxlength"
+            jhiTranslate="entity.validation.maxlength"
+          >
+            This field cannot be longer than 15 characters.
+          </small>
+        </div>
+      </div>
+
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.ehc.status"></label>
+      <div class="col-sm-3" *ngIf="editMode">
+        <select class="form-control" name="status" (change)="changeSecondaryStatus(secondary, $event)" required>
+          <option *ngFor="let st of statuses" [selected]="secondary!.status != null && secondary!.status == st" [value]="st">
+            {{ st }}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-3" *ngIf="!editMode">
+        <input
+          type="text"
+          class="form-control"
+          name="status"
+          [ngModel]="secondary.status"
+          readonly
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.ehc.note"></label>
+      <div class="col-sm-8">
+        <textarea type="text" class="form-control" name="note" formControlName="note" [readOnly]="!editMode"> </textarea>
+        <div
+          *ngIf="secondaryEditForm.get('note')!.invalid && (secondaryEditForm.get('note')!.dirty || secondaryEditForm.get('note')!.touched)"
+        >
+          <!--                    <small class="form-text text-danger"-->
+          <!--                           *ngIf="secondaryEditForm.get('note')?.errors!.maxlength" jhiTranslate="entity.validation.maxlength"-->
+          <!--                           [translateValues]="{ max: 350 }">-->
+          <!--                        This field cannot be longer than 350 characters.-->
+          <!--                    </small>-->
+
+          <small
+            class="form-text text-danger"
+            *ngIf="(secondaryEditForm.get('note')?.errors)!.maxlength"
+            jhiTranslate="entity.validation.maxlength"
+          >
+            This field cannot be longer than 350 characters.
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.ehc.addedToPrimary"></label>
+      <div class="col-sm-3">
+        <input type="text" class="form-control" name="createdDate" formControlName="createdDate" placeholder="YYYY-MM-DD" readonly />
+      </div>
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.ehc.lastModifiedDate"></label>
+      <div class="col-sm-3">
+        <input type="datetime-local" class="form-control" name="lastModifiedDate" formControlName="lastModifiedDate" readOnly />
+      </div>
+    </div>
+  </form>
+</div>
+<div class="form-group row">
+  <div class="col-lg-10 text-right">
+    <div class="btn-group flex-btn-group-container">
+      <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+      <button type="submit" (click)="saveSecondary()" [disabled]="secondaryEditForm.invalid || !editMode" class="btn btn-outline-primary">
+        <i class="fa fa-1x fa-save"></i>
+        <span jhiTranslate="ermConsoleApp.ehc.saveEhc"></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+&nbsp;
+<h5><span jhiTranslate="ermConsoleApp.ehc.primaryInfo"></span></h5>
+<br />
+<form name="editFormPrimary" role="form" novalidate [formGroup]="primaryEditForm">
+  <div class="mt-lg-6">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.ehc.name"></label>
+      <div class="col-sm-3">
+        <input type="text" class="form-control" name="name" id="field_name" formControlName="name" readOnly />
+      </div>
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.ehc.expiry"></label>
+      <div class="col-sm-3">
+        <div class="input-group">
+          <input
+            id="field_endDate"
+            type="text"
+            class="form-control"
+            name="endDate"
+            formControlName="endDate"
+            placeholder="YYYY-MM-DD"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.ehc.policyNumber"></label>
+      <div class="col-sm-3">
+        <input type="text" class="form-control" name="policyNumber" id="field_policyNumber" formControlName="policyNumber" readOnly />
+      </div>
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.ehc.policyHolder"></label>
+      <div class="col-sm-3">
+        <input type="text" class="form-control" name="policyHolder" id="field_policyHolder" formControlName="policyHolder" readOnly />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.ehc.certificateNumber"></label>
+      <div class="col-sm-3">
+        <input
+          type="text"
+          class="form-control"
+          name="certificateNumber"
+          id="field_certificateNumber"
+          formControlName="certificateNumber"
+          readOnly
+        />
+      </div>
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.ehc.groupNumber"></label>
+      <div class="col-sm-3">
+        <input type="text" class="form-control" name="groupNumber" id="field_groupNumber" formControlName="groupNumber" readOnly />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.ehc.ehcType"></label>
+      <div class="col-sm-3">
+        <input type="text" class="form-control" name="groupNumber" id="field_type" formControlName="type" readonly />
+      </div>
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.ehc.status"></label>
+      <div class="col-sm-3">
+        <input
+          type="text"
+          class="form-control"
+          name="status"
+          [ngModel]="secondary.status"
+          readonly
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.ehc.note"></label>
+      <div class="col-sm-8">
+        <textarea type="text" class="form-control" name="note" id="field_note" formControlName="note" readonly> </textarea>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.ehc.lastModifiedDate"></label>
+      <div class="col-sm-8">
+        <input
+          id="field_lastModifiedDate"
+          type="datetime-local"
+          class="form-control"
+          name="lastModifiedDate"
+          formControlName="lastModifiedDate"
+          readOnly
+        />
+      </div>
+    </div>
+  </div>
+</form>

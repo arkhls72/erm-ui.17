@@ -1,0 +1,192 @@
+<br />
+<table class="exercise_top">
+  <thead>
+    <tr>
+      <th class="th_label_center">
+        <div class="btn-group flex-btn-group-container">
+          <button type="submit" (click)="ngOnCondition()" class="btn btn-outline-primary">
+            <span class="fa fa-edit"></span>
+            <span jhiTranslate="ermConsoleApp.condition.modifyConditoion"></span>
+          </button>
+          &nbsp;
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" (click)="ngOnMedication()" class="btn btn-outline-primary">
+            <span class="fa fa-edit"></span>
+            <span jhiTranslate="ermConsoleApp.medication.modifyMedication"></span>
+          </button>
+          &nbsp;<span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" (click)="ngOnInjury()" class="btn btn-outline-primary">
+            <span class="fa fa-edit"></span>
+            <span jhiTranslate="ermConsoleApp.injury.modifyInjury"></span>
+          </button>
+          &nbsp;<span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" (click)="ngOnOperation()" class="btn btn-outline-primary">
+            <span class="fa fa-edit"></span>
+            <span jhiTranslate="ermConsoleApp.operation.modifyOperation"></span>
+          </button>
+        </div>
+      </th>
+    </tr>
+  </thead>
+</table>
+<br />
+
+<div *ngIf="medicalEventType === 0">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+          <h5><span jhiTranslate="ermConsoleApp.condition.home.title"></span></h5>
+        </th>
+        <th>
+          <h5><span jhiTranslate="ermConsoleApp.medication.home.title"></span></h5>
+        </th>
+        <th>
+          <h5><span jhiTranslate="ermConsoleApp.injury.home.title"></span></h5>
+        </th>
+        <th>
+          <h5><span jhiTranslate="ermConsoleApp.operation.home.title"></span></h5>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <br />
+          <ul>
+            <div *ngFor="let cond of conditions">
+              <div class="table-body-cell">
+                <li>{{ cond.name }}</li>
+              </div>
+            </div>
+          </ul>
+          <br />
+        </td>
+        <td>
+          <br />
+          <ul>
+            <div *ngFor="let meds of medications">
+              <div class="table-body-cell">
+                <li>{{ meds.name }}</li>
+              </div>
+            </div>
+          </ul>
+          <br />
+        </td>
+        <td>
+          <br />
+          <ul>
+            <div *ngFor="let inj of injuries">
+              <div class="table-body-cell">
+                <li>{{ inj.nameType }}</li>
+              </div>
+            </div>
+          </ul>
+          <br />
+        </td>
+        <td>
+          <br />
+
+          <ul>
+            <div *ngFor="let opr of operations">
+              <div class="table-body-cell">
+                <li>{{ opr.name }}</li>
+              </div>
+            </div>
+          </ul>
+          <br />
+
+          <div class="btn-group flex-btn-group-container"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br />
+<div *ngIf="medicalEventType === 1">
+  <div class="btn-group flex-btn-group-container">
+    <button type="button" (click)="backToMedicalTab()" class="btn btn-outline-primary">
+      <span class="fa fa-window-close"></span>
+    </button>
+    <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+  </div>
+  <br />
+  <br />
+  <div class="row">
+    &nbsp;&nbsp;&nbsp;
+    <h5><span jhiTranslate="ermConsoleApp.condition.modifyConditoion"></span></h5>
+  </div>
+  <br />
+  <div class="col-sm-10">
+    <bc-condition-edit [medicalClient]="medicalClient"> </bc-condition-edit>
+  </div>
+</div>
+
+<div *ngIf="medicalEventType === 2">
+  <div class="btn-group flex-btn-group-container">
+    <button type="button" (click)="backToMedicalTab()" class="btn btn-outline-primary">
+      <span class="fa fa-window-close"></span>
+    </button>
+    <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+  </div>
+  <br />
+  <br />
+  <div class="row">
+    &nbsp;&nbsp;&nbsp;
+    <h5><span jhiTranslate="ermConsoleApp.medication.modifyMedication"></span></h5>
+  </div>
+  <br />
+  <div class="resp-table-row">
+    <div class="divTableRow">
+      <div>
+        <bc-medication-edit [medicalClient]="medicalClient"> </bc-medication-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="medicalEventType === 3">
+  <div class="btn-group flex-btn-group-container">
+    <button type="button" (click)="backToMedicalTab()" class="btn btn-outline-primary">
+      <span class="fa fa-window-close"></span>
+    </button>
+    <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+  </div>
+  <br />
+  <br />
+  <div class="row">
+    &nbsp;&nbsp;&nbsp;
+    <h5><span jhiTranslate="ermConsoleApp.injury.modifyInjury"></span></h5>
+  </div>
+  <br />
+  <div class="resp-table-row">
+    <div class="divTableRow">
+      <div>
+        <bc-injury-edit [medicalClient]="medicalClient"> </bc-injury-edit>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="medicalEventType === 4">
+  <div class="btn-group flex-btn-group-container">
+    <button type="button" (click)="backToMedicalTab()" class="btn btn-outline-primary">
+      <span class="fa fa-window-close"></span>
+    </button>
+    <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+  </div>
+  <br />
+  <br />
+  <div class="row">
+    &nbsp;&nbsp;&nbsp;
+    <h5><span jhiTranslate="ermConsoleApp.operation.modifyOperation"></span></h5>
+  </div>
+  <br />
+  <div class="resp-table-row">
+    <div class="divTableRow">
+      <div>
+        <bc-operation-edit [medicalClient]="medicalClient"> </bc-operation-edit>
+      </div>
+    </div>
+  </div>
+</div>

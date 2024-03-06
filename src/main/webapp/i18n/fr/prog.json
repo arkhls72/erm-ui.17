@@ -1,0 +1,51 @@
+{
+  "ermConsoleApp": {
+    "prog": {
+      "home": {
+        "title": "Progs",
+        "createLabel": "Create a new Prog",
+        "createOrEditLabel": "Create or edit a Prog",
+        "notFound": "No Progs found"
+      },
+      "created": "A new Prog is created with identifier {{ param }}",
+      "updated": "A Prog is updated with identifier {{ param }}",
+      "deleted": "A Prog is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Program {{ id }}?",
+        "questionName": "Are you sure you  are deleting  Program {{ name }}?"
+      },
+      "detail": {
+        "title": "Prog"
+      },
+      "name": "Name",
+      "status": "Status",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date",
+      "clientId": "Client Id",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "addGroupExer": "Group Exer.",
+      "addExer": "Exercise. ",
+      "listingProg": "Program Listing",
+      "search": "Search for exercise programs",
+      "assessmentId": "Assessment Id",
+      "assessment": "Assessment",
+      "edit": "Edit",
+      "saveProg": "Save Prog.",
+      "viewProg": "View Program",
+      "saveProgram": "Save Prog.",
+      "addProgram": "Program",
+      "addNewProgram": "Add Program",
+      "addGroupExer": "Group Exer.",
+      "notFound": "No Program found.",
+      "addGroupExercise": "Select Group Exercise",
+      "groupExer": "Group Exercise(s)",
+      "programName": "Program",
+      "exercises": "Exercises(s)",
+      "assessment": "Assessment",
+      "empty": "  ",
+      "next": "Next",
+      "exercise": "Exercise"
+    }
+  }
+}

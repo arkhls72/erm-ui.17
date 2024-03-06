@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (plan) {
+      <div>
+        <h2 data-cy="planDetailsHeading"><span>Plan</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ plan.id }}</span>
+          </dd>
+          <dt><span>Name</span></dt>
+          <dd>
+            <span>{{ plan.name }}</span>
+          </dd>
+          <dt><span>Status</span></dt>
+          <dd>
+            <span>{{ plan.status }}</span>
+          </dd>
+          <dt><span>Client Id</span></dt>
+          <dd>
+            <span>{{ plan.clientId }}</span>
+          </dd>
+          <dt><span>Start Date</span></dt>
+          <dd>
+            <span>{{ plan.startDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>End Date</span></dt>
+          <dd>
+            <span>{{ plan.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Assessment Id</span></dt>
+          <dd>
+            <span>{{ plan.assessmentId }}</span>
+          </dd>
+          <dt><span>Assessment</span></dt>
+          <dd>
+            <span>{{ plan.assessment }}</span>
+          </dd>
+          <dt><span>Programs</span></dt>
+          <dd>
+            <span>{{ plan.programs }}</span>
+          </dd>
+          <dt><span>Clinical Note</span></dt>
+          <dd>
+            <span>{{ plan.clinicalNote }}</span>
+          </dd>
+          <dt><span>Created Date</span></dt>
+          <dd>
+            <span>{{ plan.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Created By</span></dt>
+          <dd>
+            <span>{{ plan.createdBy }}</span>
+          </dd>
+          <dt><span>Last Modified Date</span></dt>
+          <dd>
+            <span>{{ plan.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Lastmodified By</span></dt>
+          <dd>
+            <span>{{ plan.lastModifiedBy }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/plan', plan.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

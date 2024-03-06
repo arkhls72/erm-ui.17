@@ -1,0 +1,19 @@
+<br />
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+      <div class="form-group row" *ngFor="let fp of displayProductFees">
+        <span class="col-sm-2 col-form-label text-right">{{ fp.feeTypeName }}</span>
+        <div class="col-sm-10">
+          <input currencyMask type="tel" [(ngModel)]="fp.fee" [ngModelOptions]="{ standalone: true }" />
+        </div>
+      </div>
+      <!--            <input currencyMask type="tel" formControlName="credit" name="credit" id = "field_credit" />-->
+      <div class="modal-footer">
+        <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<h5><span jhiTranslate="ermConsoleApp.mva.mvaListing"></span></h5>
+<br />
+
+<div class="table-responsive" id="entities" *ngIf="mvas && mvas.length > 0">
+  <table class="table table-striped" aria-describedby="page-heading">
+    <thead>
+      <!--                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">-->
+      <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
+        <th scope="col" jhiSortBy="insurance">
+          <span jhiTranslate="ermConsoleApp.mva.insurance">Insurance</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" jhiSortBy="claimNumber">
+          <span jhiTranslate="ermConsoleApp.mva.claimNumber">Claim Number</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" jhiSortBy="accidentDate">
+          <span jhiTranslate="ermConsoleApp.mva.accidentDate">Accident Date</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" jhiSortBy="status"><span jhiTranslate="ermConsoleApp.mva.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
+        <th scope="col" jhiSortBy="lastModifiedDate">
+          <span jhiTranslate="ermConsoleApp.mva.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let mva of mvas; trackBy: trackId">
+        <td>
+          <a class="my-alert-link" (click)="editMva(mva)">{{ mva.insurance }}</a>
+        </td>
+        <td>{{ mva.claimNumber }}</td>
+        <td>{{ mva.accidentDate?.format('YYYY-MM-DD HH:mm') }}</td>
+        <td>{{ mva.status }}</td>
+        <td>{{ mva.lastModifiedDate?.format('YYYY-MM-DD HH:mm') }}</td>
+        <td class="text-right">
+          <div class="btn-group flex-btn-group-container">
+            &nbsp;<span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+            <div class="not-selected">
+              <i class="fa fa-2x fa-trash-o" (click)="delete(mva)"></i>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="mvas && mvas.length > 0">
+  <div class="row justify-content-center">
+    <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"> </jhi-item-count>
+  </div>
+
+  <div class="row justify-content-center">
+    <ngb-pagination
+      [collectionSize]="totalItems"
+      [(page)]="ngbPaginationPage"
+      [pageSize]="itemsPerPage"
+      [maxSize]="5"
+      [rotate]="true"
+      [boundaryLinks]="true"
+      (pageChange)="loadPage($event)"
+    ></ngb-pagination>
+  </div>
+</div>
+
+<div class="table-responsive" *ngIf="!mvas || mvas.length === 0">
+  <table class="table table-striped" aria-describedby="page-heading">
+    <thead>
+      <!--            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">-->
+      <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
+        <th scope="col" jhiSortBy="insurance">
+          <span jhiTranslate="ermConsoleApp.mva.insurance">Insurance</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" jhiSortBy="claimNumber">
+          <span jhiTranslate="ermConsoleApp.mva.claimNumber">Claim Number</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" jhiSortBy="accidentDate">
+          <span jhiTranslate="ermConsoleApp.mva.accidentDate">Accident Date</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" jhiSortBy="status"><span jhiTranslate="ermConsoleApp.mva.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
+        <th scope="col" jhiSortBy="lastModifiedDate">
+          <span jhiTranslate="ermConsoleApp.mva.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+  </table>
+</div>
+<div class="alert alert-warning" id="no-result" *ngIf="!mvas || mvas.length === 0">
+  <span jhiTranslate="ermConsoleApp.mva.home.notFound">No mvas found</span>
+</div>

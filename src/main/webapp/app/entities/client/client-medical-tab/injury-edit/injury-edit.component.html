@@ -1,0 +1,69 @@
+<table class="table table-striped" *ngIf="medicalEventType === 3">
+  <thead>
+    <tr>
+      <th><span jhiTranslate="ermConsoleApp.injury.nameType">Name</span></th>
+      <th><span jhiTranslate="ermConsoleApp.injury.happenDate">Happen date</span></th>
+      <th><span jhiTranslate="ermConsoleApp.injury.note">note</span></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let inj of injuries; let i = index">
+      <td class="text-center">
+        <input [(ngModel)]="inj.nameType" class="form-control col-lg-10" type="text" required />
+      </td>
+      <td class="text-center">
+        <div class="input-group">
+          <input
+            type="text"
+            name="happen_field{{ i }}"
+            id="happen_field{{ i }}"
+            class="form-control col-md-7"
+            ngbDatepicker
+            #happenDateDp="ngbDatepicker"
+            [(ngModel)]="inj.happenDate"
+          />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" (click)="happenDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+          </span>
+        </div>
+      </td>
+      <td class="text-center">
+        <textarea type="text" class="form-control" name="note" id="field_note" [(ngModel)]="inj.note" *ngIf="inj"></textarea>
+      </td>
+      <!--<td ">-->
+      <td class="text-left" (click)="deleteRow(i)">
+        <div class="btn-group flex-btn-group-container">
+          <button type="submit" id="save-entity-2" class="btn btn-outline-primary" (click)="save(i)">
+            <i class="fa fa-1x fa-save"></i>
+            &nbsp;&nbsp;<span jhiTranslate="entity.action.save"></span>
+          </button>
+          &nbsp;
+          <button type="submit" class="btn btn-outline-danger">
+            <i class="fa fa-2x fa-trash-o" (click)="deleteRow(i)"></i>
+          </button>
+        </div>
+      </td>
+      <td class="text-left"></td>
+    </tr>
+    <tr>
+      <td class="text-center">&nbsp;</td>
+      <td class="text-center">&nbsp;</td>
+      <td class="text-center">&nbsp;</td>
+      <td class="text-center"></td>
+      <td class="text-center">
+        &nbsp;
+        <i class="fa fa-plus fa-2x" (click)="addRow()"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="resp-table-row" *ngIf="medicalEventType === 9">
+  <div class="divTableRow">
+    <div>
+      <bc-injury-delete [injury]="injury" [medicalClient]="medicalClient"> </bc-injury-delete>
+    </div>
+  </div>
+</div>

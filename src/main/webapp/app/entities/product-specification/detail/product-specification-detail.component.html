@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (productSpecification) {
+      <div>
+        <h2 data-cy="productSpecificationDetailsHeading"><span>Product Specification</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ productSpecification.id }}</span>
+          </dd>
+          <dt><span>Make</span></dt>
+          <dd>
+            <span>{{ productSpecification.make }}</span>
+          </dd>
+          <dt><span>Model Number</span></dt>
+          <dd>
+            <span>{{ productSpecification.modelNumber }}</span>
+          </dd>
+          <dt><span>Serial Number</span></dt>
+          <dd>
+            <span>{{ productSpecification.serialNumber }}</span>
+          </dd>
+          <dt><span>Barcode Media Id</span></dt>
+          <dd>
+            <span>{{ productSpecification.barcodeMediaId }}</span>
+          </dd>
+          <dt><span>Product Id</span></dt>
+          <dd>
+            <span>{{ productSpecification.productId }}</span>
+          </dd>
+          <dt><span>Last Modified By</span></dt>
+          <dd>
+            <span>{{ productSpecification.lastModifiedBy }}</span>
+          </dd>
+          <dt><span>Last Modified Date</span></dt>
+          <dd>
+            <span>{{ productSpecification.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Created By</span></dt>
+          <dd>
+            <span>{{ productSpecification.createdBy }}</span>
+          </dd>
+          <dt><span>Created Date</span></dt>
+          <dd>
+            <span>{{ productSpecification.createdDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/product-specification', productSpecification.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

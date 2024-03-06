@@ -1,0 +1,52 @@
+<div class="row">
+  <br />
+</div>
+<table class="textBoxTable">
+  <thead>
+    <tr>
+      <th></th>
+      <th><span jhiTranslate="ermConsoleApp.product.name">product name</span></th>
+      <th><span jhiTranslate="ermConsoleApp.productOrder.quantity">quantity</span></th>
+      <th><span jhiTranslate="ermConsoleApp.productOrder.orderPrice">order price</span></th>
+      <th><span jhiTranslate="ermConsoleApp.productOrder.status">status</span></th>
+      <th>&nbsp;&nbsp;</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td></td>
+      <td></td>
+      <td>
+        <button type="submit" (click)="saveForUpdateList()" id="save-entity" class="btn btn-primary v-btm-m">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <tr *ngFor="let pro of productOrders; let i = index">
+      <td></td>
+      <td>{{ initProductName(pro.myProductId) }}</td>
+
+      <td>{{ pro.quantity }}</td>
+      <td>{{ pro.orderPrice | currency: 'CAD' : 'symbol-narrow' }}</td>
+      <td>
+        <select class="form-control col-lg-15" name="status" (change)="changeStatus(pro, $event)">
+          <option *ngFor="let st of statuses" [selected]="pro!.status !== null && pro!.status === st" [value]="st">{{ st }}</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center">&nbsp;</td>
+      <td class="text-center">&nbsp;</td>
+      <td class="text-center">&nbsp;</td>
+      <td class="text-center">&nbsp;</td>
+      <td class="text-right"></td>
+      <td class="text-right"></td>
+      <td class="text-right"></td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,39 @@
+{
+  "ermConsoleApp": {
+    "myService": {
+      "home": {
+        "title": "My Services",
+        "createLabel": "Add service",
+        "createOrEditLabel": "Create or edit a My Service",
+        "notFound": "No My Services found"
+      },
+      "created": "A new My Service is created with identifier {{ param }}",
+      "updated": "A My Service is updated with identifier {{ param }}",
+      "deleted": "A My Service is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  My Service {{ id }}?"
+      },
+      "detail": {
+        "title": "My Service"
+      },
+      "myItem": "My Item",
+      "name": "Name",
+      "description": "Description",
+      "commonServiceCodeId": "Service code",
+      "ontarioServiceCode": "Ontario Code",
+      "fee": "Fee",
+      "feeType": "Fee type",
+      "quantity": "Quantity",
+      "unit": "Unit",
+      "note": "Note",
+      "importServices": "Import public",
+      "cancelImport": "Close import",
+      "importedServices": "Imported service",
+      "createAddEdit": "Modify My Services",
+      "general": "General",
+      "myFees": "My fees",
+      "lastModifiedBy": "Modified by",
+      "lastModifiedDate": "Modified on"
+    }
+  }
+}

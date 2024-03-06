@@ -1,0 +1,93 @@
+<table class="table table-striped" *ngIf="medicalEventType === 2">
+  <thead>
+    <tr>
+      <th><span jhiTranslate="ermConsoleApp.medication.name">Name</span></th>
+      <th><span jhiTranslate="ermConsoleApp.medication.reasonFor">Reason For</span></th>
+      <th><span jhiTranslate="ermConsoleApp.medication.startDate">Start Date</span></th>
+      <th><span jhiTranslate="ermConsoleApp.medication.endDate">End Date</span></th>
+      <th><span jhiTranslate="ermConsoleApp.medication.note">note</span></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let med of medications; let i = index">
+      <td class="text-center">
+        <input [(ngModel)]="med.name" class="form-control col-lg-10" type="text" required />
+      </td>
+
+      <td class="text-center">
+        <input [(ngModel)]="med.reasonFor" class="form-control col-lg-10" type="text" required />
+      </td>
+      <td class="text-center">
+        <div class="input-group">
+          <input
+            type="text"
+            name="startDate{{ i }}"
+            id="startDate{{ i }}"
+            class="form-control col-md-7"
+            ngbDatepicker
+            #startDateDp="ngbDatepicker"
+            [(ngModel)]="med.startDate"
+          />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" (click)="startDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+          </span>
+        </div>
+      </td>
+      <td class="text-center">
+        <div class="input-group">
+          <input
+            type="text"
+            name="endDate_field{{ i }}"
+            id="endDate_field{{ i }}"
+            class="form-control col-md-7"
+            ngbDatepicker
+            #endDateDp="ngbDatepicker"
+            [(ngModel)]="med.endDate"
+          />
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default" (click)="endDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+          </span>
+        </div>
+      </td>
+      <td class="text-center">
+        <textarea type="text" class="form-control" name="note" id="field_note" [(ngModel)]="med.note" *ngIf="med"></textarea>
+      </td>
+      <!--<td ">-->
+      <td class="text-center">
+        <div class="btn-group flex-btn-group-container">
+          <button type="submit" id="save-entity-2" class="btn btn-outline-primary" (click)="save(i)">
+            <i class="fa fa-1x fa-save"></i>
+            &nbsp;&nbsp;<span jhiTranslate="entity.action.save"></span>
+          </button>
+          &nbsp;
+          <button type="submit" class="btn btn-outline-danger">
+            <i class="fa fa-2x fa-trash-o" (click)="deleteRow(i)"></i>
+          </button>
+        </div>
+      </td>
+      <td class="text-center"></td>
+    </tr>
+    <tr>
+      <td class="text-center">&nbsp;</td>
+      <td class="text-center">&nbsp;</td>
+      <td class="text-center">&nbsp;</td>
+      <td class="text-center">&nbsp;</td>
+      <td class="text-center"></td>
+      <td class="text-center"></td>
+
+      <td class="text-right">
+        <i class="fa fa-plus fa-2x" (click)="addRow()"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="resp-table-row" *ngIf="medicalEventType === 8">
+  <div class="divTableRow">
+    <div>
+      <bc-medication-delete [medication]="medication" [medicalClient]="medicalClient"> </bc-medication-delete>
+    </div>
+  </div>
+</div>

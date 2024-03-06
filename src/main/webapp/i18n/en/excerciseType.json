@@ -1,0 +1,22 @@
+{
+  "ermConsoleApp": {
+    "exerciseType": {
+      "home": {
+        "title": "Exercise Types",
+        "createLabel": "Create a new Exercise Type",
+        "createOrEditLabel": "Create or edit a Exercise Type",
+        "notFound": "No Exercise Types found"
+      },
+      "created": "A new Exercise Type is created with identifier {{ param }}",
+      "updated": "A Exercise Type is updated with identifier {{ param }}",
+      "deleted": "A Exercise Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Exercise Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Exercise Type"
+      },
+      "name": "Name"
+    }
+  }
+}

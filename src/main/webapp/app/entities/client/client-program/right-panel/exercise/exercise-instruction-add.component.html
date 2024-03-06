@@ -1,0 +1,264 @@
+<h5><span jhiTranslate="ermConsoleApp.exerGroup.instructionLong"></span></h5>
+<table class="header_detail">
+  <thead></thead>
+  <tbody>
+    <tr>
+      <td class="td_label"><span jhiTranslate="ermConsoleApp.prog.programName"> </span> &nbsp;</td>
+      <td class="td_grey_center_bal">
+        {{ selectedProg.name }}
+      </td>
+    </tr>
+    <tr>
+      <td class="td_label"><span jhiTranslate="ermConsoleApp.prog.exercise"> </span> &nbsp;</td>
+      <td class="td_grey_center_bal">
+        {{ selectedExercise.name }}
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="alert alert-warning" id="no-result" *ngIf="!instructions || instructions.length === 0">
+  <span jhiTranslate="ermConsoleApp.instruction.home.notFound">No instructions found</span>
+</div>
+<br />
+
+<form name="editForm" role="form" novalidate [formGroup]="editForm">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.exerGroup.edit"></label>
+    <div class="col-sm-8">
+      <label class="switch">
+        <input class="largerCheckbox" id="editCheck" type="checkbox" (change)="checkEditMode($event)" />
+        <span class="slider round"></span> </label
+      >&nbsp;
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.instruction.name" for="field_name"></label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="name" id="field_name" formControlName="name" [readOnly]="!editMode" />
+      <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+        <small
+          class="form-control-feedback text-danger"
+          *ngIf="(editForm.get('name')?.errors)!.required"
+          jhiTranslate="entity.validation.required"
+        >
+          This field is required.
+        </small>
+        <!--                    <small class="form-control-feedback text-danger"-->
+        <!--                           *ngIf="editForm.get('name')?.errors!.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 1 }">-->
+        <!--                        This field is required to be at least 1 characters.-->
+        <!--                    </small>-->
+
+        <small
+          class="form-control-feedback text-danger"
+          *ngIf="(editForm.get('name')?.errors)!.minlength"
+          jhiTranslate="entity.validation.minlength"
+        >
+          This field is required to be at least 1 characters.
+        </small>
+        <!--                    <small class="form-control-feedback text-danger"-->
+        <!--                           *ngIf="editForm.get('name')?.errors!.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">-->
+        <!--                        This field cannot be longer than 50 characters.-->
+        <!--                    </small>-->
+
+        <small
+          class="form-control-feedback text-danger"
+          *ngIf="(editForm.get('name')?.errors)!.maxlength"
+          jhiTranslate="entity.validation.maxlength"
+        >
+          This field cannot be longer than 50 characters.
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.instruction.repeat" for="field_repeat">Repeat</label>
+    <div class="col-sm-3">
+      <input type="number" class="form-control" name="repeat" id="field_repeat" formControlName="repeat" [readOnly]="!editMode" />
+      <div *ngIf="editMode">
+        <small
+          class="form-control-feedback text-danger"
+          *ngIf="(editForm.get('repeat')?.errors)!.required"
+          jhiTranslate="entity.validation.required"
+        >
+          This field is required.
+        </small>
+      </div>
+    </div>
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.instruction.hold" for="field_hold">Hold</label>
+    <div class="col-sm-3">
+      <input type="number" class="form-control" name="hold" id="field_hold" formControlName="hold" [readOnly]="!editMode" />
+      <div *ngIf="editMode">
+        <small
+          class="form-control-feedback text-danger"
+          *ngIf="(editForm.get('hold')?.errors)!.required"
+          jhiTranslate="entity.validation.required"
+        >
+          This field is required.
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.instruction.complete" for="field_complete"
+      >Complete</label
+    >
+    <div class="col-sm-3">
+      <input type="number" class="form-control" name="complete" id="field_complete" formControlName="complete" [readOnly]="!editMode" />
+      <div *ngIf="editMode">
+        <small
+          class="form-control-feedback text-danger"
+          *ngIf="(editForm.get('complete')?.errors)!.required"
+          jhiTranslate="entity.validation.required"
+        >
+          This field is required.
+        </small>
+      </div>
+    </div>
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.instruction.perform" for="field_perform">Perform</label>
+    <div class="col-sm-3">
+      <input type="number" class="form-control" name="perform" id="field_perform" formControlName="perform" [readOnly]="!editMode" />
+      <div *ngIf="editMode">
+        <small
+          class="form-control-feedback text-danger"
+          *ngIf="(editForm.get('perform')?.errors)!.required"
+          jhiTranslate="entity.validation.required"
+        >
+          This field is required.
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.instruction.duration" for="field_duration"
+      >Duration</label
+    >
+    <div class="col-sm-3" *ngIf="editMode">
+      <select class="form-control col-sm-12" id="field_duration" formControlName="duration">
+        <option *ngFor="let duration of durations" [ngValue]="duration" [selected]="defaultDuration(duration)" required>
+          {{ duration }}
+        </option>
+      </select>
+      <div *ngIf="editMode">
+        <small
+          class="form-control-feedback text-danger"
+          *ngIf="(editForm.get('duration')?.errors)!.required"
+          jhiTranslate="entity.validation.required"
+        >
+          This field is required.
+        </small>
+      </div>
+    </div>
+    <div class="col-sm-3" *ngIf="!editMode">
+      <input id="field_duration_txt" type="text" class="form-control" name="duration" formControlName="duration" readonly />
+    </div>
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.instruction.durationNumber" for="field_durationNumber"
+      >Duration Number</label
+    >
+    <div class="col-sm-3">
+      <input
+        type="number"
+        class="form-control"
+        name="durationNumber"
+        id="field_durationNumber"
+        formControlName="durationNumber"
+        [readOnly]="!editMode"
+      />
+      <div *ngIf="editMode">
+        <small
+          class="form-control-feedback text-danger"
+          *ngIf="(editForm.get('durationNumber')?.errors)!.required"
+          jhiTranslate="entity.validation.required"
+        >
+          This field is required.
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.instruction.note" for="field_note">Note</label>
+    <div class="col-sm-8">
+      <textarea type="text" class="form-control" name="note" id="field_note" formControlName="note" [readonly]="!editMode"></textarea>
+      <div *ngIf="editForm.get('note')!.invalid && (editForm.get('note')!.dirty || editForm.get('note')!.touched)">
+        <!--                    <small class="form-text text-danger"-->
+        <!--                           *ngIf="editForm.get('note')?.errors!.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 350 }">-->
+        <!--                        This field cannot be longer than 350 characters.-->
+        <!--                    </small>-->
+
+        <small class="form-text text-danger" *ngIf="(editForm.get('note')?.errors)!.maxlength" jhiTranslate="entity.validation.maxlength">
+          This field cannot be longer than 350 characters.
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row" *ngIf="progExerciseInstruction && progExerciseInstruction.lastModifiedDate">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.instruction.lastModifiedDate" for="field_lastModifiedDate"
+      >Last Modified Date</label
+    >
+    <div class="col-sm-8">
+      <input
+        id="field_lastModifiedDate"
+        type="datetime-local"
+        class="form-control"
+        name="lastModifiedDate"
+        formControlName="lastModifiedDate"
+        placeholder="YYYY-MM-DD HH:mm"
+        readonly
+      />
+    </div>
+  </div>
+</form>
+<div class="form-group row">
+  <div class="col-sm-10 text-right">
+    <div class="btn-group flex-btn-group-container">
+      <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+      <button type="submit" (click)="save()" [disabled]="editForm.invalid || !editMode" class="btn btn-outline-primary">
+        <i class="fa fa-1x fa-save"></i>
+        <span jhiTranslate="ermConsoleApp.exerGroup.saveInstruction"></span>
+      </button>
+    </div>
+  </div>
+</div>
+<br />
+<div class="row">
+  &nbsp;&nbsp;&nbsp;
+  <h5><span jhiTranslate="ermConsoleApp.exerGroup.defaultInstruction"></span></h5>
+</div>
+<br />
+<div class="col-sm-10" *ngIf="instructions && instructions.length > 0">
+  <table class="table table-striped" aria-describedby="page-heading">
+    <thead>
+      <!--        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadInstruction.bind(this)">-->
+      <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
+        <th></th>
+        <th scope="col" jhiSortBy="instruction.name">
+          <span jhiTranslate="ermConsoleApp.instruction.name">name</span><fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" jhiSortBy="lastModifiedDate">
+          <span jhiTranslate="ermConsoleApp.instruction.lastModifiedDate">Last Modified Date</span><fa-icon icon="sort"></fa-icon>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ins of instructions; trackBy: trackId; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>
+          <a class="my-alert-link" (click)="changeInstruction(ins)">{{ ins.name }}</a>
+        </td>
+        <td>{{ ins.lastModifiedDate?.format('dd/MM/yy HH:mm a') }}</td>
+        <td style="text-align: right">
+          <div class="btn-group flex-btn-group-container text-right">
+            <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+            <button type="submit" (click)="changeInstruction(ins)" [disabled]="!editMode" class="btn btn-outline-primary">
+              <i class="fa fa-1x fa-check"></i>
+            </button>
+            &nbsp;
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,20 @@
+<br />
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div class="form-group row" *ngFor="let sf of myServiceFees; let i = index">
+      <label class="col-sm-2 col-form-label text-right">{{ getFeeTypeName(sf) }}</label>
+      <div class="col-sm-10">
+        <div class="d-flex">
+          <input currencyMask type="tel" [(ngModel)]="sf.fee" id="fee_{{ i }}" class="form-control col-lg-15" />
+          <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.myServiceFee.note"></label>
+          <textarea type="text" class="form-control col-lg-15" name="note" [(ngModel)]="sf.note"> </textarea>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" id="save-entity" (click)="save()" class="btn btn-primary">
+        <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+      </button>
+    </div>
+  </div>
+</div>

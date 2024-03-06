@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-medical-heading" data-cy="MedicalCreateUpdateHeading">Create or edit a Medical</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_clientId">Client Id</label>
+          <input type="number" class="form-control" name="clientId" id="field_clientId" data-cy="clientId" formControlName="clientId" />
+          @if (editForm.get('clientId')!.invalid && (editForm.get('clientId')!.dirty || editForm.get('clientId')!.touched)) {
+            <div>
+              @if ((editForm.get('clientId')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!(editForm.get('clientId')?.errors)!.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_injuryId">Injury Id</label>
+          <input type="number" class="form-control" name="injuryId" id="field_injuryId" data-cy="injuryId" formControlName="injuryId" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_medicationId">Medication Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="medicationId"
+            id="field_medicationId"
+            data-cy="medicationId"
+            formControlName="medicationId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_conditionId">Condition Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="conditionId"
+            id="field_conditionId"
+            data-cy="conditionId"
+            formControlName="conditionId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_operationId">Operation Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="operationId"
+            id="field_operationId"
+            data-cy="operationId"
+            formControlName="operationId"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

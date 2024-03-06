@@ -1,20 +1,22 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-import { IClient } from '../client.model';
+import { Client } from '../client.model';
 import { sampleWithRequiredData, sampleWithNewData, sampleWithPartialData, sampleWithFullData } from '../client.test-samples';
 
 import { ClientService, RestClient } from './client.service';
 
 const requireRestSample: RestClient = {
   ...sampleWithRequiredData,
+  birthDate: sampleWithRequiredData.birthDate?.toJSON(),
+  createdDate: sampleWithRequiredData.createdDate?.toJSON(),
   lastModifiedDate: sampleWithRequiredData.lastModifiedDate?.toJSON(),
 };
 
 describe('Client Service', () => {
   let service: ClientService;
   let httpMock: HttpTestingController;
-  let expectedResult: IClient | IClient[] | boolean | null;
+  let expectedResult: Client | Client[] | boolean | null;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -98,15 +100,15 @@ describe('Client Service', () => {
 
     describe('addClientToCollectionIfMissing', () => {
       it('should add a Client to an empty array', () => {
-        const client: IClient = sampleWithRequiredData;
+        const client: Client = sampleWithRequiredData;
         expectedResult = service.addClientToCollectionIfMissing([], client);
         expect(expectedResult).toHaveLength(1);
         expect(expectedResult).toContain(client);
       });
 
       it('should not add a Client to an array that contains it', () => {
-        const client: IClient = sampleWithRequiredData;
-        const clientCollection: IClient[] = [
+        const client: Client = sampleWithRequiredData;
+        const clientCollection: Client[] = [
           {
             ...client,
           },
@@ -117,23 +119,23 @@ describe('Client Service', () => {
       });
 
       it("should add a Client to an array that doesn't contain it", () => {
-        const client: IClient = sampleWithRequiredData;
-        const clientCollection: IClient[] = [sampleWithPartialData];
+        const client: Client = sampleWithRequiredData;
+        const clientCollection: Client[] = [sampleWithPartialData];
         expectedResult = service.addClientToCollectionIfMissing(clientCollection, client);
         expect(expectedResult).toHaveLength(2);
         expect(expectedResult).toContain(client);
       });
 
       it('should add only unique Client to an array', () => {
-        const clientArray: IClient[] = [sampleWithRequiredData, sampleWithPartialData, sampleWithFullData];
-        const clientCollection: IClient[] = [sampleWithRequiredData];
+        const clientArray: Client[] = [sampleWithRequiredData, sampleWithPartialData, sampleWithFullData];
+        const clientCollection: Client[] = [sampleWithRequiredData];
         expectedResult = service.addClientToCollectionIfMissing(clientCollection, ...clientArray);
         expect(expectedResult).toHaveLength(3);
       });
 
       it('should accept varargs', () => {
-        const client: IClient = sampleWithRequiredData;
-        const client2: IClient = sampleWithPartialData;
+        const client: Client = sampleWithRequiredData;
+        const client2: Client = sampleWithPartialData;
         expectedResult = service.addClientToCollectionIfMissing([], client, client2);
         expect(expectedResult).toHaveLength(2);
         expect(expectedResult).toContain(client);
@@ -141,14 +143,14 @@ describe('Client Service', () => {
       });
 
       it('should accept null and undefined values', () => {
-        const client: IClient = sampleWithRequiredData;
+        const client: Client = sampleWithRequiredData;
         expectedResult = service.addClientToCollectionIfMissing([], null, client, undefined);
         expect(expectedResult).toHaveLength(1);
         expect(expectedResult).toContain(client);
       });
 
       it('should return initial array if no Client is added', () => {
-        const clientCollection: IClient[] = [sampleWithRequiredData];
+        const clientCollection: Client[] = [sampleWithRequiredData];
         expectedResult = service.addClientToCollectionIfMissing(clientCollection, undefined, null);
         expect(expectedResult).toEqual(clientCollection);
       });

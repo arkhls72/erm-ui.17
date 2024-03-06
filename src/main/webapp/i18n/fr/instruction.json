@@ -1,0 +1,33 @@
+{
+  "ermConsoleApp": {
+    "instruction": {
+      "home": {
+        "title": "Instructions",
+        "createLabel": "Create a new Instruction",
+        "createOrEditLabel": "Create or edit a Instruction",
+        "notFound": "No Instructions found"
+      },
+      "created": "A new Instruction is created with identifier {{ param }}",
+      "updated": "A Instruction is updated with identifier {{ param }}",
+      "deleted": "A Instruction is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Instruction {{ id }}?"
+      },
+      "detail": {
+        "title": "Instruction"
+      },
+      "repeat": "Repeat",
+      "instruction": "Instruction",
+      "hold": "Hold",
+      "complete": "Complete",
+      "perform": "Perform",
+      "note": "Note",
+      "name": "Name",
+      "durationNumber": "Duration Number",
+      "duration": "Duration",
+      "instructions": "Instructions",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Modified"
+    }
+  }
+}

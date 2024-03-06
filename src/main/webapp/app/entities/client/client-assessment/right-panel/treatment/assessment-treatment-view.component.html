@@ -1,0 +1,260 @@
+<br />
+<h5><span jhiTranslate="ermConsoleApp.plan.viewTreat"></span></h5>
+<form name="editForm" role="form" novalidate #editForm="ngForm">
+  <br />
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.plan.edit"></label>
+    <div class="col-sm-4">
+      <label class="switch">
+        <input class="largerCheckbox" [disabled]="!plan || !plan.id" type="checkbox" (change)="checkEditMode($event)" />
+        <span class="slider round"></span> </label
+      >&nbsp;
+    </div>
+  </div>
+  <div *ngIf="assessment">
+    <form name="editForm" role="form" novalidate #editForm="ngForm">
+      <br />
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.name"></label>
+        <div class="col-sm-8">
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            id="field_name"
+            [readOnly]="!editMode"
+            [(ngModel)]="plan.name"
+            required
+            [minLength]="1"
+            [maxlength]="50"
+          />
+          <small
+            class="form-control-feedback text-danger"
+            [hidden]="!editForm.controls.name.errors!.required"
+            jhiTranslate="entity.validation.required"
+            >This field is required.
+          </small>
+          <small
+            class="form-text text-danger"
+            [hidden]="!editForm.controls.name.errors!.minlength"
+            jhiTranslate="entity.validation.minlength"
+            translateValues="{ min: 1 }"
+          >
+            This field is required to be at least 3 characters.
+          </small>
+          <small
+            class="form-text text-danger"
+            [hidden]="!editForm.controls.name.errors!.maxlength"
+            jhiTranslate="entity.validation.maxlength"
+            translateValues="{ max: 50 }"
+          >
+            This field cannot be longer than 50 characters.
+          </small>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label
+          class="col-sm-2 col-form-label text-right"
+          jhiTranslate="ermConsoleApp.assessment.selectedNote"
+          *ngIf="!isClinicalNoteChanged"
+        ></label>
+        <label
+          class="col-sm-2 col-form-label text-right"
+          jhiTranslate="ermConsoleApp.assessment.newNote"
+          *ngIf="isClinicalNoteChanged"
+        ></label>
+        <div class="col-sm-8">
+          <textarea
+            type="text"
+            class="form-control"
+            name="clinicalNote"
+            id="field_clinicalNote"
+            *ngIf="plan!.clinicalNote"
+            [(ngModel)]="plan.clinicalNote!.note"
+            [maxlength]="350"
+            [readOnly]="!editMode"
+            (ngModelChange)="isNoteModified($event)"
+          ></textarea>
+          <small
+            class="form-text text-danger"
+            [hidden]="!editForm.controls.clinicalNote.errors!.maxlength"
+            jhiTranslate="entity.validation.maxlength"
+            translateValues="{ max: 350 }"
+          >
+            This field cannot be longer than 350 characters.
+          </small>
+        </div>
+      </div>
+      <div class="form-group row" *ngIf="editMode">
+        <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.empty"></label>
+        <div class="col-sm-8 text-right">
+          <div class="btn-group flex-btn-group-container">
+            <div *ngIf="isClinicalNoteChanged" class="not-selected">
+              <label class="col-sm-1 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.empty"></label>
+              <i class="fa fa-save fa-2x" (click)="saveNotes()"></i>
+            </div>
+
+            <label class="col-sm-1 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.empty"></label>
+            <div class="not-selected text-right" *ngIf="planNotes && planNotes.length > 0">
+              <i class="fa fa-plus fa-2x" (click)="addRow()"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row" *ngIf="!deleteSelectedNote">
+        <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.clinicalNote"></label>
+        <div class="col-sm-8">
+          <table class="table table-borderless" *ngIf="planNotes">
+            <thead>
+              <tr>
+                <th><span jhiTranslate="ermConsoleApp.assessment.num"></span></th>
+                <th><span jhiTranslate="ermConsoleApp.assessment.modifiedOn"></span></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tr *ngFor="let note of planNotes; let i = index">
+              <td>
+                <a class="my-alert-link" (click)="onSelectNote(note)">{{ i + 1 }}</a>
+              </td>
+              <td>
+                <a class="my-alert-link" (click)="onSelectNote(note)">{{ note.lastModifiedDate?.format('YYYY-MM-DD HH:mm') }}</a>
+              </td>
+
+              <td class="text-right">
+                <div class="not-selected" *ngIf="editMode">
+                  <i class="fa fa-2x fa-trash-o" (click)="deleteNote(note)"></i>
+                </div>
+                <div class="selected" *ngIf="!editMode">
+                  <i class="fa fa-2x fa-trash-o"></i>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="form-group row" *ngIf="deleteSelectedNote">
+        <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.empty"></label>
+        <div class="col-sm-8">
+          <bc-treatment-note-delete
+            [planNote]="selectedNote"
+            (cancelNoteDeleteEmitter)="cancelNoteDelete()"
+            (confirmNoteDeleteEmitter)="confirmDeleteNote($event)"
+          >
+          </bc-treatment-note-delete>
+          <br />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.assessmentName"></label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" name="assessment" readonly [(ngModel)]="assessment.name" />
+        </div>
+
+        <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.status"></label>
+        <div class="col-sm-3" *ngIf="editMode">
+          <select class="form-control col-md-15" name="status" (change)="changeStatus(plan, $event)">
+            <option *ngFor="let st of statuses" [selected]="plan.status && st == plan!.status" [value]="st">{{ st }}</option>
+          </select>
+        </div>
+        <div class="col-sm-3" *ngIf="!editMode">
+          <input type="text" class="form-control" name="status" readonly [(ngModel)]="plan.status" />
+        </div>
+      </div>
+      <div class="form-group row" *ngIf="editMode">
+        <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.startDate"></label>
+        <div class="col-sm-3">
+          <div class="input-group">
+            <input
+              id="field_startDate"
+              type="text"
+              class="form-control"
+              name="endDate"
+              ngbDatepicker
+              #startDateDp="ngbDatepicker"
+              [(ngModel)]="plan.startDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="startDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+        <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.plan.endDate"></label>
+        <div class="col-sm-3">
+          <div class="input-group">
+            <input
+              id="field_endDate"
+              type="text"
+              class="form-control"
+              name="endDate"
+              ngbDatepicker
+              #endDateDp="ngbDatepicker"
+              [(ngModel)]="plan.endDate"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="endDateDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row" *ngIf="!editMode">
+        <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.startDate"></label>
+        <div class="col-sm-3">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              name="endDate"
+              ngbDatepicker
+              #startDateDp="ngbDatepicker"
+              [(ngModel)]="plan.startDate"
+              readonly
+            />
+          </div>
+        </div>
+        <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.plan.endDate"></label>
+        <div class="col-sm-3">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              name="endDate"
+              ngbDatepicker
+              #endDateDp="ngbDatepicker"
+              [(ngModel)]="plan.endDate"
+              readonly
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.modified"></label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" name="lastModifiedDate" [value]="getFormatDate(plan)" readonly />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-10 text-right">
+          <div class="btn-group flex-btn-group-container">
+            <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+            <button
+              type="submit"
+              (click)="save()"
+              [disabled]="isClinicalNoteChanged || editForm.invalid || !editMode"
+              class="btn btn-outline-primary"
+            >
+              <i class="fa fa-1x fa-save"></i>
+              <span jhiTranslate="ermConsoleApp.assessment.saveTreat"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</form>

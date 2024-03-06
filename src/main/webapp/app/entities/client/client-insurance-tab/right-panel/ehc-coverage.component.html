@@ -1,0 +1,57 @@
+<div class="form-group row">
+  <h5><span jhiTranslate="ermConsoleApp.ehc.ehc"></span>: &nbsp;</h5>
+  {{ ehc.name }}
+</div>
+<div class="form-group row">
+  <h5><span jhiTranslate="ermConsoleApp.ehc.policyHolder"></span>: &nbsp;</h5>
+  {{ ehc.policyHolder }}
+</div>
+<br />
+<div class="form-group row">
+  &nbsp;&nbsp;&nbsp;<label class="switch">
+    <input class="largerCheckbox" type="checkbox" (change)="checkEditMode($event)" />
+    <span class="slider round"></span> </label
+  >&nbsp;
+  <span jhiTranslate="ermConsoleApp.exercise.edit"></span>
+</div>
+<form name="editForm" role="form" novalidate>
+  <div class="mt-lg-6">
+    <div class="form-group row" *ngFor="let cov of coverageTherapies">
+      <label class="col-sm-2 col-form-label text-right">{{ cov.therapyName }}</label>
+      <div class="col-sm-2">
+        <input
+          currencyMask
+          type="tel"
+          [(ngModel)]="cov.limit"
+          [disabled]="!editMode"
+          class="form-control"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
+      <label class="col-sm-1 col-form-label text-right" jhiTranslate="ermConsoleApp.mva.note"></label>
+      <div class="col-sm-6">
+        <textarea
+          type="text"
+          class="form-control"
+          name="note"
+          [disabled]="!editMode"
+          [ngModelOptions]="{ standalone: true }"
+          [(ngModel)]="cov.note"
+          *ngIf="ehc"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+</form>
+<br />
+<div class="form-group row">
+  <div class="col-lg-11 text-right">
+    <div class="btn-group flex-btn-group-container">
+      <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+      <button type="submit" (click)="save()" [disabled]="!editMode" class="btn btn-outline-primary">
+        <i class="fa fa-1x fa-save"></i>
+        <span jhiTranslate="ermConsoleApp.ehc.saveCoverage"></span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<br />
+<div class="row justify-content-center">
+  <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+    <table class="payment">
+      <thead></thead>
+      <tbody>
+        <tr>
+          <td class="td_label"><span jhiTranslate="ermConsoleApp.orderPayment.totalPrice">Total Price</span></td>
+          <td class="td_grey">{{ getGrandTotal() | currency: 'CAD' : 'symbol-narrow' }}</td>
+        </tr>
+        <tr>
+          <td class="td_label"><span jhiTranslate="ermConsoleApp.orderPayment.credit">Credit</span></td>
+          <td class="td_grey">
+            <input currencyMask type="tel" formControlName="credit" name="credit" id="field_credit" />
+          </td>
+        </tr>
+        <tr>
+          <td class="td_label"><span jhiTranslate="ermConsoleApp.orderPayment.debit">debit</span></td>
+          <td class="td_grey"><input currencyMask type="tel" formControlName="debit" name="debit" id="field_debit" /></td>
+        </tr>
+
+        <tr>
+          <td class="td_label"><span jhiTranslate="ermConsoleApp.orderPayment.eTransfer">Total Price</span></td>
+          <td class="td_grey"><input currencyMask type="tel" formControlName="eTransfer" /></td>
+        </tr>
+
+        <tr>
+          <td class="td_label"><span jhiTranslate="ermConsoleApp.orderPayment.moneyEmail">Total Price</span></td>
+          <td class="td_grey"><input currencyMask type="tel" formControlName="moneyEmail" /></td>
+        </tr>
+        <tr>
+          <td class="td_label"><span jhiTranslate="ermConsoleApp.orderPayment.directDeposit">Total Price</span></td>
+          <td class="td_grey"><input currencyMask type="tel" formControlName="directDeposit" /></td>
+        </tr>
+        <tr>
+          <td class="td_label"><span jhiTranslate="ermConsoleApp.orderPayment.cash">Total Price</span></td>
+          <td class="td_grey"><input currencyMask type="tel" formControlName="cash" /></td>
+        </tr>
+        <tr>
+          <td class="td_label"><span jhiTranslate="ermConsoleApp.orderPayment.cheque">Total Price</span></td>
+          <td class="td_grey"><input currencyMask type="tel" formControlName="cheque" /></td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <button type="submit" id="save-entity" [disabled]="editForm.invalid || !ifCanSave()" class="btn btn-primary">
+        <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+      </button>
+      <button class="btn btn-primary btn-md" (click)="onPlaceOrder()" [disabled]="editForm.invalid || !ifCanPlaced()">
+        <span class="far fa-closed-captioning"></span>&nbsp;
+        <span jhiTranslate="ermConsoleApp.orderPayment.placeOrder"></span></button
+      >&nbsp;
+    </div>
+  </form>
+</div>

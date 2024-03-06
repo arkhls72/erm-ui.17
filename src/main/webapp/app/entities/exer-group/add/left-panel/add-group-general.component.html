@@ -1,0 +1,93 @@
+<br />
+<div class="row">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <h5><span jhiTranslate="ermConsoleApp.exerGroup.addNew"></span></h5>
+</div>
+<!--<div class="alert alert-warning" id="no-result" *ngIf="isAddMode">
+    <span jhiTranslate="ermConsoleApp.exerGroup.notFoundAdd">No Group found</span>
+</div>-->
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+  <div class="mt-lg-4">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.exerGroup.name" for="field_name">Name</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="name" id="field_name" formControlName="name" />
+        <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+          <small class="form-text text-danger" *ngIf="(editForm.get('name')?.errors)!.required" jhiTranslate="entity.validation.required">
+            This field is required.
+          </small>
+          <small
+            class="form-text text-danger"
+            *ngIf="(editForm.get('name')?.errors)!.minlength"
+            jhiTranslate="entity.validation.minlength"
+            [translateValues]="{ min: 1 }"
+          >
+            This field is required to be at least 1 characters.
+          </small>
+          <small
+            class="form-text text-danger"
+            *ngIf="(editForm.get('name')?.errors)!.maxlength"
+            jhiTranslate="entity.validation.maxlength"
+            [translateValues]="{ max: 50 }"
+          >
+            This field cannot be longer than 50 characters.
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.exercise.description" for="field_description"
+        >Description</label
+      >
+      <div class="col-sm-6">
+        <textarea type="text" class="form-control" name="description" id="field_description" formControlName="description"></textarea>
+        <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+          <small
+            class="form-text text-danger"
+            *ngIf="(editForm.get('description')?.errors)!.maxlength"
+            jhiTranslate="entity.validation.maxlength"
+            [translateValues]="{ max: 250 }"
+          >
+            This field cannot be longer than 250 characters.
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.exerGroup.lastModifiedDate" for="field_lastModifiedDate"
+        >Last Modified Date</label
+      >
+      <div class="col-sm-6">
+        <input
+          id="field_lastModifiedDate"
+          type="datetime-local"
+          class="form-control"
+          name="lastModifiedDate"
+          formControlName="lastModifiedDate"
+          placeholder="YYYY-MM-DD HH:mm"
+          readOnly
+        />
+      </div>
+    </div>
+
+    <br />
+    <table class="exercise_top">
+      <thead>
+        <tr>
+          <th class="th_label_left">
+            <div class="btn-group flex-btn-group-container">
+              <button type="submit" (click)="save()" class="btn btn-outline-primary" [disabled]="editForm.invalid || isSaving">
+                <i class="fa fa-1x fa-save"></i>
+                <span jhiTranslate="ermConsoleApp.exercise.saveInstruction"></span>
+              </button>
+              <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+            </div>
+          </th>
+          <th class="th_label_center"></th>
+          <th class="th_label_right"></th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</form>

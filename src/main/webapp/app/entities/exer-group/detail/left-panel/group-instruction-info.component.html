@@ -1,0 +1,120 @@
+<br />
+<div class="row">
+  &nbsp;&nbsp;&nbsp;
+  <h5><span jhiTranslate="ermConsoleApp.exerGroup.groupInfo"></span></h5>
+</div>
+<form name="editForm" role="form" novalidate [formGroup]="editForm">
+  <div class="mt-lg-4">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.exerGroup.name" for="field_name">Name</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="name" id="field_name" formControlName="name" readonly />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.exercise.description" for="field_description"
+        >Description</label
+      >
+      <div class="col-sm-6">
+        <textarea type="text" class="form-control" name="name" id="field_description" formControlName="description" readonly></textarea>
+      </div>
+    </div>
+    <div class="form-group row"></div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.exerGroup.lastModifiedDate" for="field_lastModifiedDate"
+        >Last Modified Date</label
+      >
+      <div class="col-sm-6">
+        <input
+          id="field_lastModifiedDate"
+          type="datetime-local"
+          class="form-control"
+          name="lastModifiedDate"
+          formControlName="lastModifiedDate"
+          placeholder="YYYY-MM-DD HH:mm"
+          [readOnly]="true"
+        />
+      </div>
+    </div>
+    <br />
+  </div>
+</form>
+<div class="row">
+  &nbsp;&nbsp;&nbsp;
+  <h5><span jhiTranslate="ermConsoleApp.exerGroup.exerciseInfo"></span></h5>
+</div>
+<div class="mt-lg-4" *ngIf="exercise">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.exercise.name">Name</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" name="name" [(ngModel)]="exercise!.name" readonly />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.exercise.description" for="field_description"
+      >Description</label
+    >
+    <div class="col-sm-6">
+      <textarea type="text" class="form-control" name="description" [(ngModel)]="exercise!.description" readonly></textarea>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.exercise.muscle">muscle</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" name="muscleName" [(ngModel)]="exercise!.muscle!.name" readonly />
+    </div>
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.exercise.type">type</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" name="typeName" [(ngModel)]="exercise!.type!.name" readonly />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.exercise.bodyPart"></label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" name="bodyPartName" [(ngModel)]="exercise!.bodyPart!.name" readonly />
+    </div>
+    <label class="col-sm-2 col-form-label col-form-label-lg text-right" jhiTranslate="ermConsoleApp.exercise.position">position</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" name="bodyPartName" [(ngModel)]="exercise!.position!.name" readonly />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label col-form-label-lg text-right" jhiTranslate="ermConsoleApp.exercise.movement">movement</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" name="bodyPartName" [(ngModel)]="exercise!.movement!.name" readonly />
+    </div>
+    <label class="col-sm-2 col-form-label col-form-label-lg text-right" jhiTranslate="ermConsoleApp.exercise.tools">tools</label>
+    <div class="col-sm-2">
+      <input type="text" class="form-control" name="bodyPartName" [(ngModel)]="exercise!.tool!.name" readonly />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.exerGroup.lastModifiedDate" for="field_lastModifiedDate"
+      >Last Modified Date</label
+    >
+    <div class="col-sm-6">
+      <input type="text" class="form-control" name="lastModifiedDate" [(ngModel)]="exercise!.lastModifiedDate" readonly />
+    </div>
+  </div>
+</div>
+<br />
+
+<!--<div class="col-lg-8" id="entities" *ngIf="instructions && instructions.length > 0">-->
+<!--    <table class="table table-striped" aria-describedby="page-heading">-->
+<!--        <thead>-->
+<!--        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadInstruction.bind(this)">-->
+<!--           &lt;!&ndash; <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>&ndash;&gt;-->
+<!--            <th scope="col" jhiSortBy="instruction.name"><span jhiTranslate="ermConsoleApp.instruction.name">name</span><fa-icon icon="sort"></fa-icon></th>-->
+<!--            <th scope="col" jhiSortBy="lastModifiedDate"><span jhiTranslate="ermConsoleApp.instruction.lastModifiedDate">Last Modified Date</span><fa-icon icon="sort"></fa-icon></th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr *ngFor="let ins of instructions ;trackBy: trackId">-->
+<!--            <td><a class="my-alert-link" (click)="changeInstruction(ins)">{{ ins.name }}</a></td>-->
+<!--            <td>{{ ins.lastModifiedDate | date:'dd/MM/yy HH:mm a' }}</td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</div>-->

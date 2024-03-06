@@ -1,0 +1,29 @@
+{
+  "ermConsoleApp": {
+    "coverage": {
+      "home": {
+        "title": "Coverages",
+        "createLabel": "Create a new Coverage",
+        "createOrEditLabel": "Create or edit a Coverage",
+        "notFound": "No Coverages found"
+      },
+      "created": "A new Coverage is created with identifier {{ param }}",
+      "updated": "A Coverage is updated with identifier {{ param }}",
+      "deleted": "A Coverage is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Coverage {{ id }}?"
+      },
+      "detail": {
+        "title": "Coverage"
+      },
+      "therapyId": "Therapy Id",
+      "ehcId": "Ehc Id",
+      "wsibId": "Wsib Id",
+      "mvaId": "Mva Id",
+      "limit": "Limit",
+      "note": "Note",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

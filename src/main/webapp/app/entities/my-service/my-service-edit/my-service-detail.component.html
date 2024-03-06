@@ -1,0 +1,34 @@
+<h2><span jhiTranslate="ermConsoleApp.myService.detail.title">My Service</span> {{ myService!.id }}</h2>
+<button type="submit" (click)="previousState()" class="btn btn-info">
+  <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+</button>
+<div class="mt-lg-4">
+  <jhi-alert></jhi-alert>
+  <jhi-alert-error></jhi-alert-error>
+  <ngb-tabset>
+    <ngb-tab>
+      <ng-template ngbTabTitle><span jhiTranslate="ermConsoleApp.myService.general"></span></ng-template>
+      <ng-template ngbTabContent>
+        <div>
+          <bc-my-service-general-tab> </bc-my-service-general-tab>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+      <ng-template ngbTabTitle><span jhiTranslate="ermConsoleApp.myService.ontarioServiceCode"></span></ng-template>
+      <ng-template ngbTabContent>
+        <div>
+          <bc-ontario-service-tab [myService]="myService" (eventEmitter)="refreshMyServiceByChild($event)"> </bc-ontario-service-tab>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+      <ng-template ngbTabTitle><span jhiTranslate="ermConsoleApp.myService.myFees"></span></ng-template>
+      <ng-template ngbTabContent>
+        <div>
+          <bc-service-fee-tab [myService]="myService"> </bc-service-fee-tab>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

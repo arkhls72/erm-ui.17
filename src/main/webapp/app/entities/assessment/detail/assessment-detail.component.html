@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (assessment) {
+      <div>
+        <h2 data-cy="assessmentDetailsHeading"><span>Assessment</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ assessment.id }}</span>
+          </dd>
+          <dt><span>Name</span></dt>
+          <dd>
+            <span>{{ assessment.name }}</span>
+          </dd>
+          <dt><span>Pain Intensity</span></dt>
+          <dd>
+            <span>{{ assessment.painIntensity }}</span>
+          </dd>
+          <dt><span>Source Pain</span></dt>
+          <dd>
+            <span>{{ assessment.sourcePain }}</span>
+          </dd>
+          <dt><span>Pain On Set</span></dt>
+          <dd>
+            <span>{{ assessment.painOnSet }}</span>
+          </dd>
+          <dt><span>Aggravation Pain</span></dt>
+          <dd>
+            <span>{{ assessment.aggravationPain }}</span>
+          </dd>
+          <dt><span>Note</span></dt>
+          <dd>
+            <span>{{ assessment.note }}</span>
+          </dd>
+          <dt><span>Client Id</span></dt>
+          <dd>
+            <span>{{ assessment.clientId }}</span>
+          </dd>
+          <dt><span>Plans</span></dt>
+          <dd>
+            <span>{{ assessment.plans }}</span>
+          </dd>
+          <dt><span>Is Back</span></dt>
+          <dd>
+            <span>{{ assessment.isBack }}</span>
+          </dd>
+          <dt><span>Soap Note</span></dt>
+          <dd>
+            <span>{{ assessment.soapNote }}</span>
+          </dd>
+          <dt><span>Created By</span></dt>
+          <dd>
+            <span>{{ assessment.createdBy }}</span>
+          </dd>
+          <dt><span>Last Modified By</span></dt>
+          <dd>
+            <span>{{ assessment.lastModifiedBy }}</span>
+          </dd>
+          <dt><span>Last Modified Date</span></dt>
+          <dd>
+            <span>{{ assessment.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/assessment', assessment.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

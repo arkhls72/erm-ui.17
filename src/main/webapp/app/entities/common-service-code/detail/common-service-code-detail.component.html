@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (commonServiceCode) {
+      <div>
+        <h2 data-cy="commonServiceCodeDetailsHeading"><span>Common Service Code</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ commonServiceCode.id }}</span>
+          </dd>
+          <dt><span>Service Code</span></dt>
+          <dd>
+            <span>{{ commonServiceCode.serviceCode }}</span>
+          </dd>
+          <dt><span>Description</span></dt>
+          <dd>
+            <span>{{ commonServiceCode.description }}</span>
+          </dd>
+          <dt><span>Service Type</span></dt>
+          <dd>
+            <span>{{ commonServiceCode.serviceType }}</span>
+          </dd>
+          <dt><span>Category</span></dt>
+          <dd>
+            <span>{{ commonServiceCode.category }}</span>
+          </dd>
+          <dt><span>Note</span></dt>
+          <dd>
+            <span>{{ commonServiceCode.note }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/common-service-code', commonServiceCode.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

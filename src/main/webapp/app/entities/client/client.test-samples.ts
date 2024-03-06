@@ -1,28 +1,58 @@
 import dayjs from 'dayjs/esm';
 
-import { IClient, NewClient } from './client.model';
+import { Client, NewClient } from './client.model';
 
-export const sampleWithRequiredData: IClient = {
-  id: 8660,
-  firstName: 'Wilhelm',
+export const sampleWithRequiredData: Client = {
+  id: 13139,
+  firstName: 'Earnest',
+  lastName: 'Murray',
+  cellPhone: 'splosh withX',
+  gender: 'fair near',
+  emergencyName: 'mmm judgementally',
+  emergencyPhone: 'where absolute ',
 };
 
-export const sampleWithPartialData: IClient = {
-  id: 4964,
-  firstName: 'Merritt',
-  lastName: 'Luettgen',
-  lastModifiedDate: dayjs('2024-03-02T05:12'),
+export const sampleWithPartialData: Client = {
+  id: 29297,
+  firstName: 'Caden',
+  lastName: 'Collins',
+  cellPhone: 'obedienceXXX',
+  email: 'Brionna_Doyle@yahoo.com',
+  addressId: 15407,
+  gender: 'ouch astride',
+  emergencyName: 'gratefully however',
+  emergencyPhone: 'trial whoa exce',
+  createdBy: 'brush amid huzzah',
+  lastModifiedDate: dayjs('2024-01-27T19:36'),
 };
 
-export const sampleWithFullData: IClient = {
-  id: 27359,
-  firstName: 'Tremaine',
-  lastName: 'Homenick',
-  lastModifiedDate: dayjs('2024-03-02T06:53'),
+export const sampleWithFullData: Client = {
+  id: 30024,
+  firstName: 'Fay',
+  lastName: 'Hettinger',
+  birthDate: dayjs('2024-01-27T15:45'),
+  homePhone: 'long-term',
+  cellPhone: 'thoroughly pira',
+  email: 'Tracey.DAmore@gmail.com',
+  addressId: 3128,
+  gender: 'majestically',
+  howHear: 'sportsman prevail',
+  emergencyName: 'within inside who',
+  emergencyPhone: 'conjureXXXXX',
+  createdDate: dayjs('2024-01-27T13:38'),
+  createdBy: 'saw portly scale',
+  lastModifiedDate: dayjs('2024-01-27T11:27'),
+  lastModifiedBy: 'brr recess',
+  phoneExtension: 'the',
 };
 
 export const sampleWithNewData: NewClient = {
-  firstName: 'Alvena',
+  firstName: 'Juston',
+  lastName: 'Treutel',
+  cellPhone: 'ew limplyXXX',
+  gender: 'mortally',
+  emergencyName: 'inherit faithfully',
+  emergencyPhone: 'age concerning',
   id: null,
 };
 

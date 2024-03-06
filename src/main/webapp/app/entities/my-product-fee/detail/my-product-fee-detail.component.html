@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (myProductFee) {
+      <div>
+        <h2 data-cy="myProductFeeDetailsHeading"><span>My Product Fee</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ myProductFee.id }}</span>
+          </dd>
+          <dt><span>Fee</span></dt>
+          <dd>
+            <span>{{ myProductFee.fee }}</span>
+          </dd>
+          <dt><span>Fee Type Id</span></dt>
+          <dd>
+            <span>{{ myProductFee.feeTypeId }}</span>
+          </dd>
+          <dt><span>Fee Type Name</span></dt>
+          <dd>
+            <span>{{ myProductFee.feeTypeName }}</span>
+          </dd>
+          <dt><span>My Product Id</span></dt>
+          <dd>
+            <span>{{ myProductFee.myProductId }}</span>
+          </dd>
+          <dt><span>Created Date</span></dt>
+          <dd>
+            <span>{{ myProductFee.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Created By</span></dt>
+          <dd>
+            <span>{{ myProductFee.createdBy }}</span>
+          </dd>
+          <dt><span>Last Modified By</span></dt>
+          <dd>
+            <span>{{ myProductFee.lastModifiedBy }}</span>
+          </dd>
+          <dt><span>Last Modified Date</span></dt>
+          <dd>
+            <span>{{ myProductFee.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/my-product-fee', myProductFee.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,274 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-exercise-heading" data-cy="ExerciseCreateUpdateHeading">Create or edit a Exercise</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          @if (editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)) {
+            <div>
+              @if ((editForm.get('name')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              @if ((editForm.get('name')?.errors)!.minlength) {
+                <small class="form-text text-danger">This field is required to be at least 1 characters.</small>
+              }
+              @if ((editForm.get('name')?.errors)!.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 50 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_bodyPartId">Body Part Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="bodyPartId"
+            id="field_bodyPartId"
+            data-cy="bodyPartId"
+            formControlName="bodyPartId"
+          />
+          @if (editForm.get('bodyPartId')!.invalid && (editForm.get('bodyPartId')!.dirty || editForm.get('bodyPartId')!.touched)) {
+            <div>
+              @if ((editForm.get('bodyPartId')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!(editForm.get('bodyPartId')?.errors)!.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_muscle">Muscle</label>
+          <input type="number" class="form-control" name="muscle" id="field_muscle" data-cy="muscle" formControlName="muscle" />
+          @if (editForm.get('muscle')!.invalid && (editForm.get('muscle')!.dirty || editForm.get('muscle')!.touched)) {
+            <div>
+              @if ((editForm.get('muscle')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!(editForm.get('muscle')?.errors)!.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_typeId">Type Id</label>
+          <input type="number" class="form-control" name="typeId" id="field_typeId" data-cy="typeId" formControlName="typeId" />
+          @if (editForm.get('typeId')!.invalid && (editForm.get('typeId')!.dirty || editForm.get('typeId')!.touched)) {
+            <div>
+              @if ((editForm.get('typeId')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!(editForm.get('typeId')?.errors)!.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_positionId">Position Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="positionId"
+            id="field_positionId"
+            data-cy="positionId"
+            formControlName="positionId"
+          />
+          @if (editForm.get('positionId')!.invalid && (editForm.get('positionId')!.dirty || editForm.get('positionId')!.touched)) {
+            <div>
+              @if ((editForm.get('positionId')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!(editForm.get('positionId')?.errors)!.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_movementId">Movement Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="movementId"
+            id="field_movementId"
+            data-cy="movementId"
+            formControlName="movementId"
+          />
+          @if (editForm.get('movementId')!.invalid && (editForm.get('movementId')!.dirty || editForm.get('movementId')!.touched)) {
+            <div>
+              @if ((editForm.get('movementId')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!(editForm.get('movementId')?.errors)!.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_toolId">Tool Id</label>
+          <input type="number" class="form-control" name="toolId" id="field_toolId" data-cy="toolId" formControlName="toolId" />
+          @if (editForm.get('toolId')!.invalid && (editForm.get('toolId')!.dirty || editForm.get('toolId')!.touched)) {
+            <div>
+              @if ((editForm.get('toolId')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!(editForm.get('toolId')?.errors)!.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_mediaId">Media Id</label>
+          <input type="number" class="form-control" name="mediaId" id="field_mediaId" data-cy="mediaId" formControlName="mediaId" />
+          @if (editForm.get('mediaId')!.invalid && (editForm.get('mediaId')!.dirty || editForm.get('mediaId')!.touched)) {
+            <div>
+              @if ((editForm.get('mediaId')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!(editForm.get('mediaId')?.errors)!.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          @if (editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)) {
+            <div>
+              @if ((editForm.get('description')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              @if ((editForm.get('description')?.errors)!.minlength) {
+                <small class="form-text text-danger">This field is required to be at least 1 characters.</small>
+              }
+              @if ((editForm.get('description')?.errors)!.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 350 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_firstMediaId">First Media Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="firstMediaId"
+            id="field_firstMediaId"
+            data-cy="firstMediaId"
+            formControlName="firstMediaId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_secondMediaId">Second Media Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="secondMediaId"
+            id="field_secondMediaId"
+            data-cy="secondMediaId"
+            formControlName="secondMediaId"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedBy">Last Modified By</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifiedBy"
+            id="field_lastModifiedBy"
+            data-cy="lastModifiedBy"
+            formControlName="lastModifiedBy"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedDate">Last Modified Date</label>
+          <div class="d-flex">
+            <input
+              id="field_lastModifiedDate"
+              data-cy="lastModifiedDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastModifiedDate"
+              formControlName="lastModifiedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate">Created Date</label>
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

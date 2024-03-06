@@ -1,0 +1,137 @@
+<br />
+<br />
+<div class="row">
+  &nbsp;&nbsp;&nbsp;
+  <h5><span jhiTranslate="ermConsoleApp.client.personalInfo"></span></h5>
+</div>
+<form name="editForm" role="form" novalidate #editForm="ngForm">
+  <div class="mt-lg-4">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.client.gender" for="field_gender">Gender</label>
+
+      <div class="col-sm-6">
+        <select class="form-control" id="field_gender" name="gender" (change)="changeGender($event)" required>
+          <option *ngFor="let gen of genders" [selected]="client && client.gender && client.gender === gen" [value]="gen" required>
+            {{ gen }}
+          </option>
+        </select>
+      </div>
+      <small
+        class="form-control-feedback text-danger"
+        [hidden]="!editForm.controls.gender?.errors?.required"
+        jhiTranslate="entity.validation.required"
+        >This field is required.
+      </small>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.client.firstName" for="field_firstName"
+        >Frist name</label
+      >
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="firstName" id="field_firstName" [(ngModel)]="client.firstName" required />
+        <small
+          class="form-control-feedback text-danger"
+          [hidden]="!editForm.controls.firstName?.errors?.required"
+          jhiTranslate="entity.validation.required"
+          >This field is required.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.client.lastName" for="field_lastName">Last Name</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="lastName" id="field_lastName" [(ngModel)]="client.lastName" required />
+        <small
+          class="form-control-feedback text-danger"
+          [hidden]="!editForm.controls.lastName?.errors?.required"
+          jhiTranslate="entity.validation.required"
+          >This field is required.
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.client.birthDate" for="field_birthDate"
+        >Birth Date</label
+      >
+      <div class="col-sm-6">
+        <!--                <input id="field_birthDate"-->
+        <!--                       type="date"-->
+        <!--                       class="form-control"-->
+        <!--                       name="birthDate"-->
+        <!--                       [ngModel]="client.birthDate"-->
+        <!--                       (blur)="client.birthDate = validateDate($event.target);" />-->
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.client.homePhone" for="field_homePhone"
+        >Home phone</label
+      >
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="homePhone" id="field_homePhone" [(ngModel)]="client.homePhone" required />
+        <small
+          class="form-control-feedback text-danger"
+          [hidden]="!editForm.controls.homePhone?.errors?.required"
+          jhiTranslate="entity.validation.required"
+          >This field is required.
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.client.cellPhone" for="field_cellPhone"
+        >cell Phone</label
+      >
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="cellPhone" id="field_cellPhone" [(ngModel)]="client.cellPhone" required />
+        <small
+          class="form-control-feedback text-danger"
+          [hidden]="!editForm.controls.cellPhone?.errors?.required"
+          jhiTranslate="entity.validation.required"
+          >This field is required.
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.client.email" for="field_email">Email</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="email" id="field_email" [(ngModel)]="client.email" required />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.client.emergencyName" for="field_emergency_name"
+        >Emergency name</label
+      >
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="emergencyName" id="field_emergency_name" [(ngModel)]="client.emergencyName" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.client.emergencyPhone" for="field_emergency_phone"
+        >Emergency Phone</label
+      >
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="emergencyPhone" id="field_emergency_phone" [(ngModel)]="client.emergencyPhone" />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.client.lastModifiedDate"></label>
+      <div class="col-sm-6">
+        <span class="form-control color">{{ client.lastModifiedDate?.format('YYYY-MM-DD HH:mm') }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-8 text-right">
+      <div class="btn-group flex-btn-group-container">
+        <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+        <button type="submit" (click)="save()" [disabled]="editForm.invalid" class="btn btn-outline-primary">
+          <i class="fa fa-1x fa-save"></i>
+          <span jhiTranslate="ermConsoleApp.client.savePersonal"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

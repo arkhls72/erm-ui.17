@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { ITEM_DELETED_EVENT } from 'app/config/navigation.constants';
-import { IClient } from '../client.model';
+import { Client } from '../client.model';
 import { ClientService } from '../service/client.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { ClientService } from '../service/client.service';
   imports: [SharedModule, FormsModule],
 })
 export class ClientDeleteDialogComponent {
-  client?: IClient;
+  client?: Client;
 
   constructor(
     protected clientService: ClientService,

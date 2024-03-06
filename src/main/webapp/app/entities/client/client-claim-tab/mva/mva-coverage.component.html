@@ -1,0 +1,38 @@
+<h5><span jhiTranslate="ermConsoleApp.mva.mvaCoverage">MVA Coverage</span>: &nbsp;( &nbsp;{{ mva.insurance }} &nbsp;)</h5>
+<br />
+<div class="form-group row">
+  &nbsp;&nbsp;&nbsp;<label class="switch">
+    <input class="largerCheckbox" type="checkbox" (change)="checkEditMode($event)" />
+    <span class="slider round"></span> </label
+  >&nbsp;
+  <span jhiTranslate="ermConsoleApp.exercise.edit"></span>
+</div>
+
+<div class="mt-lg-4">
+  <div class="form-group row" *ngFor="let cov of coverageTherapies">
+    <label class="col-sm-2 col-form-label text-right">{{ cov.therapyName }}</label>
+    <div class="col-sm-2">
+      <input currencyMask type="tel" [(ngModel)]="cov.limit" [disabled]="!editMode" class="form-control" />
+    </div>
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.mva.note"></label>
+    <div class="col-sm-6">
+      <textarea type="text" class="form-control" name="note" [disabled]="!editMode" [(ngModel)]="cov.note" *ngIf="mva"></textarea>
+    </div>
+  </div>
+</div>
+
+<table class="exercise_top">
+  <thead>
+    <tr>
+      <th class="th_label_left">
+        <div class="btn-group flex-btn-group-container">
+          <button type="submit" (click)="save()" class="btn btn-outline-primary" [disabled]="!editMode">
+            <i class="fa fa-1x fa-save"></i>
+            <span jhiTranslate="ermConsoleApp.mva.saveMva"></span>
+          </button>
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+        </div>
+      </th>
+    </tr>
+  </thead>
+</table>

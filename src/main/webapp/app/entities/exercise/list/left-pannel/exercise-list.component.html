@@ -1,0 +1,97 @@
+<div>
+  <div class="row">
+    <div class="col-sm-12">
+      <form name="searchForm" class="form-inline">
+        <div class="input-group w-100 mt-3">
+          <!--                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch"-->
+          <!--                           name="currentSearch" placeholder="{{ 'ermConsoleApp.exercise.search' | translate }}">-->
+
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="currentSearch"
+            id="currentSearch"
+            name="currentSearch"
+            placeholder="{{ 'ermConsoleApp.exercise.search' }}"
+          />
+
+          <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+            <span class="fa fa-search"></span>
+          </button>
+          <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+            <span class="fa fa-trash-o"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <br />
+  <div class="table-responsive" id="entities" *ngIf="exercises && exercises.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
+          <!--                           [callback]="loadPage.bind(this)">-->
+          <th scope="col" jhiSortBy="name"><span jhiTranslate="ermConsoleApp.exercise.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="bodyPart">
+            <span jhiTranslate="ermConsoleApp.exercise.bodyPart">Body Part</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="muscle">
+            <span jhiTranslate="ermConsoleApp.exercise.muscle">Muscle</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="firstMediaId">
+            <span jhiTranslate="ermConsoleApp.exercise.firstMedia">First Media Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="secondMediaId">
+            <span jhiTranslate="ermConsoleApp.exercise.secondMedia">Second Media Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ex of exercises; trackBy: trackId">
+          <td>
+            <a [routerLink]="['/exercise', ex.id, 'view']">{{ ex.name }}</a>
+          </td>
+          <td>{{ getBodyPart(ex) }}</td>
+          <td>{{ getMuscle(ex) }}</td>
+          <td>
+            <a *ngIf="ex.firstMediaId">
+              <img [src]="addSrcMedia(ex.firstMediaId)" style="max-height: 50px" alt="media image" />
+            </a>
+          </td>
+          <td>
+            <a *ngIf="ex.secondMediaId">
+              <img [src]="addSrcMedia(ex.secondMediaId)" style="max-height: 50px" alt="media image" />
+            </a>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" (click)="delete(ex)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="exercises && exercises.length > 0">
+    <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"> </jhi-item-count>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      >
+      </ngb-pagination>
+    </div>
+  </div>
+</div>

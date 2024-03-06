@@ -1,0 +1,70 @@
+<br />
+<h5><span jhiTranslate="ermConsoleApp.assessment.selectAssessment"></span></h5>
+<table class="header_detail">
+  <thead></thead>
+  <tbody>
+    <tr>
+      <td class="td_label"><span jhiTranslate="ermConsoleApp.prog.assessment"> </span> &nbsp;</td>
+      <td class="td_grey_center_bal" *ngIf="selecetedAssessment">
+        {{ selecetedAssessment!.name }}
+      </td>
+      <td class="td_grey_center_bal" *ngIf="!selecetedAssessment">
+        <span jhiTranslate="ermConsoleApp.prog.empty"></span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<br />
+<form name="editForm" role="form" novalidate #editForm="ngForm">
+  <table class="table table-striped">
+    <thead>
+      <!--        <tr jhiSort [(predicate)]="paginationParams.predicate" [(ascending)]="paginationParams.reverse"-->
+      <!--            [callback]="reorder.bind(this)">-->
+      <tr jhiSort [(predicate)]="paginationParams.predicate" [(ascending)]="paginationParams.reverse">
+        <th class="text-center"></th>
+        <th class="whiteTR" jhiSortBy="name">
+          <span jhiTranslate="ermConsoleApp.assessment.name"></span> <span class="fa fa-sort"></span>
+        </th>
+        <th class="whiteTR" jhiSortBy="sourcePain">
+          <span jhiTranslate="ermConsoleApp.assessment.sourcePain"></span> <span class="fa fa-sort"></span>
+        </th>
+        <th class="whiteTR" jhiSortBy="lastModifiedDate">
+          <span jhiTranslate="ermConsoleApp.assessment.lastModifiedDate"></span> <span class="fa fa-sort"></span>
+        </th>
+        <th class="whiteTR" jhiSortBy="note">
+          <span jhiTranslate="ermConsoleApp.assessment.note">Status</span> <span class="fa fa-sort"></span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ass of assessments; trackBy: trackId; let i = index">
+        <td class="text-center">
+          <input
+            class="align-content-center"
+            type="radio"
+            name="radioAssessment"
+            id="ass-{{ i }}"
+            (change)="addOrRemoveAssessment(ass, $event)"
+          />
+        </td>
+        <td>{{ ass.name }}</td>
+        <td>{{ ass.sourcePain }}</td>
+        <td>{{ ass.lastModifiedDate?.format('YYYY-MM-DD HH:mm') }}</td>
+        <td>{{ ass.note }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="assessments && assessments.length">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"> </jhi-item-count>
+    </div>
+    <div class="row justify-content-center">
+      <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+    </div>
+  </div>
+</form>
+
+<div class="alert alert-warning" id="no-result" *ngIf="!assessments || assessments.length === 0">
+  <span jhiTranslate="ermConsoleApp.plan.assessmentFound"></span>
+</div>

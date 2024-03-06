@@ -22,12 +22,25 @@ describe('Client Form Service', () => {
             id: expect.any(Object),
             firstName: expect.any(Object),
             lastName: expect.any(Object),
+            birthDate: expect.any(Object),
+            homePhone: expect.any(Object),
+            cellPhone: expect.any(Object),
+            email: expect.any(Object),
+            addressId: expect.any(Object),
+            gender: expect.any(Object),
+            howHear: expect.any(Object),
+            emergencyName: expect.any(Object),
+            emergencyPhone: expect.any(Object),
+            createdDate: expect.any(Object),
+            createdBy: expect.any(Object),
             lastModifiedDate: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
+            phoneExtension: expect.any(Object),
           }),
         );
       });
 
-      it('passing IClient should create a new form with FormGroup', () => {
+      it('passing Client should create a new form with FormGroup', () => {
         const formGroup = service.createClientFormGroup(sampleWithRequiredData);
 
         expect(formGroup.controls).toEqual(
@@ -35,7 +48,20 @@ describe('Client Form Service', () => {
             id: expect.any(Object),
             firstName: expect.any(Object),
             lastName: expect.any(Object),
+            birthDate: expect.any(Object),
+            homePhone: expect.any(Object),
+            cellPhone: expect.any(Object),
+            email: expect.any(Object),
+            addressId: expect.any(Object),
+            gender: expect.any(Object),
+            howHear: expect.any(Object),
+            emergencyName: expect.any(Object),
+            emergencyPhone: expect.any(Object),
+            createdDate: expect.any(Object),
+            createdBy: expect.any(Object),
             lastModifiedDate: expect.any(Object),
+            lastModifiedBy: expect.any(Object),
+            phoneExtension: expect.any(Object),
           }),
         );
       });
@@ -58,7 +84,7 @@ describe('Client Form Service', () => {
         expect(client).toMatchObject({});
       });
 
-      it('should return IClient', () => {
+      it('should return Client', () => {
         const formGroup = service.createClientFormGroup(sampleWithRequiredData);
 
         const client = service.getClient(formGroup) as any;
@@ -68,7 +94,7 @@ describe('Client Form Service', () => {
     });
 
     describe('resetForm', () => {
-      it('passing IClient should not enable id FormControl', () => {
+      it('passing Client should not enable id FormControl', () => {
         const formGroup = service.createClientFormGroup();
         expect(formGroup.controls.id.disabled).toBe(true);
 

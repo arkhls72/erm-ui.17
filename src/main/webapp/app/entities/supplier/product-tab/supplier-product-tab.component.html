@@ -1,0 +1,157 @@
+<br />
+<div *ngIf="supplierEventType === 0">
+  <div class="alert alert-warning" id="no-result" *ngIf="products!.length === 0">
+    <span jhiTranslate="ermConsoleApp.product.home.notFound">No products found</span>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-product" (click)="addProductToSupplier()">
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="ermConsoleApp.product.addNewProduct"> Add new Product </span>
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <form name="searchForm" class="form-inline">
+        <div class="input-group w-100 mt-3">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="currentSearch"
+            id="currentSearch"
+            name="currentSearch"
+            placeholder="{{ 'ermConsoleApp.commonServiceCode.search' | translate }}"
+          />
+          <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+            <span class="fa fa-search"></span>
+          </button>
+          <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+            <span class="fa fa-trash-o"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="products && products!.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="name"><span jhiTranslate="ermConsoleApp.product.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="description">
+            <span jhiTranslate="ermConsoleApp.product.description">Description</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="supplierId">
+            <span jhiTranslate="ermConsoleApp.product.supplierId">Supplier Product Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="quantity">
+            <span jhiTranslate="ermConsoleApp.product.quantity">Quantity</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="quantity">
+            <span jhiTranslate="ermConsoleApp.product.lastOrderDate">lastOrderDate</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products; trackBy: trackId">
+          <td>
+            <a (click)="editMyProduct(product)">{{ product.name }}</a>
+          </td>
+          <td>{{ product.description }}</td>
+
+          <td>{{ initSupplierName(product.supplierId) }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.lastOrderDate | date: 'dd/MM/yy HH:mm a' }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" (click)="deleteSupplierProduct(product!.id)" class="btn btn-danger btn-sm">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="products && products!.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>
+<div *ngIf="supplierEventType === 1">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th style="border: none">
+          <div class="divTableRow">
+            <span jhiTranslate="ermConsoleApp.product.home.createLabel"></span>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <br />
+  <div class="row justify-content-left">
+    <div class="col-10">
+      <bc-product-add [supplier]="supplier"> </bc-product-add>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="supplierEventType === 2">
+  <bc-supplier-product-delete [product]="product"> </bc-supplier-product-delete>
+</div>
+
+<div class="table-responsive" *ngIf="supplierEventType !== 0 && supplierEventType !== 1 && supplierEventType !== 2">
+  <table class="table table-striped">
+    <thead>
+      <tr style="border: none">
+        <th style="border: none">
+          <h4>
+            <a (click)="backToProductList()"><i class="fa fa-long-arrow-left"></i> </a>
+          </h4>
+        </th>
+      </tr>
+      <tr style="border: none">
+        <th style="border: none">
+          <button class="button button5" (click)="goToGeneral()">
+            &nbsp;<span jhiTranslate="ermConsoleApp.supplier.general-tab"></span>&nbsp;&nbsp;&nbsp;
+          </button>
+        </th>
+        <th style="border: none">
+          <button class="button button5" (click)="goToSpecification()">
+            <span jhiTranslate="ermConsoleApp.supplier.specification-tab"></span>
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<div *ngIf="supplierEventType === 3">
+  <bc-supplier-product-general [product]="product"> </bc-supplier-product-general>
+</div>
+
+<div *ngIf="supplierEventType === 4">
+  <bc-supplier-product-spec [product]="product"> </bc-supplier-product-spec>
+</div>

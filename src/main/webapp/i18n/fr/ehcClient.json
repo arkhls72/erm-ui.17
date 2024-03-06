@@ -1,0 +1,27 @@
+{
+  "ermConsoleApp": {
+    "ehcClient": {
+      "home": {
+        "title": "Ehc Clients",
+        "createLabel": "Create a new Ehc Client",
+        "createOrEditLabel": "Create or edit a Ehc Client",
+        "notFound": "No Ehc Clients found"
+      },
+      "created": "A new Ehc Client is created with identifier {{ param }}",
+      "updated": "A Ehc Client is updated with identifier {{ param }}",
+      "deleted": "A Ehc Client is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Ehc Client {{ id }}?"
+      },
+      "detail": {
+        "title": "Ehc Client"
+      },
+      "ehcType": "Ehc Type",
+      "policyHolder": "Policy Holder",
+      "clientId": "Client Id",
+      "ehcId": "Ehc Id",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

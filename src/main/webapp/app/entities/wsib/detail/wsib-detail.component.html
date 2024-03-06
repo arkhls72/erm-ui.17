@@ -1,0 +1,106 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (wsib) {
+      <div>
+        <h2 data-cy="wsibDetailsHeading"><span>Wsib</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ wsib.id }}</span>
+          </dd>
+          <dt><span>Employer</span></dt>
+          <dd>
+            <span>{{ wsib.employer }}</span>
+          </dd>
+          <dt><span>Claim Number</span></dt>
+          <dd>
+            <span>{{ wsib.claimNumber }}</span>
+          </dd>
+          <dt><span>Client Id</span></dt>
+          <dd>
+            <span>{{ wsib.clientId }}</span>
+          </dd>
+          <dt><span>Supervisor</span></dt>
+          <dd>
+            <span>{{ wsib.supervisor }}</span>
+          </dd>
+          <dt><span>Accident Date</span></dt>
+          <dd>
+            <span>{{ wsib.accidentDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Adjudicator</span></dt>
+          <dd>
+            <span>{{ wsib.adjudicator }}</span>
+          </dd>
+          <dt><span>Case Manager</span></dt>
+          <dd>
+            <span>{{ wsib.caseManager }}</span>
+          </dd>
+          <dt><span>Status</span></dt>
+          <dd>
+            <span>{{ wsib.status }}</span>
+          </dd>
+          <dt><span>Phone</span></dt>
+          <dd>
+            <span>{{ wsib.phone }}</span>
+          </dd>
+          <dt><span>Phone Extension</span></dt>
+          <dd>
+            <span>{{ wsib.phoneExtension }}</span>
+          </dd>
+          <dt><span>Cell Phone</span></dt>
+          <dd>
+            <span>{{ wsib.cellPhone }}</span>
+          </dd>
+          <dt><span>Close Date</span></dt>
+          <dd>
+            <span>{{ wsib.closeDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Note</span></dt>
+          <dd>
+            <span>{{ wsib.note }}</span>
+          </dd>
+          <dt><span>Fax</span></dt>
+          <dd>
+            <span>{{ wsib.fax }}</span>
+          </dd>
+          <dt><span>Coverages</span></dt>
+          <dd>
+            <span>{{ wsib.coverages }}</span>
+          </dd>
+          <dt><span>Email</span></dt>
+          <dd>
+            <span>{{ wsib.email }}</span>
+          </dd>
+          <dt><span>Address Id</span></dt>
+          <dd>
+            <span>{{ wsib.addressId }}</span>
+          </dd>
+          <dt><span>Last Modified By</span></dt>
+          <dd>
+            <span>{{ wsib.lastModifiedBy }}</span>
+          </dd>
+          <dt><span>Last Modified Date</span></dt>
+          <dd>
+            <span>{{ wsib.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/wsib', wsib.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

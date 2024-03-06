@@ -1,0 +1,93 @@
+<br />
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm" *ngIf="myService">
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.myService.myItem" for="field_itemId"
+            >Frist name</label
+          >
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="itemId" id="field_itemId" formControlName="itemId" />
+            <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+              <small
+                class="form-text text-danger"
+                *ngIf="(editForm.get('name')?.errors)!.required"
+                jhiTranslate="entity.validation.required"
+              >
+              </small>
+              <small
+                class="form-text text-danger"
+                *ngIf="(editForm.get('name')?.errors)!.maxlength"
+                jhiTranslate="entity.validation.maxlength"
+                [translateValues]="{ max: 50 }"
+              >
+                This field cannot be longer than 50 characters.
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.myService.description" for="field_description"
+            >Frist name</label
+          >
+          <div class="col-sm-10">
+            <textarea type="text" class="form-control" name="description" id="field_description" formControlName="description"></textarea>
+            <div
+              *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)"
+            >
+              <small
+                class="form-text text-danger"
+                *ngIf="(editForm.get('description')?.errors)!.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required.
+              </small>
+              <small
+                class="form-text text-danger"
+                *ngIf="(editForm.get('description')?.errors)!.maxlength"
+                jhiTranslate="entity.validation.maxlength"
+                [translateValues]="{ max: 500 }"
+              >
+                This field cannot be longer than 500 characters.
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.myService.unit"></label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="unit" id="field_unit" formControlName="unit" />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.myService.note"></label>
+          <div class="col-sm-10">
+            <textarea type="text" class="form-control" name="note" id="field_note" formControlName="note"></textarea>
+            <div *ngIf="editForm.get('note')!.invalid && (editForm.get('note')!.dirty || editForm.get('note')!.touched)">
+              <small
+                class="form-text text-danger"
+                *ngIf="(editForm.get('note')?.errors)!.maxlength"
+                jhiTranslate="entity.validation.maxlength"
+                [translateValues]="{ max: 350 }"
+              >
+                This field cannot be longer than 350 characters.
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" id="save-entity" [disabled]="editForm.invalid" class="btn btn-primary">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+{
+  "ermConsoleApp": {
+    "progExerciseInstruction": {
+      "home": {
+        "title": "Prog Exercise Instructions",
+        "createLabel": "Create a new Prog Exercise Instruction",
+        "createOrEditLabel": "Create or edit a Prog Exercise Instruction",
+        "notFound": "No Prog Exercise Instructions found"
+      },
+      "created": "A new Prog Exercise Instruction is created with identifier {{ param }}",
+      "updated": "A Prog Exercise Instruction is updated with identifier {{ param }}",
+      "deleted": "A Prog Exercise Instruction is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Prog Exercise Instruction {{ id }}?"
+      },
+      "detail": {
+        "title": "Prog Exercise Instruction"
+      },
+      "exerciseId": "Exercise Id",
+      "progId": "Prog Id",
+      "instructionId": "Instruction Id",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

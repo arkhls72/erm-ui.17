@@ -1,0 +1,147 @@
+<br />
+<div class="row">
+  &nbsp;
+  <h5><span jhiTranslate="ermConsoleApp.exercise.image"></span></h5>
+</div>
+<br />
+<div class="form-group row">
+  <label class="switch">
+    <input class="largerCheckbox_20" type="checkbox" id="firstRadioId" (change)="radioEditable($event)" />
+    <span class="slider round"></span>
+  </label>
+  &nbsp;&nbsp;
+  <span jhiTranslate="ermConsoleApp.exerGroup.edit"></span>
+</div>
+
+<br />
+<form name="firstEditForm" role="form" novalidate [formGroup]="firstEditForm">
+  <table class="media">
+    <tbody>
+      <tr>
+        <td class="td_label_left"></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="td_label">
+          <div *ngIf="editMode" style="width: 300px">
+            <input
+              type="file"
+              id="file_value"
+              [disabled]="!editMode"
+              (change)="setFirstFileData($event, 'value', true)"
+              accept="image/*"
+              jhiTranslate="entity.action.addimage"
+            />
+          </div>
+          <div *ngIf="!editMode">
+            <div style="width: 300px"></div>
+          </div>
+        </td>
+        <td class="td_image">
+          <div class="container">
+            <div>
+              <img
+                [src]="'data:' + firstEditForm.get('contentType')!.value + ';base64,' + firstEditForm.get('value')!.value"
+                *ngIf="firstEditForm.get('value')!.value"
+                alt="media image"
+              />
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="td_label_left">
+          <div class="btn-group flex-btn-group-container">
+            <button type="submit" id="save-entity" [disabled]="!saveCancelMode" class="btn btn-outline-primary" (click)="save(1)">
+              <i class="fa fa-1x fa-save" (click)="save(1)"></i>
+              <span jhiTranslate="entity.action.save"></span>
+            </button>
+            &nbsp;
+            <span jhiTranslate="ermConsoleApp.exercise.empty"></span>
+            <button type="submit" class="btn btn-outline-danger" [disabled]="!editMode">
+              <i class="fa fa-1x fa-trash-o" (click)="clearFirstInputImage('value', 'valueContentType', 'file_value')"></i>
+            </button>
+            &nbsp;
+            <button
+              type="submit"
+              [disabled]="!saveCancelMode"
+              (click)="cancelFirst('value', 'valueContentType')"
+              class="btn btn-outline-info"
+            >
+              <span class="fa fa-close"></span>
+            </button>
+          </div>
+        </td>
+        <td class="td_label_left">
+          <input type="text" class="form-control col-sm-5" name="name" id="name_id" formControlName="name" [readOnly]="!editMode" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+<br />
+<br />
+<div class="row justify-content-center">
+  <form name="secondEditForm" role="form" novalidate [formGroup]="secondEditForm">
+    <table class="media">
+      <tbody>
+        <tr>
+          <td class="td_label">
+            <div *ngIf="editMode" style="width: 300px">
+              <input
+                type="file"
+                id="file_value_second"
+                [disabled]="!editMode"
+                (change)="setSecondFileData($event, 'value', true)"
+                accept="image/*"
+                jhiTranslate="entity.action.addimage"
+              />
+            </div>
+            <div *ngIf="!editMode">
+              <div style="width: 300px"></div>
+            </div>
+          </td>
+          <td>
+            <div class="container">
+              <div>
+                <img
+                  [src]="'data:' + secondEditForm.get('contentType')!.value + ';base64,' + secondEditForm.get('value')!.value"
+                  *ngIf="secondEditForm.get('value')!.value"
+                  alt="media image"
+                />
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="td_label_left">
+            <div class="btn-group flex-btn-group-container">
+              <button type="submit" id="save-entity-2" [disabled]="!saveCancelMode" class="btn btn-outline-primary" (click)="save(2)">
+                <i class="fa fa-1x fa-save" (click)="save(2)"></i>
+                <span jhiTranslate="entity.action.save"></span>
+              </button>
+              &nbsp;
+              <span jhiTranslate="ermConsoleApp.exercise.empty"></span>
+              <button type="submit" class="btn btn-outline-danger" [disabled]="!editMode">
+                <i class="fa fa-1x fa-trash-o" (click)="clearSecondInputImage('value', 'valueContentType', 'file_value')"></i>
+              </button>
+              &nbsp;
+              <button
+                type="submit"
+                [disabled]="!saveCancelMode"
+                (click)="cancelSecond('value', 'valueContentType')"
+                class="btn btn-outline-info"
+              >
+                <span class="fa fa-close"></span>
+              </button>
+            </div>
+          </td>
+          <td>
+            <input type="text" class="form-control col-sm-5" name="name" id="name_id2" formControlName="name" [readOnly]="!editMode" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

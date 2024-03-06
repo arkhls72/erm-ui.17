@@ -1,0 +1,159 @@
+<br />
+<div class="row">
+  &nbsp;&nbsp;&nbsp;
+  <h5><span jhiTranslate="ermConsoleApp.invoice.payment"></span></h5>
+</div>
+<div *ngIf="paymentInvoice!.status !== 'Paid'">
+  <br />
+
+  <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+    <fieldset id="myFieldset">
+      <div id="formId">
+        <div class="form-group row" [hidden]="!editForm.get('id')!.value">
+          <label for="id" jhiTranslate="global.field.id">ID</label>
+          <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+        </div>
+
+        <div class="form-group row">
+          <div class="col-sm-4">
+            <input
+              currencyMask
+              class="form-control col-sm-8"
+              name="paymentAmount"
+              id="field_paymentAmount"
+              formControlName="paymentAmount"
+            />yar
+
+            <div
+              *ngIf="
+                editForm.get('paymentAmount')!.invalid && (editForm.get('paymentAmount')!.dirty || editForm.get('paymentAmount')!.touched)
+              "
+            >
+              <small
+                class="form-text text-danger"
+                *ngIf="(editForm.get('paymentAmount')?.errors)!.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required
+              </small>
+              <!--                                <small class="form-text text-danger"-->
+              <!--                                       *ngIf="editForm.get('paymentAmount')?.errors!.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 1 }">-->
+              <!--                                    The field should be at least 1-->
+              <!--                                </small>-->
+
+              <small
+                class="form-text text-danger"
+                *ngIf="(editForm.get('paymentAmount')?.errors)!.min"
+                jhiTranslate="entity.validation.min"
+              >
+                The field should be at least 1
+              </small>
+              <!--                                <small class="form-text text-danger"-->
+              <!--                                       *ngIf="editForm.get('paymentAmount')?.errors!.max" jhiTranslate="entity.validation.maxDollar"  [translateValues]="{ max: this.paymentInvoice!.dueNow!}">-->
+              <!--&lt;!&ndash;                                    *ngIf="editForm.get('paymentAmount')?.errors!.max" jhiTranslate="entity.validation.max" [translateValues]="{ max: getMaxValidator() }">                                    &ndash;&gt;-->
+              <!--                                    This field cannot be more than 100.-->
+              <!--                                </small>-->
+
+              <small
+                class="form-text text-danger"
+                *ngIf="(editForm.get('paymentAmount')?.errors)!.max"
+                jhiTranslate="entity.validation.maxDollar"
+              >
+                <!--                                    *ngIf="editForm.get('paymentAmount')?.errors!.max" jhiTranslate="entity.validation.max" [translateValues]="{ max: getMaxValidator() }">                                    -->
+                This field cannot be more than 100.
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row col-sm-8">
+          <select
+            class="form-control col-sm-4"
+            id="field_paymentMethod"
+            name="paymentMethod"
+            (change)="changePaymentMethod($event.target)"
+            required
+          >
+            <option *ngFor="let method of paymentMethods" [selected]="editForm.get('paymentMethod') != null" [value]="method" required>
+              {{ method }}
+            </option>
+          </select>
+          <div class="col-sm-8" *ngIf="isCard">
+            <!--                            <input type="text" class="form-control" name="cardNumber" id="field_cardNumber"  placeholder="{{ 'rmConsoleApp.paymentInvoiceDetails.cardNumber' | translate }}"-->
+            <!--                                   formControlName="cardNumber" placeholder="{{ 'ermConsoleApp.paymentInvoiceDetails.lastFourDigits' | translate }}" />-->
+
+            <!--                          <input type="text" class="form-control" name="cardNumber" id="field_cardNumber"  placeholder="{{ 'rmConsoleApp.paymentInvoiceDetails.cardNumber' | translate }}"-->
+            <!--                                 formControlName="cardNumber" placeholder="{{ 'ermConsoleApp.paymentInvoiceDetails.lastFourDigits'  }}" />-->
+
+            <input
+              type="text"
+              class="form-control"
+              name="cardNumber"
+              id="field_cardNumber"
+              placeholder="{{ 'rmConsoleApp.paymentInvoiceDetails.cardNumber' }}"
+              formControlName="cardNumber"
+              placeholder="{{ 'ermConsoleApp.paymentInvoiceDetails.lastFourDigits' }}"
+            />
+
+            <div *ngIf="editForm.get('cardNumber')!.invalid && (editForm.get('cardNumber')!.dirty || editForm.get('cardNumber')!.touched)">
+              <!--                                <small class="form-text text-danger"-->
+              <!--                                       *ngIf="editForm.get('cardNumber')?.errors!.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 4 }">-->
+              <!--                                    This field cannot be longer than 4 characters.-->
+              <!--                                </small>-->
+
+              <small
+                class="form-text text-danger"
+                *ngIf="(editForm.get('cardNumber')?.errors)!.maxlength"
+                jhiTranslate="entity.validation.maxlength"
+              >
+                This field cannot be longer than 4 characters.
+              </small>
+              <small
+                class="form-text text-danger"
+                *ngIf="(editForm.get('cardNumber')?.errors)!.required"
+                jhiTranslate="entity.validation.required"
+              >
+                This field is required
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row col-sm-8">
+          <!--                            <textarea type="text" name="note" name="note" class="form-control" id="field_note"-->
+          <!--                                      formControlName="note"-->
+          <!--                                      placeholder="{{ 'ermConsoleApp.paymentInvoiceDetails.note' | translate }}"></textarea>-->
+
+          <textarea
+            type="text"
+            name="note"
+            name="note"
+            class="form-control"
+            id="field_note"
+            formControlName="note"
+            placeholder="{{ 'ermConsoleApp.paymentInvoiceDetails.note' }}"
+          ></textarea>
+          <div *ngIf="editForm.get('note')!.invalid && (editForm.get('note')!.dirty || editForm.get('note')!.touched)">
+            <!--                                <small class="form-text text-danger"-->
+            <!--                                       *ngIf="editForm.get('note')?.errors!.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">-->
+            <!--                                    This field cannot be longer than 50 characters.-->
+            <!--                                </small>-->
+
+            <small
+              class="form-text text-danger"
+              *ngIf="(editForm.get('note')?.errors)!.maxlength"
+              jhiTranslate="entity.validation.maxlength"
+            >
+              This field cannot be longer than 50 characters.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" id="save-entity" [disabled]="editForm.invalid || paymentInvoice!.status === 'Paid'" class="btn btn-primary">
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="ermConsoleApp.invoice.submitPayment">Submit payment</span>
+        </button>
+      </div>
+    </fieldset>
+  </form>
+</div>

@@ -1,0 +1,300 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-wsib-heading" data-cy="WsibCreateUpdateHeading">Create or edit a Wsib</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_employer">Employer</label>
+          <input type="text" class="form-control" name="employer" id="field_employer" data-cy="employer" formControlName="employer" />
+          @if (editForm.get('employer')!.invalid && (editForm.get('employer')!.dirty || editForm.get('employer')!.touched)) {
+            <div>
+              @if ((editForm.get('employer')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              @if ((editForm.get('employer')?.errors)!.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 50 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_claimNumber">Claim Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="claimNumber"
+            id="field_claimNumber"
+            data-cy="claimNumber"
+            formControlName="claimNumber"
+          />
+          @if (editForm.get('claimNumber')!.invalid && (editForm.get('claimNumber')!.dirty || editForm.get('claimNumber')!.touched)) {
+            <div>
+              @if ((editForm.get('claimNumber')?.errors)!.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 50 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_clientId">Client Id</label>
+          <input type="number" class="form-control" name="clientId" id="field_clientId" data-cy="clientId" formControlName="clientId" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_supervisor">Supervisor</label>
+          <input
+            type="text"
+            class="form-control"
+            name="supervisor"
+            id="field_supervisor"
+            data-cy="supervisor"
+            formControlName="supervisor"
+          />
+          @if (editForm.get('supervisor')!.invalid && (editForm.get('supervisor')!.dirty || editForm.get('supervisor')!.touched)) {
+            <div>
+              @if ((editForm.get('supervisor')?.errors)!.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 50 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_accidentDate">Accident Date</label>
+          <div class="d-flex">
+            <input
+              id="field_accidentDate"
+              data-cy="accidentDate"
+              type="datetime-local"
+              class="form-control"
+              name="accidentDate"
+              formControlName="accidentDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (editForm.get('accidentDate')!.invalid && (editForm.get('accidentDate')!.dirty || editForm.get('accidentDate')!.touched)) {
+            <div>
+              @if ((editForm.get('accidentDate')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!(editForm.get('accidentDate')?.errors)!.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_adjudicator">Adjudicator</label>
+          <input
+            type="text"
+            class="form-control"
+            name="adjudicator"
+            id="field_adjudicator"
+            data-cy="adjudicator"
+            formControlName="adjudicator"
+          />
+          @if (editForm.get('adjudicator')!.invalid && (editForm.get('adjudicator')!.dirty || editForm.get('adjudicator')!.touched)) {
+            <div>
+              @if ((editForm.get('adjudicator')?.errors)!.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 50 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_caseManager">Case Manager</label>
+          <input
+            type="text"
+            class="form-control"
+            name="caseManager"
+            id="field_caseManager"
+            data-cy="caseManager"
+            formControlName="caseManager"
+          />
+          @if (editForm.get('caseManager')!.invalid && (editForm.get('caseManager')!.dirty || editForm.get('caseManager')!.touched)) {
+            <div>
+              @if ((editForm.get('caseManager')?.errors)!.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 50 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+          @if (editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)) {
+            <div>
+              @if ((editForm.get('status')?.errors)!.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 15 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_phone">Phone</label>
+          <input type="text" class="form-control" name="phone" id="field_phone" data-cy="phone" formControlName="phone" />
+          @if (editForm.get('phone')!.invalid && (editForm.get('phone')!.dirty || editForm.get('phone')!.touched)) {
+            <div>
+              @if ((editForm.get('phone')?.errors)!.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 12 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_phoneExtension">Phone Extension</label>
+          <input
+            type="text"
+            class="form-control"
+            name="phoneExtension"
+            id="field_phoneExtension"
+            data-cy="phoneExtension"
+            formControlName="phoneExtension"
+          />
+          @if (
+            editForm.get('phoneExtension')!.invalid && (editForm.get('phoneExtension')!.dirty || editForm.get('phoneExtension')!.touched)
+          ) {
+            <div>
+              @if ((editForm.get('phoneExtension')?.errors)!.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 10 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_cellPhone">Cell Phone</label>
+          <input type="text" class="form-control" name="cellPhone" id="field_cellPhone" data-cy="cellPhone" formControlName="cellPhone" />
+          @if (editForm.get('cellPhone')!.invalid && (editForm.get('cellPhone')!.dirty || editForm.get('cellPhone')!.touched)) {
+            <div>
+              @if ((editForm.get('cellPhone')?.errors)!.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 15 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_closeDate">Close Date</label>
+          <div class="d-flex">
+            <input
+              id="field_closeDate"
+              data-cy="closeDate"
+              type="datetime-local"
+              class="form-control"
+              name="closeDate"
+              formControlName="closeDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_note">Note</label>
+          <input type="text" class="form-control" name="note" id="field_note" data-cy="note" formControlName="note" />
+          @if (editForm.get('note')!.invalid && (editForm.get('note')!.dirty || editForm.get('note')!.touched)) {
+            <div>
+              @if ((editForm.get('note')?.errors)!.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 350 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fax">Fax</label>
+          <input type="text" class="form-control" name="fax" id="field_fax" data-cy="fax" formControlName="fax" />
+          @if (editForm.get('fax')!.invalid && (editForm.get('fax')!.dirty || editForm.get('fax')!.touched)) {
+            <div>
+              @if ((editForm.get('fax')?.errors)!.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 12 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_coverages">Coverages</label>
+          <input type="number" class="form-control" name="coverages" id="field_coverages" data-cy="coverages" formControlName="coverages" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          @if (editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)) {
+            <div>
+              @if ((editForm.get('email')?.errors)!.maxlength) {
+                <small class="form-text text-danger">This field cannot be longer than 320 characters.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_addressId">Address Id</label>
+          <input type="number" class="form-control" name="addressId" id="field_addressId" data-cy="addressId" formControlName="addressId" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedBy">Last Modified By</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifiedBy"
+            id="field_lastModifiedBy"
+            data-cy="lastModifiedBy"
+            formControlName="lastModifiedBy"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedDate">Last Modified Date</label>
+          <div class="d-flex">
+            <input
+              id="field_lastModifiedDate"
+              data-cy="lastModifiedDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastModifiedDate"
+              formControlName="lastModifiedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

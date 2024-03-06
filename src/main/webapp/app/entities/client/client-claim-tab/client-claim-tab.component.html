@@ -1,0 +1,130 @@
+<table class="exercise_top">
+  <tbody>
+    <!-------------------------------------------- Button WSIB---------------------------------------------------------------->
+    <tr>
+      <td class="td_label_left" *ngIf="wsibEventType === 0">
+        <div class="btn-group flex-btn-group-container">
+          <button type="submit" (click)="addWsib()" class="btn btn-outline-primary">
+            <i class="fa fa-1x fa-plus"></i>
+            <span jhiTranslate="ermConsoleApp.wsib.addWsib"></span>&nbsp;
+          </button>
+          &nbsp;
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+        </div>
+      </td>
+      <td class="td_label_left" *ngIf="wsibEventType === 2">
+        <div class="btn-group flex-btn-group-container">
+          <button type="submit" (click)="addWsib()" class="btn btn-outline-primary">
+            <i class="fa fa-1x fa-plus"></i>
+            <span jhiTranslate="ermConsoleApp.wsib.addWsib"></span>&nbsp;
+          </button>
+          &nbsp;
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="button" (click)="goWsibBackPage()" class="btn btn-outline-primary">
+            <span class="fa fa-window-close"></span></button
+          ><span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+        </div>
+      </td>
+
+      <td class="td_label_left" *ngIf="wsibEventType === 1 || wsibEventType === 3 || wsibEventType === 4 || wsibEventType === 6">
+        <div class="btn-group flex-btn-group-container">
+          <button type="submit" (click)="wsibAddress()" class="btn btn-outline-info">
+            <i class="fa fa-1x fa-address-card"></i> &nbsp;
+            <span jhiTranslate="ermConsoleApp.wsib.address"></span>
+          </button>
+          &nbsp;
+          <button type="submit" (click)="wsibCoverage()" class="btn btn-outline-info">
+            <i class="fa fa-1x fa-plus"></i> &nbsp;
+            <span jhiTranslate="ermConsoleApp.wsib.coverage"></span></button
+          >&nbsp;
+          <button type="button" (click)="goWsibBackPage()" class="btn btn-outline-info">
+            <span class="fa fa-window-close"></span></button
+          ><span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+        </div>
+      </td>
+      <!-------------------------------------------- Button MVA---------------------------------------------------------------->
+      <td class="td_label_right" *ngIf="mvaEventType === 0">
+        <div class="btn-group flex-btn-group-container">
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" (click)="addMva()" class="btn btn-outline-primary">
+            <i class="fa fa-1x fa-plus"></i>
+            <span jhiTranslate="ermConsoleApp.mva.addMva"></span>&nbsp;
+          </button>
+          &nbsp;
+        </div>
+      </td>
+      <td class="td_label_right" *ngIf="mvaEventType === 8">
+        <div class="btn-group flex-btn-group-container">
+          <button type="button" (click)="goMvaBackPage()" class="btn btn-outline-primary">
+            <span class="fa fa-window-close"></span></button
+          ><span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          &nbsp;
+          <button type="submit" (click)="addMva()" class="btn btn-outline-primary">
+            <i class="fa fa-1x fa-plus"></i>
+            <span jhiTranslate="ermConsoleApp.mva.addMva"></span>&nbsp;
+          </button>
+          &nbsp;
+        </div>
+      </td>
+      <td class="td_label_right" *ngIf="mvaEventType === 7 || mvaEventType === 9 || mvaEventType === 10 || mvaEventType === 11">
+        <div class="btn-group flex-btn-group-container">
+          <button type="button" (click)="goMvaBackPage()" class="btn btn-outline-info">
+            <span class="fa fa-window-close"></span></button
+          ><span jhiTranslate="ermConsoleApp.ehc.empty"></span>&nbsp;
+          <button type="submit" (click)="mvaAddress()" class="btn btn-outline-info">
+            <i class="fa fa-1x fa-address-card"></i> &nbsp;
+            <span jhiTranslate="ermConsoleApp.mva.address"></span></button
+          >&nbsp;
+          <button type="submit" (click)="mvaCoverage()" class="btn btn-outline-info">
+            <i class="fa fa-1x fa-plus"></i> &nbsp;
+            <span jhiTranslate="ermConsoleApp.mva.coverage"></span>
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="mt-lg-4">
+  <div class="row">
+    <div class="col-sm-6" *ngIf="wsibEventType === 0">
+      <bc-wsib-list [client]="client" (wsibEditEmitter)="editWsib($event)" (wsibDeleteEmitter)="deleteWsib($event)"> </bc-wsib-list>
+    </div>
+    <div class="col-sm-6" *ngIf="wsibEventType === 1">
+      <bc-wsib-edit [selectedWsib]="selectedWsib"> </bc-wsib-edit>
+    </div>
+    <div class="col-sm-6" *ngIf="wsibEventType === 2">
+      <bc-wsib-add [client]="client" (saveWsibSuccessEmitter)="editWsib($event)"> </bc-wsib-add>
+    </div>
+    <div class="col-sm-6" *ngIf="wsibEventType === 3">
+      <bc-wsib-coverage [wsib]="selectedWsib"> </bc-wsib-coverage>
+    </div>
+    <div class="col-sm-6" *ngIf="wsibEventType === 4">
+      <bc-wsib-address [wsib]="selectedWsib"> </bc-wsib-address>
+    </div>
+    <div class="col-sm-6" *ngIf="wsibEventType === 6">
+      <bc-wsib-delete [wsib]="selectedWsib" (confirmDeleteWsibEmitter)="goWsibBackPage()" (cancelDeleteWsibEmitter)="goWsibBackPage()">
+      </bc-wsib-delete>
+    </div>
+    <!--     -->
+    <div class="col-sm-6" *ngIf="mvaEventType === 0">
+      <bc-mva-list (editMvaEmitter)="editMva($event)" (deleteMvaEmitter)="deleteMva($event)"> </bc-mva-list>
+    </div>
+    <div class="col-sm-6" *ngIf="mvaEventType === 7">
+      <bc-mva-edit [client]="client" [selectedMva]="selectedMva"> </bc-mva-edit>
+    </div>
+    <div class="col-sm-6" *ngIf="mvaEventType === 8">
+      <bc-mva-add [client]="client" (successAddMvaEmitter)="editMva($event)"> </bc-mva-add>
+    </div>
+    <div class="col-sm-6" *ngIf="mvaEventType === 9">
+      <bc-mva-coverage [mva]="selectedMva"> </bc-mva-coverage>
+    </div>
+    <div class="col-sm-6" *ngIf="mvaEventType === 10">
+      <bc-mva-address [mva]="selectedMva"> </bc-mva-address>
+    </div>
+    <div class="col-sm-6" *ngIf="mvaEventType === 11">
+      <bc-mva-delete [mva]="selectedMva" (cancelDeleteMvaEmitter)="goMvaBackPage()" (confirmDeleteMvaEmitter)="goMvaBackPage()">
+      </bc-mva-delete>
+    </div>
+  </div>
+</div>

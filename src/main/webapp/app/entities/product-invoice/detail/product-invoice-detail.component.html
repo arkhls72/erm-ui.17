@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (productInvoice) {
+      <div>
+        <h2 data-cy="productInvoiceDetailsHeading"><span>Product Invoice</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ productInvoice.id }}</span>
+          </dd>
+          <dt><span>Invoice Id</span></dt>
+          <dd>
+            <span>{{ productInvoice.invoiceId }}</span>
+          </dd>
+          <dt><span>My Product Id</span></dt>
+          <dd>
+            <span>{{ productInvoice.myProductId }}</span>
+          </dd>
+          <dt><span>My Product Fee Id</span></dt>
+          <dd>
+            <span>{{ productInvoice.myProductFeeId }}</span>
+          </dd>
+          <dt><span>Invoice Price</span></dt>
+          <dd>
+            <span>{{ productInvoice.invoicePrice }}</span>
+          </dd>
+          <dt><span>Quantity</span></dt>
+          <dd>
+            <span>{{ productInvoice.quantity }}</span>
+          </dd>
+          <dt><span>Status</span></dt>
+          <dd>
+            <span>{{ productInvoice.status }}</span>
+          </dd>
+          <dt><span>Created By</span></dt>
+          <dd>
+            <span>{{ productInvoice.createdBy }}</span>
+          </dd>
+          <dt><span>Created Date</span></dt>
+          <dd>
+            <span>{{ productInvoice.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Last Modified By</span></dt>
+          <dd>
+            <span>{{ productInvoice.lastModifiedBy }}</span>
+          </dd>
+          <dt><span>Last Modified Date</span></dt>
+          <dd>
+            <span>{{ productInvoice.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/product-invoice', productInvoice.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

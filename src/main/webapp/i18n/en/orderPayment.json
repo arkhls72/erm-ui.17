@@ -1,0 +1,35 @@
+{
+  "ermConsoleApp": {
+    "orderPayment": {
+      "home": {
+        "title": "Order Payments",
+        "createLabel": "Create a new Order Payment",
+        "createOrEditLabel": "Create or edit a Order Payment",
+        "notFound": "No Order Payments found"
+      },
+      "created": "A new Order Payment is created with identifier {{ param }}",
+      "updated": "A Order Payment is updated with identifier {{ param }}",
+      "deleted": "A Order Payment is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Order Payment {{ id }}?"
+      },
+      "detail": {
+        "title": "Order Payment"
+      },
+      "orderId": "Order Id",
+      "totalPrice": "Total Price",
+      "credit": "Credit",
+      "debit": "Debit",
+      "eTransfer": "Etransfer",
+      "moneyEmail": "Money Email",
+      "directDeposit": "Direct Deposit",
+      "cash": "Cash",
+      "cheque": "Cheque",
+      "placeOrder": "Place your order",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "ermConsoleApp": {
+    "plan": {
+      "home": {
+        "title": "Plans",
+        "createLabel": "Create a new Plan",
+        "createOrEditLabel": "Create or edit a Plan",
+        "notFound": "No Plans found",
+        "search": "Search for treatments"
+      },
+      "created": "A new Plan is created with identifier {{ param }}",
+      "updated": "A Plan is updated with identifier {{ param }}",
+      "deleted": "A Plan is deleted with identifier {{ param }}",
+      "delete": {
+        "questionNote": "Are you sure you  are deleting  Treatment modified on: {{ lastModifiedDate }}?",
+        "question": "Are you sure you  are deleting  Treatment : {{ name }}?"
+      },
+      "detail": {
+        "title": "Plan"
+      },
+      "status": "Status",
+      "clientId": "Client Id",
+      "endDate": "End Date",
+      "name": "Name",
+      "save": "Save Treatment",
+      "startDate": "Start Date",
+      "assessmentId": "Assessment",
+      "selectTreatment": "Select Treatment",
+      "treatment": "Treatment",
+      "addTreatment": "Add Treatment ",
+      "empty": "",
+      "programs": "Programs",
+      "clinicalTreatment": "CLINICAL TREATMENT(S)",
+      "treatment": "CLINICAL TREATMENT",
+      "addTreatment": "Treatment",
+      "addTreatmentPlan": "Add Treatment",
+      "homeExercise": "Home Exercise",
+      "addClinicalTreatment": "Add Treatment",
+      "editClinicalTreatment": "Edit Treatment",
+      "clinicalNote": "Clinical Note",
+      "assessment": "Assessment",
+      "empty": " ",
+      "progressNotes": "Progress Note(s)",
+      "progressNote": "Progress Note",
+      "treatmentDetail": "Treatment Detail",
+      "emptyAssessment": "Please select assessment",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Modified",
+      "endDate": "End",
+      "edit": "Edit",
+      "notFound": "No treatment found. Please create a new assessment first.",
+      "notFound2": "No treatment found. Please create or select assessment first.",
+      "viewTreat": "View Treatment",
+      "assessmentFound": "No assessment found to add a treatment to",
+      "action": "Action",
+      "listingTreatment": "Treatment Listing"
+    }
+  }
+}

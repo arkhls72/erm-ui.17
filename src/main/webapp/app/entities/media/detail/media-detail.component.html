@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (media) {
+      <div>
+        <h2 data-cy="mediaDetailsHeading"><span>Media</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ media.id }}</span>
+          </dd>
+          <dt><span>Content Type</span></dt>
+          <dd>
+            <span>{{ media.contentType }}</span>
+          </dd>
+          <dt><span>Value Content Type</span></dt>
+          <dd>
+            <span>{{ media.valueContentType }}</span>
+          </dd>
+          <dt><span>Value</span></dt>
+          <dd>
+            @if (media.value) {
+              <div>
+                <a (click)="openFile(media.value, media.valueContentType)">
+                  <img [src]="'data:' + media.valueContentType + ';base64,' + media.value" style="max-width: 100%" alt="media image" />
+                </a>
+                {{ media.valueContentType }}, {{ byteSize(media.value) }}
+              </div>
+            }
+          </dd>
+          <dt><span>Name</span></dt>
+          <dd>
+            <span>{{ media.name }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/media', media.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

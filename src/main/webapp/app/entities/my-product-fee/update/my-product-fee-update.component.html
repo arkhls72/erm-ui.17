@@ -1,0 +1,149 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-my-product-fee-heading" data-cy="MyProductFeeCreateUpdateHeading">Create or edit a My Product Fee</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fee">Fee</label>
+          <input type="text" class="form-control" name="fee" id="field_fee" data-cy="fee" formControlName="fee" />
+          @if (editForm.get('fee')!.invalid && (editForm.get('fee')!.dirty || editForm.get('fee')!.touched)) {
+            <div>
+              @if ((editForm.get('fee')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_feeTypeId">Fee Type Id</label>
+          <input type="number" class="form-control" name="feeTypeId" id="field_feeTypeId" data-cy="feeTypeId" formControlName="feeTypeId" />
+          @if (editForm.get('feeTypeId')!.invalid && (editForm.get('feeTypeId')!.dirty || editForm.get('feeTypeId')!.touched)) {
+            <div>
+              @if ((editForm.get('feeTypeId')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!(editForm.get('feeTypeId')?.errors)!.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_feeTypeName">Fee Type Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="feeTypeName"
+            id="field_feeTypeName"
+            data-cy="feeTypeName"
+            formControlName="feeTypeName"
+          />
+          @if (editForm.get('feeTypeName')!.invalid && (editForm.get('feeTypeName')!.dirty || editForm.get('feeTypeName')!.touched)) {
+            <div>
+              @if ((editForm.get('feeTypeName')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_myProductId">My Product Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="myProductId"
+            id="field_myProductId"
+            data-cy="myProductId"
+            formControlName="myProductId"
+          />
+          @if (editForm.get('myProductId')!.invalid && (editForm.get('myProductId')!.dirty || editForm.get('myProductId')!.touched)) {
+            <div>
+              @if ((editForm.get('myProductId')?.errors)!.required) {
+                <small class="form-text text-danger">This field is required.</small>
+              }
+              <small class="form-text text-danger" [hidden]="!(editForm.get('myProductId')?.errors)!.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdDate">Created Date</label>
+          <div class="d-flex">
+            <input
+              id="field_createdDate"
+              data-cy="createdDate"
+              type="datetime-local"
+              class="form-control"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedBy">Last Modified By</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifiedBy"
+            id="field_lastModifiedBy"
+            data-cy="lastModifiedBy"
+            formControlName="lastModifiedBy"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lastModifiedDate">Last Modified Date</label>
+          <div class="d-flex">
+            <input
+              id="field_lastModifiedDate"
+              data-cy="lastModifiedDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastModifiedDate"
+              formControlName="lastModifiedDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (serviceInvoice) {
+      <div>
+        <h2 data-cy="serviceInvoiceDetailsHeading"><span>Service Invoice</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ serviceInvoice.id }}</span>
+          </dd>
+          <dt><span>Invoice Id</span></dt>
+          <dd>
+            <span>{{ serviceInvoice.invoiceId }}</span>
+          </dd>
+          <dt><span>Invoice Price</span></dt>
+          <dd>
+            <span>{{ serviceInvoice.invoicePrice }}</span>
+          </dd>
+          <dt><span>My Service Id</span></dt>
+          <dd>
+            <span>{{ serviceInvoice.myServiceId }}</span>
+          </dd>
+          <dt><span>My Service Fee Id</span></dt>
+          <dd>
+            <span>{{ serviceInvoice.myServiceFeeId }}</span>
+          </dd>
+          <dt><span>Quantity</span></dt>
+          <dd>
+            <span>{{ serviceInvoice.quantity }}</span>
+          </dd>
+          <dt><span>Status</span></dt>
+          <dd>
+            <span>{{ serviceInvoice.status }}</span>
+          </dd>
+          <dt><span>Created Date</span></dt>
+          <dd>
+            <span>{{ serviceInvoice.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Created By</span></dt>
+          <dd>
+            <span>{{ serviceInvoice.createdBy }}</span>
+          </dd>
+          <dt><span>Last Modified Date</span></dt>
+          <dd>
+            <span>{{ serviceInvoice.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Last Modified By</span></dt>
+          <dd>
+            <span>{{ serviceInvoice.lastModifiedBy }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/service-invoice', serviceInvoice.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

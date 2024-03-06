@@ -1,0 +1,79 @@
+<div>
+  <h5 id="page-heading">
+    <span jhiTranslate="ermConsoleApp.clientInvoice.addService">Add service</span>
+  </h5>
+
+  <jhi-alert-error></jhi-alert-error>
+  <jhi-alert></jhi-alert>
+  <br />
+  <div class="row">
+    <div class="col-sm-12">
+      <form name="searchForm" class="form-inline">
+        <div class="input-group w-100 mt-3">
+          <!--                    <input type="text" class="form-control" [(ngModel)]="currentSearch"-->
+          <!--                           id="currentSearch" name="currentSearch" placeholder="{{ 'ermConsoleApp.commonServiceCode.search' | translate }}">-->
+
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="currentSearch"
+            id="currentSearch"
+            name="currentSearch"
+            placeholder="{{ 'ermConsoleApp.commonServiceCode.search' }}"
+          />
+          <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+            <span class="fa fa-search"></span>
+          </button>
+          <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+            <span class="fa fa-trash-o"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="table-responsive-lg" id="entities" *ngIf="myServices && myServices.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <!--                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">-->
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
+          <th></th>
+          <th scope="col" jhiSortBy="nmae"><span jhiTranslate="ermConsoleApp.myService.name"></span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="description">
+            <span jhiTranslate="ermConsoleApp.myService.description">Description</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let myService of myServices; trackBy: trackId">
+          <td class="text-left">
+            <input class="largerCheckbox_20" type="checkbox" id="selectedCondition" [checked]="isSelected(myService)" />
+          </td>
+          <td class="td_10">
+            <a [routerLink]="['/my-service', myService.id, 'edit']">{{ myService.name }}</a>
+          </td>
+          <td class="td_30">{{ myService.description }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="myServices && myServices.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"> </jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      >
+      </ngb-pagination>
+    </div>
+  </div>
+</div>

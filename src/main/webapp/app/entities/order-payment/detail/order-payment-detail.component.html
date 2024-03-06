@@ -1,0 +1,82 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (orderPayment) {
+      <div>
+        <h2 data-cy="orderPaymentDetailsHeading"><span>Order Payment</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ orderPayment.id }}</span>
+          </dd>
+          <dt><span>Order Id</span></dt>
+          <dd>
+            <span>{{ orderPayment.orderId }}</span>
+          </dd>
+          <dt><span>Total Price</span></dt>
+          <dd>
+            <span>{{ orderPayment.totalPrice }}</span>
+          </dd>
+          <dt><span>Credit</span></dt>
+          <dd>
+            <span>{{ orderPayment.credit }}</span>
+          </dd>
+          <dt><span>Debit</span></dt>
+          <dd>
+            <span>{{ orderPayment.debit }}</span>
+          </dd>
+          <dt><span>E Transfer</span></dt>
+          <dd>
+            <span>{{ orderPayment.eTransfer }}</span>
+          </dd>
+          <dt><span>Money Email</span></dt>
+          <dd>
+            <span>{{ orderPayment.moneyEmail }}</span>
+          </dd>
+          <dt><span>Direct Deposit</span></dt>
+          <dd>
+            <span>{{ orderPayment.directDeposit }}</span>
+          </dd>
+          <dt><span>Cash</span></dt>
+          <dd>
+            <span>{{ orderPayment.cash }}</span>
+          </dd>
+          <dt><span>cheque</span></dt>
+          <dd>
+            <span>{{ orderPayment.cheque }}</span>
+          </dd>
+          <dt><span>Created By</span></dt>
+          <dd>
+            <span>{{ orderPayment.createdBy }}</span>
+          </dd>
+          <dt><span>Created Date</span></dt>
+          <dd>
+            <span>{{ orderPayment.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Last Modified By</span></dt>
+          <dd>
+            <span>{{ orderPayment.lastModifiedBy }}</span>
+          </dd>
+          <dt><span>Last Modified Date</span></dt>
+          <dd>
+            <span>{{ orderPayment.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/order-payment', orderPayment.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,31 @@
+{
+  "ermConsoleApp": {
+    "productInvoice": {
+      "home": {
+        "title": "Product Invoices",
+        "createLabel": "Create a new Product Invoice",
+        "createOrEditLabel": "Create or edit a Product Invoice",
+        "notFound": "No Product Invoices found"
+      },
+      "created": "A new Product Invoice is created with identifier {{ param }}",
+      "updated": "A Product Invoice is updated with identifier {{ param }}",
+      "deleted": "A Product Invoice is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  Product Invoice {{ id }}?"
+      },
+      "detail": {
+        "title": "Product Invoice"
+      },
+      "invoiceId": "Invoice Id",
+      "myProductId": "My Product Id",
+      "myProductFeeId": "My Product Fee Id",
+      "invoicePrice": "Invoice Price",
+      "quantity": "Quantity",
+      "status": "Status",
+      "createdDate": "Created Date",
+      "createdBy": "Created By",
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By"
+    }
+  }
+}

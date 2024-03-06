@@ -1,0 +1,88 @@
+<h5><span jhiTranslate="ermConsoleApp.wsib.wsibListing"></span></h5>
+<br />
+<div *ngIf="wsibs && wsibs.length > 0">
+  <table class="table table-striped" aria-describedby="page-heading">
+    <thead>
+      <!--            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">-->
+      <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
+        <th scope="col" jhiSortBy="employer">
+          <span jhiTranslate="ermConsoleApp.wsib.employer">Employer</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" jhiSortBy="claimNumber">
+          <span jhiTranslate="ermConsoleApp.wsib.claimNumber">Claim Number</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" jhiSortBy="accidentDate">
+          <span jhiTranslate="ermConsoleApp.wsib.accidentDate">Accident Date</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th scope="col" jhiSortBy="status"><span jhiTranslate="ermConsoleApp.wsib.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
+        <th scope="col" jhiSortBy="lastModifiedDate">
+          <span jhiTranslate="ermConsoleApp.wsib.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon>
+        </th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let wsib of wsibs; trackBy: trackId">
+        <td>
+          <a class="my-alert-link" (click)="editWsib(wsib)">{{ wsib.employer }}</a>
+        </td>
+        <td>{{ wsib.claimNumber }}</td>
+        <td>{{ wsib.accidentDate?.format('YYYY-MM-DD HH:mm') }}</td>
+        <td>{{ wsib.status }}</td>
+        <td>{{ wsib.lastModifiedDate?.format('YYYY-MM-DD HH:mm') }}</td>
+        <td>
+          <div class="btn-group flex-btn-group-container">
+            &nbsp;<span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+            <div class="not-selected">
+              <i class="fa fa-2x fa-trash-o" (click)="deleteRow(wsib)"></i>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="wsibs && wsibs.length > 0">
+  <div class="row justify-content-center">
+    <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"> </jhi-item-count>
+  </div>
+
+  <div class="row justify-content-center">
+    <ngb-pagination
+      [collectionSize]="totalItems"
+      [(page)]="ngbPaginationPage"
+      [pageSize]="itemsPerPage"
+      [maxSize]="5"
+      [rotate]="true"
+      [boundaryLinks]="true"
+      (pageChange)="loadPage($event)"
+    ></ngb-pagination>
+  </div>
+</div>
+
+<table class="table table-striped" aria-describedby="page-heading" *ngIf="!wsibs || wsibs.length === 0">
+  <thead>
+    <!--        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">-->
+    <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
+      <!--                <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>-->
+      <th scope="col" jhiSortBy="employer">
+        <span jhiTranslate="ermConsoleApp.wsib.employer">Employer</span> <fa-icon icon="sort"></fa-icon>
+      </th>
+      <th scope="col" jhiSortBy="claimNumber">
+        <span jhiTranslate="ermConsoleApp.wsib.claimNumber">Claim Number</span> <fa-icon icon="sort"></fa-icon>
+      </th>
+      <th scope="col" jhiSortBy="accidentDate">
+        <span jhiTranslate="ermConsoleApp.wsib.accidentDate">Accident Date</span> <fa-icon icon="sort"></fa-icon>
+      </th>
+      <th scope="col" jhiSortBy="status"><span jhiTranslate="ermConsoleApp.wsib.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
+      <th scope="col" jhiSortBy="lastModifiedDate">
+        <span jhiTranslate="ermConsoleApp.wsib.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon>
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+</table>
+<div class="alert alert-warning" id="no-result" *ngIf="!wsibs || wsibs.length === 0">
+  <span jhiTranslate="ermConsoleApp.wsib.home.notFound">No wsibs found</span>
+</div>

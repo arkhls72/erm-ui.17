@@ -1,0 +1,102 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (ehcPrimary) {
+      <div>
+        <h2 data-cy="ehcPrimaryDetailsHeading"><span>Ehc Primary</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.id }}</span>
+          </dd>
+          <dt><span>Ehc Id</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.ehcId }}</span>
+          </dd>
+          <dt><span>Client Id</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.clientId }}</span>
+          </dd>
+          <dt><span>Name</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.name }}</span>
+          </dd>
+          <dt><span>Status</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.status }}</span>
+          </dd>
+          <dt><span>Ehc Type</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.ehcType }}</span>
+          </dd>
+          <dt><span>Group Number</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.groupNumber }}</span>
+          </dd>
+          <dt><span>Policy Number</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.policyNumber }}</span>
+          </dd>
+          <dt><span>Policy Holder</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.policyHolder }}</span>
+          </dd>
+          <dt><span>Certificate Number</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.certificateNumber }}</span>
+          </dd>
+          <dt><span>Note</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.note }}</span>
+          </dd>
+          <dt><span>End Date</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.endDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Phone</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.phone }}</span>
+          </dd>
+          <dt><span>Fax</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.fax }}</span>
+          </dd>
+          <dt><span>Email</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.email }}</span>
+          </dd>
+          <dt><span>Created Date</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.createdDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span>Created By</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.createdBy }}</span>
+          </dd>
+          <dt><span>Last Modified Date</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Last Modified By</span></dt>
+          <dd>
+            <span>{{ ehcPrimary.lastModifiedBy }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/ehc-primary', ehcPrimary.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

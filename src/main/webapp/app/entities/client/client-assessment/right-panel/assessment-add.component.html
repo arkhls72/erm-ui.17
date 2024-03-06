@@ -1,0 +1,185 @@
+<br xmlns="http://www.w3.org/1999/html" />
+<h5><span jhiTranslate="ermConsoleApp.assessment.addNew">add New Assessment</span></h5>
+<br />
+<form name="editForm" role="form" novalidate #editForm="ngForm">
+  <br />
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.soapNote" for="field_name"></label>
+    <div class="col-sm-8" *ngIf="soapNote">
+      <input type="text" class="form-control" name="soapNoteName" id="soapNote_name" value="{{ soapNote!.name }}" readonly />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.name" for="field_name"></label>
+    <div class="col-sm-4">
+      <input
+        type="text"
+        class="form-control"
+        name="name"
+        id="field_name"
+        [(ngModel)]="assessment.name"
+        required
+        [minLength]="1"
+        [maxlength]="50"
+      />
+      <small
+        class="form-control-feedback text-danger"
+        [hidden]="!editForm.controls.name.errors!.required"
+        jhiTranslate="entity.validation.required"
+        >This field is required.
+      </small>
+      <small
+        class="form-text text-danger"
+        [hidden]="!editForm.controls.name.errors!.minlength"
+        jhiTranslate="entity.validation.minlength"
+        translateValues="{ min: 1 }"
+      >
+        This field is required to be at least 3 characters.
+      </small>
+      <small
+        class="form-text text-danger"
+        [hidden]="!editForm.controls.name.errors!.maxlength"
+        jhiTranslate="entity.validation.maxlength"
+        translateValues="{ max: 50 }"
+      >
+        This field cannot be longer than 50 characters.
+      </small>
+    </div>
+
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.painIntensity">painIntensity</label>
+    <div class="col-sm-2">
+      <input
+        type="number"
+        class="form-control"
+        name="painIntensity"
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="assessment.painIntensity"
+      />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.sourcePain">Insurance</label>
+    <div class="col-sm-8">
+      <input
+        type="text"
+        class="form-control"
+        name="sourcePain"
+        id="field_sourcePain"
+        [(ngModel)]="assessment.sourcePain"
+        required
+        [minLength]="1"
+        [maxlength]="80"
+      />
+      <small
+        class="form-control-feedback text-danger"
+        [hidden]="!editForm.controls.sourcePain.errors!.required"
+        jhiTranslate="entity.validation.required"
+        >This field is required.
+      </small>
+      <small
+        class="form-text text-danger"
+        [hidden]="!editForm.controls.sourcePain.errors!.minlength"
+        jhiTranslate="entity.validation.minlength"
+        translateValues="{ min: 1 }"
+      >
+        This field is required to be at least 3 characters.
+      </small>
+      <small
+        class="form-text text-danger"
+        [hidden]="!editForm.controls.sourcePain.errors!.maxlength"
+        jhiTranslate="entity.validation.maxlength"
+        translateValues="{ max: 80 }"
+      >
+        This field cannot be longer than 80 characters.
+      </small>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.empty"></label>
+    <div class="col-sm-4">
+      <label class="col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.sudden"></label>&nbsp;
+      <label class="switch">
+        <input
+          class="largerCheckbox_20"
+          name="sudden"
+          type="checkbox"
+          (change)="addOrRemoveOnset($event, 'sudden')"
+          [checked]="isSuddenSelected()"
+        />
+        <span class="slider round"></span>
+      </label>
+    </div>
+
+    <div class="col-sm-4">
+      &nbsp;<label class="col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.gradual">gradual</label>&nbsp;
+      &nbsp;&nbsp;<label class="switch">
+        <input
+          class="largerCheckbox_20"
+          name="gradual"
+          type="checkbox"
+          (change)="addOrRemoveOnset($event, 'gradual')"
+          [checked]="isGradualSelected()"
+        />
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+  <div class="form-group row"></div>
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.empty"></label>
+    <div class="col-sm-4">
+      &nbsp;<label class="col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.sharp">Sharp</label>&nbsp;&nbsp;&nbsp;
+      <label class="switch"
+        >&nbsp;
+        <input
+          class="largerCheckbox_20"
+          name="sharp"
+          type="checkbox"
+          (change)="addOrRemoveAggravation($event, 'sharp')"
+          [checked]="isSharpSelected()"
+        />
+        <span class="slider round"></span>
+      </label>
+    </div>
+    <div class="col-sm-4">
+      &nbsp;<label class="col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.throbbing">throbbing</label>
+      <label class="switch">
+        <input
+          class="largerCheckbox_20"
+          name="throbbing"
+          type="checkbox"
+          (change)="addOrRemoveAggravation($event, 'throbbing')"
+          [checked]="isThrobbingSelected()"
+        />
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label text-right" jhiTranslate="ermConsoleApp.assessment.note">note</label>
+    <div class="col-sm-8">
+      <textarea
+        type="text"
+        class="form-control"
+        name="note"
+        [ngModelOptions]="{ standalone: true }"
+        [(ngModel)]="assessment.note"
+        *ngIf="assessment"
+      ></textarea>
+    </div>
+  </div>
+</form>
+
+<div class="form-group row">
+  <div class="col-sm-10 text-right">
+    <div class="btn-group flex-btn-group-container">
+      <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+      <button type="submit" (click)="save()" [disabled]="editForm.invalid" class="btn btn-outline-primary">
+        <i class="fa fa-1x fa-save"></i>
+        <span jhiTranslate="ermConsoleApp.assessment.save"></span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (exerGroupDetaill) {
+      <div>
+        <h2 data-cy="exerGroupDetaillDetailsHeading"><span>Exer Group Detaill</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ exerGroupDetaill.id }}</span>
+          </dd>
+          <dt><span>Exer Group Id</span></dt>
+          <dd>
+            <span>{{ exerGroupDetaill.exerGroupId }}</span>
+          </dd>
+          <dt><span>Exercise Id</span></dt>
+          <dd>
+            <span>{{ exerGroupDetaill.exercise }}</span>
+          </dd>
+          <dt><span>Last Modified By</span></dt>
+          <dd>
+            <span>{{ exerGroupDetaill.lastModifiedBy }}</span>
+          </dd>
+          <dt><span>Last Modified Date</span></dt>
+          <dd>
+            <span>{{ exerGroupDetaill.lastModifiedDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Created Date</span></dt>
+          <dd>
+            <span>{{ exerGroupDetaill.createdDate | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span>Created By</span></dt>
+          <dd>
+            <span>{{ exerGroupDetaill.createdBy }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/exer-group-detaill', exerGroupDetaill.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

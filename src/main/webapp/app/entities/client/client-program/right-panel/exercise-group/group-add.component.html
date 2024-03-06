@@ -1,0 +1,121 @@
+<h5><span jhiTranslate="ermConsoleApp.prog.addGroupExercise"></span></h5>
+<table class="header_detail">
+  <thead></thead>
+  <tbody>
+    <tr>
+      <td class="td_label"><span jhiTranslate="ermConsoleApp.prog.programName"> </span> &nbsp;</td>
+      <td class="td_grey_center_bal">
+        {{ selectedProg.name }}
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br />
+<div class="col-sm-12">
+  <form name="searchForm" class="form-inline">
+    <div class="input-group w-100 mt-3">
+      <!--            <input type="text" class="form-control" [(ngModel)]="currentSearch"-->
+      <!--                   id="currentSearch" name="currentSearch" placeholder="{{ 'ermConsoleApp.exercise.search'-->
+      <!--                    | translate }}">-->
+
+      <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" />
+
+      <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+        <span class="fa fa-search"></span>
+      </button>
+      <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+        <span class="fa fa-trash-o"></span>
+      </button>
+    </div>
+  </form>
+</div>
+<br />
+
+<table class="table table-striped" aria-describedby="page-heading">
+  <thead>
+    <!--    <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">-->
+    <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending">
+      <th>
+        <input class="largerCheckbox_20" type="checkbox" id="checkUncheck" (change)="checkUnCheck($event)" />
+      </th>
+      <th scope="col" jhiSortBy="name"><span jhiTranslate="ermConsoleApp.exerGroup.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+      <th scope="col" jhiSortBy="description">
+        <span jhiTranslate="ermConsoleApp.exerGroup.description">desc</span> <fa-icon icon="sort"></fa-icon>
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let xg of exerGroups; trackBy: trackId">
+      <td class="text-left">
+        <input
+          class="largerCheckbox_20"
+          type="checkbox"
+          id="selectedCondition"
+          [checked]="isSelected(xg)"
+          (change)="addOrRemoveExerGroup(xg, $event)"
+        />
+      </td>
+      <td>{{ xg.name }}</td>
+      <td>{{ xg.description }}</td>
+      <td style="text-align: right">
+        <div class="btn-group flex-btn-group-container">
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button
+            type="submit"
+            (click)="ngOnInstructionGroup(xg)"
+            [disabled]="!isPersisted(xg) || !isSelected(xg)"
+            class="btn btn-outline-info"
+          >
+            &nbsp;<span jhiTranslate="ermConsoleApp.exerGroup.exerciseShort"></span>
+            <i class="fa fa-1x fa-arrow-right"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="alert alert-warning" id="no-result" *ngIf="!exerGroups || exerGroups.length === 0">
+  <span jhiTranslate="ermConsoleApp.exerGroup.notFound">No instructions found</span>
+</div>
+
+<table class="exercise_top">
+  <thead>
+    <tr>
+      <th class="th_label_left">
+        <div class="btn-group flex-btn-group-container">
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+        </div>
+      </th>
+      <th class="th_label_center">
+        <div *ngIf="exerGroups && exerGroups.length > 0">
+          <div class="row justify-content-center">
+            <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"> </jhi-item-count>
+          </div>
+
+          <div class="row justify-content-center">
+            <ngb-pagination
+              [collectionSize]="totalItems"
+              [(page)]="ngbPaginationPage"
+              [pageSize]="itemsPerPage"
+              [maxSize]="5"
+              [rotate]="true"
+              [boundaryLinks]="true"
+              (pageChange)="loadPage($event)"
+            ></ngb-pagination>
+          </div>
+        </div>
+      </th>
+      <th class="th_label_right">
+        <div class="btn-group flex-btn-group-container">
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" id="save-entity" class="btn btn-outline-primary" (click)="save()" [disabled]="!isSaveMode">
+            <i class="fa fa-1x fa-save"></i>
+            <span jhiTranslate="ermConsoleApp.exercise.saveInGroup"></span>
+          </button>
+        </div>
+      </th>
+    </tr>
+  </thead>
+</table>

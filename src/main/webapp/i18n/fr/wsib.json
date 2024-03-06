@@ -1,0 +1,53 @@
+{
+  "ermConsoleApp": {
+    "wsib": {
+      "home": {
+        "title": "WSIB",
+        "createLabel": "Create a new Wsib",
+        "createOrEditLabel": "Create or edit a Wsib",
+        "notFound": "No Wsibs found"
+      },
+      "created": "A new Wsib is created with identifier {{ param }}",
+      "updated": "A Wsib is updated with identifier {{ param }}",
+      "deleted": "A Wsib is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you are deleting  Wsib {{ employer }}?"
+      },
+      "detail": {
+        "title": "Wsib"
+      },
+      "employer": "Employer",
+      "claimNumber": "Claim #",
+      "clientId": "Client Id",
+      "supervisor": "Supervisor",
+      "accidentDate": "Accident",
+      "adjudicator": "Adjudicator",
+      "caseManager": "Case Manager",
+      "status": "Status",
+      "phone": "Phone",
+      "phoneExtension": "Exten.",
+      "cellPhone": "Cell Phone",
+      "closeDate": "Close Date",
+      "note": "Note",
+      "fax": "Fax",
+      "coverageId": "Coverage Id",
+      "addWsib": "WSIB",
+      "addWSIBClaim": "Add new WSIB claim",
+      "address": "Addr.",
+      "coverage": "Cover.",
+      "wsibCoverage": "WSIB Coverage",
+      "email": "Email",
+      "wsibAddress": "Mailing Address",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Modified On",
+      "wsibClaim": "WSIB Claim(s)",
+      "saveWsib": "Save Wsib",
+      "saveAddress": "Save Addr.",
+      "wsibInfo": " WSIB Info",
+      "newWsib": "New WSIB",
+      "closingDate": "Closing Date",
+      "wsibListing": "WSIB Listing",
+      "viewWsib": "View WSIB"
+    }
+  }
+}

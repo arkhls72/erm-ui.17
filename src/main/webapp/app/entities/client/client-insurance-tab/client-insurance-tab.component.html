@@ -1,0 +1,110 @@
+<table class="sum_invoice_top">
+  <tbody>
+    <tr>
+      <td class="td_label_center"></td>
+      <td class="td_label_right">
+        <div class="btn-group flex-btn-group-container" *ngIf="isAddPrimarySecondayPage()">
+          <button type="button" *ngIf="ehcEventType !== 0" (click)="backToInsuranceTab()" class="btn btn-outline-primary">
+            <span class="fa fa-window-close"></span></button
+          >&nbsp;
+          <button type="submit" (click)="goToPrimary()" class="btn btn-outline-primary">
+            <i class="fa fa-1x fa-plus"></i>
+            &nbsp;<span jhiTranslate="ermConsoleApp.ehc.addPrimary"></span>&nbsp;&nbsp;
+          </button>
+          &nbsp;
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <button type="submit" (click)="goToSecondary()" class="btn btn-outline-primary">
+            <i class="fa fa-1x fa-plus"></i>
+            <span jhiTranslate="ermConsoleApp.ehc.addSecondary"></span>
+          </button>
+        </div>
+        <div class="btn-group flex-btn-group-container" *ngIf="isSecondaryEditPage()">
+          <button type="button" *ngIf="ehcEventType !== 0" (click)="backToInsuranceTab()" class="btn btn-outline-info">
+            <span class="fa fa-window-close"></span></button
+          >&nbsp;
+          <button type="submit" (click)="goToAddress()" class="btn btn-outline-info">
+            <i class="fa fa-1x fa-address-card"></i>
+            <span jhiTranslate="ermConsoleApp.ehc.address"></span>
+          </button>
+          &nbsp;
+          <button type="submit" (click)="goToCoverage()" class="btn btn-outline-info">
+            <i class="fa fa-1x fa-support"></i>
+            <span jhiTranslate="ermConsoleApp.ehc.coverage"></span>
+          </button>
+        </div>
+        &nbsp;
+        <div class="btn-group flex-btn-group-container" *ngIf="ehcEventType == 11">
+          <span jhiTranslate="ermConsoleApp.ehc.empty"></span>
+          <!--                <button type="button" *ngIf="ehcEventType !== 0"-->
+          <!--                        (click)="backToInsuranceTab()"-->
+          <!--                        class="btn btn-outline-info">-->
+          <!--                    <span class="fa fa-window-close"></span>-->
+          <!--                </button>-->
+          <button type="button" (click)="backToInsuranceTab()" class="btn btn-outline-info">
+            <span class="fa fa-window-close"></span>
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="col-sm-6">
+    <bc-ehc-summary-left [client]="client" [insuranceClient]="insuranceClient" (secondaryEventEmitter)="goToEhcEdit($event)">
+    </bc-ehc-summary-left>
+  </div>
+  <div class="col-sm-6" *ngIf="ehcEventType === 0">
+    <bc-ehc-list
+      [client]="client"
+      [insuranceClient]="insuranceClient"
+      (eventEmitter)="goToEhcEdit($event)"
+      (deleteEventEmitter)="deleteRow($event)"
+      (secondaryEditEmitter)="ngOnEditSeconday($event)"
+    >
+    </bc-ehc-list>
+  </div>
+  <div class="col-sm-6" *ngIf="ehcEventType === 1">
+    <bc-ehc-edit
+      [insuranceClient]="insuranceClient"
+      [selectedEhc]="selectedEhc"
+      (saveEventEmitter)="loadInsuranceClient()"
+      (cancelEditEhc)="goToEhcList()"
+      (secondaryEditEmitter)="ngOnEditSeconday($event)"
+    >
+    </bc-ehc-edit>
+  </div>
+
+  <div class="col-sm-6" *ngIf="ehcEventType === 2">
+    <bc-ehc-add-primary
+      [ehc]="selectedEhc!"
+      [client]="client"
+      (eventEmitter)="ngOnEhc()"
+      (addPrimaryEventEmitter)="afterPrimaryAdded($event)"
+    >
+    </bc-ehc-add-primary>
+  </div>
+  <div class="col-sm-6" *ngIf="ehcEventType === 3">
+    <bc-ehc-coverage [ehc]="selectedEhc" (upDateCoverageEmitter)="afterUpdateCoverage()"> </bc-ehc-coverage>
+  </div>
+
+  <div class="col-sm-6" *ngIf="ehcEventType === 4">
+    <bc-ehc-address [ehc]="selectedEhc"> </bc-ehc-address>
+  </div>
+  <div class="col-sm-6" *ngIf="ehcEventType === 5">
+    <bc-ehc-secondary-add
+      [client]="client"
+      (secondaryEditEmitter)="ngOnEditSeconday($event)"
+      (secondaryEmitter)="ngOnEhc()"
+      (summaryEventEmitter)="loadInsuranceClient()"
+    >
+    </bc-ehc-secondary-add>
+  </div>
+
+  <div class="col-sm-6" *ngIf="ehcEventType === 9">
+    <bc-ehc-delete [ehc]="selectedEhc!" (clearDeleteEmitter)="cancelDelete()" (confirmDeleteEmitter)="confirmDelete()"> </bc-ehc-delete>
+  </div>
+  <div class="col-sm-6" *ngIf="ehcEventType === 11">
+    <bc-ehc-secondary-edit (cancelSecondaryEmitter)="goToSecondary()" [secondary]="selectedSecondary"> </bc-ehc-secondary-edit>
+  </div>
+</div>

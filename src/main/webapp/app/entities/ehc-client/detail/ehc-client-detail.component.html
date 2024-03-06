@@ -1,0 +1,86 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (ehcClient) {
+      <div>
+        <h2 data-cy="ehcClientDetailsHeading"><span>Ehc Client</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span>ID</span></dt>
+          <dd>
+            <span>{{ ehcClient.id }}</span>
+          </dd>
+          <dt><span>Ehc Type</span></dt>
+          <dd>
+            <span>{{ ehcClient.ehcType }}</span>
+          </dd>
+          <dt><span>Policy Holder</span></dt>
+          <dd>
+            <span>{{ ehcClient.policyHolder }}</span>
+          </dd>
+          <dt><span>Client Id</span></dt>
+          <dd>
+            <span>{{ ehcClient.clientId }}</span>
+          </dd>
+          <dt><span>Ehc Id</span></dt>
+          <dd>
+            <span>{{ ehcClient.ehcId }}</span>
+          </dd>
+          <dt><span>End Date</span></dt>
+          <dd>
+            <span>{{ ehcClient.endDate?.format('YYYY-MM-DD HH:mm') }}</span>
+          </dd>
+          <dt><span>Ehc Primary Id</span></dt>
+          <dd>
+            <span>{{ ehcClient.primary!.id }}</span>
+          </dd>
+          <dt><span>Note</span></dt>
+          <dd>
+            <span>{{ ehcClient.note }}</span>
+          </dd>
+          <dt><span>Relation</span></dt>
+          <dd>
+            <span>{{ ehcClient.relation }}</span>
+          </dd>
+          <dt><span>Status</span></dt>
+          <dd>
+            <span>{{ ehcClient.status }}</span>
+          </dd>
+          <dt><span>Removed Date</span></dt>
+          <dd>
+            <span>{{ ehcClient.removedDate?.format('YYYY-MM-DD HH:mm') }}</span>
+          </dd>
+          <dt><span>Last Modfied Date</span></dt>
+          <dd>
+            <span>{{ ehcClient.lastModifiedDate?.format('YYYY-MM-DD HH:mm') }}</span>
+          </dd>
+          <dt><span>Last Modified By</span></dt>
+          <dd>
+            <span>{{ ehcClient.lastModifiedBy }}</span>
+          </dd>
+          <dt><span>Created Date</span></dt>
+          <dd>
+            <span>{{ ehcClient.createdDate?.format('YYYY-MM-DD HH:mm') }}</span>
+          </dd>
+          <dt><span>Created By</span></dt>
+          <dd>
+            <span>{{ ehcClient.createdBy }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/ehc-client', ehcClient.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

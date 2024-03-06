@@ -1,0 +1,49 @@
+{
+  "ermConsoleApp": {
+    "mva": {
+      "home": {
+        "title": "Mvas",
+        "createLabel": "Create a new Mva",
+        "createOrEditLabel": "Create or edit a Mva",
+        "notFound": "No Mvas found"
+      },
+      "created": "A new Mva is created with identifier {{ param }}",
+      "updated": "A Mva is updated with identifier {{ param }}",
+      "deleted": "A Mva is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you  are deleting  MVA: {{ insurance }}?"
+      },
+      "detail": {
+        "title": "Mva"
+      },
+      "insurance": "Insurance",
+      "clientId": "Client Id",
+      "claimNumber": "Claim #",
+      "accidentDate": "Accident",
+      "adjuster": "Adjuster",
+      "status": "Status",
+      "closeDate": "Close Date",
+      "phoneExtension": "Extn.",
+      "cellPhone": "Cell Phone",
+      "fax": "Fax",
+      "email": "Email",
+      "saveMva": "Save MVA",
+      "note": "Note",
+      "address": "Address",
+      "coverage": "Coverage",
+      "addMvaClaim": "Add MVA Insurance Claim",
+      "addMva": "MVA",
+      "mvaInfo": "MVA Info",
+      "mvaAddress": "MVA Mailing Address",
+      "mvaCoverage": "Coverage",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Modified",
+      "phone": "Phone",
+      "mvaClaim": "MVA Claim(s)",
+      "closingDate": "Closing",
+      "saveAddress": "Save Addr.",
+      "viewMva": "View MVA",
+      "mvaListing": "MVA Listing"
+    }
+  }
+}
